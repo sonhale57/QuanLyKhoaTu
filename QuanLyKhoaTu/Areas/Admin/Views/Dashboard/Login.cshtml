@@ -1,0 +1,72 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Đăng nhập - Quản Lý Khóa Tu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Sơn Hà Lê">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link type="text/css" href="~/assets/css/volt.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Section -->
+    <section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">
+        <div class="container">
+            <div class="row justify-content-center form-bg-image" style="background-image:url('/assets/img/illustrations/signin.svg')">
+                <div class="col-12 d-flex align-items-center justify-content-center">
+                    <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                        <div class="text-center text-md-center mb-4 mt-md-0">
+                            <h1 class="mb-0 h3">Đăng nhập  </h1>
+                            <p>Phần mềm Quản lý Tu Sinh (Chùa Vạn Đức)</p>
+                            <hr />
+                        </div>
+                        <form action="/Admin/Dashboard/Login" method="post" class="mt-4">
+                            <!-- Form -->
+                            @Html.Raw(TempData["err"])
+                            <div class="form-group mb-4">
+                                <label for="email">Tên đăng nhập</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa fa-user"></i>  
+                                    </span>
+                                    <input type="text" class="form-control" placeholder="Tên đăng nhập" id="username" name="username" autofocus required>
+                                </div>
+                            </div>
+                            <!-- End of Form -->
+                            <div class="form-group">
+                                <!-- Form -->
+                                <div class="form-group mb-4">
+                                    <label for="password">Mật khẩu</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon2">
+                                            <i class="fa fa-lock"></i>
+                                        </span>
+                                        <input type="password" placeholder="Mật khẩu" class="form-control" id="password" name="password" required>
+                                    </div>
+                                </div>
+                                <!-- End of Form -->
+                                <div class="d-flex justify-content-between align-items-top mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="remember">
+                                        <label class="form-check-label mb-0" for="remember">
+                                            Nhớ mật khẩu
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-gray-800">Đăng nhập</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="~/assets/js/main.js"></script>
+</body>
+</html>

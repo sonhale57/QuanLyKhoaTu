@@ -1,0 +1,70 @@
+﻿@model IEnumerable<QuanLyKhoaTu.Models.GiaoTho>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Hoten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhapDanh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SDT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TuVien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LinkFb)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Namsinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hinhanh)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hoten)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhapDanh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SDT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TuVien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LinkFb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Namsinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hinhanh)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
