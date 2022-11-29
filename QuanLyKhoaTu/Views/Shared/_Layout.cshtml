@@ -1,42 +1,135 @@
-﻿<!DOCTYPE html>
-<html>
+﻿
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="apple-touch-icon" sizes="76x76" href="~/assets/client/images/logo-ban-van-hoa.png">
+    <link rel="icon" type="image/png" href="~/assets/client/images/logo-ban-van-hoa.png">
+    <title> @ViewBag.Title • Ban Văn Hóa Thông Tin Chùa Vạn Đức</title>
+    <link id="pagestyle" href="~/assets/client/css/style.css" rel="stylesheet" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Brygada+1918:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/assets/client/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="~/assets/client/fonts/flaticon/font/flaticon.css">
+
+    <link rel="stylesheet" href="~/assets/client/css/tiny-slider.css">
+    <link rel="stylesheet" href="~/assets/client/css/aos.css">
+    <link rel="stylesheet" href="~/assets/client/css/flatpickr.min.css">
+    <link rel="stylesheet" href="~/assets/client/css/glightbox.min.css">
+
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+<body class="">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3 navbar-transparent mt-4">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 text-white" href="#">
+                <img src="~/assets/client/images/logocvd.png" alt="Logo" style="width:45px;" class="rounded-pill">
+                <img src="~/assets/client/images/logo-ban-van-hoa.png" alt="Logo" style="width:50px;" class="rounded-pill">
+            </a>
+            <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon mt-2">
+                    <span class="navbar-toggler-bar bar1"></span>
+                    <span class="navbar-toggler-bar bar2"></span>
+                    <span class="navbar-toggler-bar bar3"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navigation">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="#gioithieu">
+                            <i class="fa fa-chart-pie opacity-6  me-1"></i>
+                            Giới thiệu
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-2" href="#noibat">
+                            <i class="fa fa-user opacity-6  me-1"></i>
+                            Hoạt động nổi bật
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-2" href="#">
+                            <i class="fa fa-user opacity-6  me-1"></i>
+                            Hỉnh ảnh
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-2" href="#dangky">
+                            <i class="fas fa-user-circle opacity-6  me-1"></i>
+                            Đăng ký
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item ">
+                        <a href="javascript:ModalTracuu();" class="btn btn-sm mb-0 bg-gradient-success me-2 mx-2">Tra cứu</a>
+                    </li>
                 </ul>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    </nav>
+    <!-- End Navbar -->
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <main class="main-content">
+        @RenderBody()
+    </main>
+    <hr class="horizontal dark mt-3 ">
+    <footer class="footer py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 ">
+                    <ul class="nav nav-footer justify-content-center">
+                        <li class="nav-item">
+                            <a href="https://facebook.com/banvanhoavanduc" class="nav-link text-primary font-weight-bolder" target="_blank"><i class="icon-facebook-official"></i> Follow Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://chuavanduc.vn" class="nav-link text-warning font-weight-bolder" target="_blank"><i class="icon-safari"></i> About </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="mailto:sonhale57@gmail.com" class="nav-link text-secondary font-weight-bolder" target="_blank"><i class="icon-mail_outline"></i> Contact </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#license" class="nav-link pe-0 text-dark font-weight-bolder" target="_blank">License</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-8 mx-auto text-center mt-1">
+                    <p class="mb-0 text-secondary">
+                        Copyright ©
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script> <br />
+                        Toàn bộ bản quyền thuộc sở hữu bởi <a href="https://facebook.com/banvanhoavanduc" class="text-dark font-weight-bolder">Ban Văn Hóa Thông Tin Chùa Vạn Đức</a>
+                        <br /> Design and Completed by <a href="https://facebook.com/sonhale.imdola" class="text-dark font-weight-bolder">Sơn Hà Lê</a> for better website.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--  jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+    <script src="~/assets/client/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/client/js/tiny-slider.js"></script>
+    <script src="~/assets/client/js/aos.js"></script>
+    <script src="~/assets/client/js/navbar.js"></script>
+    <script src="~/assets/client/js/counter.js"></script>
+    <script src="~/assets/client/js/rellax.js"></script>
+    <script src="~/assets/client/js/flatpickr.js"></script>
+    <script src="~/assets/client/js/glightbox.min.js"></script>
+    <script src="~/assets/client/js/custom.js"></script>
+
 </body>
+
 </html>

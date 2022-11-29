@@ -1,7 +1,281 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title  = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<div class="page-header align-items-start min-vh-70 pt-5 pb-5" style="background-image: url('/assets/client/images/header.png'); background-position: top;">
+    <span class="mask bg-gradient-dark opacity-0"></span>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center mx-auto mt-10">
+                <h1 class="text-white mb-2 mt-6">Trang Thông Tin Khoá Tu Tuổi Trẻ</h1>
+                <p class="text-lead text-white">Khoá sắp diễn ra: An nhiên từng phút giây lần thứ 22 (31/12/2022 - 2/1/2023)</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--SECTION GIOITHIEU-->
+<section id="gioithieu">
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
 
-<p>Use this area to provide additional information.</p>
+            <div class="col-lg-6 order-lg-2 mb-5">
+                <div class="image-stack mb-2 mb-lg-0">
+                    <div class="image-stack__item " data-aos="fade-up">
+                        <img src="~/assets/client/images/tapthe.png" alt="Image">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 order-lg-1 mt-0">
+                <div>
+                    <h2 class="heading mb-3" data-aos="fade-up" data-aos-delay="100">Xin chào bạn mới!</h2>
+
+                    <p data-aos="fade-up" data-aos-delay="200">Nếu đây là lần đầu bạn tham gia khoá tu tuổi trẻ cùng bọn tớ, hãy cùng nhau khám phá xem bọn mình sẽ được tham gia những chương trình gì nhé. </p>
+
+                    <p class="my-4" data-aos="fade-up" data-aos-delay="300"><a href="#noibat" class="btn btn-primary">Khám phá</a></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!--SECTION HOATDONGNOIBAT-->
+<section class="mt-2" id="noibat" style="background-color: #f7f8ff ;">
+    <div data-aos="fade-up" data-aos-delay="100">
+        <div class="container">
+            <div class="row align-items-center justify-content-between mb-5">
+                <div class="col-lg-6 mt-6" data-aos="fade-up">
+                    <h2 class="heading ">Các chương trình nổi bật</h2>
+                </div>
+                <div class="" data-aos="fade-up" data-aos-delay="100">
+                    <div id="destination-controls" style="display: none;">
+                        <span class="prev me-3" data-controls="prev">
+                            <span class="icon-chevron-left"></span>
+                        </span>
+                        <span class="next" data-controls="next">
+                            <span class="icon-chevron-right"></span>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="destination-slider-wrap">
+            <div class="destination-slider mb-6">
+
+                <div class="destination">
+                    <div class="thumb">
+                        <img src="~/assets/client/images/hoadang.jpeg" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="mt-4">
+                        <h3><a>Đêm hoa đăng</a></h3>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <div class="thumb">
+                        <img src="~/assets/client/images/ganket.jpeg" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="mt-4">
+                        <h3><a>Gắn kết yêu thương</a></h3>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <div class="thumb">
+                        <img src="~/assets/client/images/vannghe.jpeg" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="mt-4">
+                        <h3><a>Đêm văn nghệ</a></h3>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <div class="thumb">
+                        <img src="~/assets/client/images/tinhtoa.jpeg" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="mt-4">
+                        <h3><a>Thiền hành, tĩnh toạ</a></h3>
+                    </div>
+                </div>
+
+
+                <div class="destination mt-0">
+                    <div class="thumb">
+                        <img src="~/assets/client/images/giadinh.jpeg" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="mt-4">
+                        <h3><a>Sinh hoạt gia đình</a></h3>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <div class="thumb">
+                        <img src="~/assets/client/images/phapdam.jpeg" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="mt-4">
+                        <h3><a>Pháp đàm, toạ đàm</a></h3>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <div class="thumb">
+                        <img src="~/assets/client/images/luatrai.jpeg" alt="Image" class="img-fluid">
+                        <div class="price">Vạn Linh</div>
+                    </div>
+                    <div class="mt-4">
+                        <h3><a>Đêm lửa trại</a></h3>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <div class="thumb">
+                        <img src="~/assets/client/images/tungkinh.jpeg" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="mt-4">
+                        <h3><a>Khoá lễ tụng kinh niệm Phật</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FORM ĐĂNG KÝ -->
+<section id="dangky" style="background-image: url('/assets/client/images/register.png'); background-repeat: no-repeat;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-10 col-md-10 mx-auto">
+                <div class="card z-index-0 mt-7">
+                    <div class="card-header text-center">
+                        <h4>Form đăng ký tham dự khoá tu</h4>
+                        <h4>AN NHIÊN TỪNG PHÚT GIÂY LẦN THỨ 22 - CHỦ ĐỀ: NƠI BÌNH YÊN</h4>
+                        <a>Địa điểm: Chùa Huệ Viễn - Đồng Nai</a><br>
+                        <a>Thời gian: 31/12/2022 - 02/01/2023 Dương lịch</a><br>
+                        <a>Số lượng: 200 tu sinh</a><br>
+                        <a>Chi phí tham gia:  </a>
+                    </div>
+                    <hr class="horizontal dark mt-0">
+                    <div class="card-body">
+                        <form action="/Home/DangKy" method="post">
+                            <div class="row">
+                                @Html.DropDownList("IdKhoaTu", null, htmlAttributes: new { @class = "form-control" })
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group mb-2">
+                                        <label for="ts_ten" class="form-label">Họ tên(*):</label>
+                                        <input type="text" class="form-control" id="ts_ten" placeholder="Họ tên của bạn..." name="Hoten" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group mb-4">
+                                        <label for="ts_phapdanh" class="form-label">Pháp danh (nếu có):</label>
+                                        <input type="text" class="form-control" id="ts_phapdanh" placeholder="Pháp danh của bạn..." name="Phapdanh" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <label for="ts_ngaysinh" class="form-label">Ngày sinh(*):</label>
+                                        <input class="form-control" id="ts_ngaysinh" name="Namsinh" type="date" required />
+                                        <small>VD: 31/01/1999</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <label for="ts_gioitinh" class="form-label">Giới tính(*):</label>
+                                        <select id="ts_gioitinh" name="Gioitinh" class="form-select" aria-label="Default select example" required>
+                                            <option disabled="disabled" selected>Chọn giới tính</option>
+                                            <option value="Nam">Nam</option>
+                                            <option value="Nu">Nữ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label for="ts_cmnd" class="form-label">CMND/CCCD(*):</label>
+                                        <input type="text" class="form-control" id="ts_cmnd" placeholder="Số căn cước của bạn..." name="CMND">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <label for="email" class="form-label">Địa chỉ Email(*):</label>
+                                        <input class="form-control" id="ts_email" name="Email" placeholder="Nhập email..." type="email" required>
+                                        <small>Ví dụ: bvhtt@gmail.com</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <label for="ts_sdt" class="form-label">Số điện thoại(*):</label>
+                                        <input type="tel" class="form-control" id="ts_sdt" placeholder="Nhập đủ 10 số nha..." name="SDT" pattern="[0-9]{10}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label for="ts_sdtnt" class="form-label">Số điện thoại người thân(*):</label>
+                                        <input type="tel" class="form-control" id="ts_sdtnt" placeholder="Nhập đủ 10 số nha..." name="SDT_Nguoithan" pattern="[0-9]{10}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-4">
+                                        <label for="ts_sdtnt" class="form-label">Phương thức di chuyển:</label>
+                                        <select name="DiChuyen" class="form-select">
+                                            <option value="chuavanduc">Chùa Vạn Đức</option>
+                                            <option value="tutuc">Tự túc</option>
+                                            <option value="khac">Khác</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="mb-4">
+                                        <label for="ts_sdtnt" class="form-label">Địa chỉ:</label>
+                                        <input type="text" class="form-control" id="ts_diachi" placeholder="Địa chỉ của bạn là..." name="DiaChi" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label class="form-label">Bạn đã có áo tràng chưa:</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="co_aotrang" value="option1" checked>
+                                            <label class="form-check-label" for="co_aotrang">
+                                                Đã có áo tràng.
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="chuaco_aotrang" value="option2">
+                                            <label class="form-check-label" for="chuaco_aotrang">
+                                                Chưa có áo tràng. (Liên hệ mượn trong khoá tu)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="ts_dicung" class="form-label">Bạn bè đi cùng</label>
+                                        <br>
+                                        <label class="switch">
+                                            <input type="checkbox" id="is_dicung" name="is_dicung" onclick="isDiCung()">
+                                            <span class="slider round"></span>
+                                        </label> Thêm bạn bè đi cùng
+                                        <div id="ts_dicung" name="ts_dicung" style="display: none ;">
+                                            <input id="stt_dicung" type="search" class="form-control" placeholder="STT người đi cùng..." name="DiChung">
+                                            <small>(Nhập STT của một người bất kì mà bạn muốn đi cùng)</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check mb-3">
+                                    <label class="form-check-label">
+                                        <input id="lastcheck" class="form-check-input" type="checkbox" name="remember"> Bạn hãy kiểm tra lại đầy đủ thông tin trước khi nhấn nút Hoàn thành nhé!
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" id="save" class="btn btn-success form-button" disabled>Hoàn thành đăng ký</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

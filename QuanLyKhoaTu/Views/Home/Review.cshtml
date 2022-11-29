@@ -1,25 +1,71 @@
 ﻿@model QuanLyKhoaTu.Models.TuSinh
 @{
     ViewBag.Title = "Đăng ký thành công";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
-Review sau khi đăng ký
-Xin chúc mừng bạn đã đăng ký thành công
-<h1>
-    @Html.DisplayFor(model => model.id)
-</h1>
-@Model.Hoten  
-<p>
-    @Model.Phapdanh
-</p>
-<form action="/Home/UpdateDiChung" method="post">
-    <input type="hidden" name="IdKhoaTu" value="1" placeholder="Id Khóa Tu" class="form-control" />
-    <input type="hidden" name="Idedit" value="@Model.id" placeholder="Id Tu Sinh" class="form-control" />
-    <input type="text" name="IdTuSinh" value="" placeholder="Nhập ID của bạn bè của bạn tại đây.." class="form-control" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <div class="mt-3">
-        <button class="btn btn-success btn-sm mt-2 animate-up-2" type="submit">Thêm mới</button>
-    </div>
-</form>
+    <link rel="apple-touch-icon" sizes="76x76" href="~/assets/client/images/logo-ban-van-hoa.png">
+    <link rel="icon" type="image/png" href="~/assets/client/images/logo-ban-van-hoa.png">
+    <title> @ViewBag.Title - Ban Văn Hóa Thông Tin Chùa Vạn Đức</title>
+    <link id="pagestyle" href="~/assets/client/css/style.css" rel="stylesheet" />
 
- 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Brygada+1918:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/assets/client/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="~/assets/client/fonts/flaticon/font/flaticon.css">
+
+    <link rel="stylesheet" href="~/assets/client/css/tiny-slider.css">
+    <link rel="stylesheet" href="~/assets/client/css/aos.css">
+    <link rel="stylesheet" href="~/assets/client/css/flatpickr.min.css">
+    <link rel="stylesheet" href="~/assets/client/css/glightbox.min.css">
+
+</head>
+<body class="">
+    <main class="main-content">
+        <section id="dangky">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-8 col-lg-8 col-md-8 mx-auto">
+                        <div class="card z-index-0 mt-7">
+                            <div class="card-header text-center">
+                                <div class="wrapper">
+                                    <img src="https://i.pinimg.com/originals/85/bb/1e/85bb1e0d75c635321f1fd9f5f0d03b0e.gif" alt="Alternate Text" width="250" />
+                                </div>
+                                <h4>Đăng Ký Thành Công</h4>
+                                <h8>Chúc mừng <b>@Model.Hoten</b> đã đăng ký thành công. Số thứ tự của bạn là:</h8>
+                                <hr class="horizontal dark mt-4 ">
+                                <h1 id="ts_stt">@Model.id</h1>
+                                <hr class="horizontal dark mt-4">
+                                <h8>Để cập nhật các thông tin về khoá tu, bạn truy cập vào đây nhé!</h8>
+                                <br>
+                                <a href="/Home/Index" class="btn btn-outline-dark form-button mt-4">Trở về trang đăng ký</a>
+                                <a href="https://www.facebook.com/banvanhoavanduc" class="btn btn-primary form-button mt-4" target="_blank">Follow chúng tớ tại đây!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+    <script src="~/assets/client/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/client/js/tiny-slider.js"></script>
+    <script src="~/assets/client/js/aos.js"></script>
+    <script src="~/assets/client/js/navbar.js"></script>
+    <script src="~/assets/client/js/counter.js"></script>
+    <script src="~/assets/client/js/rellax.js"></script>
+    <script src="~/assets/client/js/flatpickr.js"></script>
+    <script src="~/assets/client/js/glightbox.min.js"></script>
+    <script src="~/assets/client/js/custom.js"></script>
+</body>
+</html>

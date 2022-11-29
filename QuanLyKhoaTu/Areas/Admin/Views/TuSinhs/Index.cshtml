@@ -11,55 +11,49 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-centered table-nowrap mb-0 rounded">
-                        <thead class="thead-light">
-                            <tr>
-                                <th class="border-0 rounded-start">Người dùng</th>
-                                <th class="border-0">Số điện thoại</th>
-                                <th class="border-0">Email </th>
-                                <th class="border-0">Tài khoản</th>
-                                <th class="border-0 rounded-end">..</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
+                                    <td><b class="text-xs"># @item.id</b></td>
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div>
-                                                @if(item.Hinhanh !=""){
+                                                @if (item.Hinhanh != "")
+                                                {
                                                 }
-                                                else{
-                                                <img src="@Html.DisplayFor(modelItem => item.Hinhanh)" class="avatar avatar-sm me-3" alt="user1">
+                                                else
+                                                {
+                                                    <img src="@Html.DisplayFor(modelItem => item.Hinhanh)" class="avatar avatar-sm me-3" alt="user1">
                                                 }
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">@Html.DisplayFor(modelItem => item.Hoten)</h6>
+                                                <h6 class="mb-0 text-xs">@Html.DisplayFor(modelItem => item.Hoten)</h6>
                                                 <p class="text-xs text-secondary mb-0">@Html.DisplayFor(modelItem => item.Phapdanh)</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <h6 class="mb-0 text-sm">@Html.DisplayFor(modelItem => item.Gioitinh)</h6>
+                                        <p class="mb-0 text-xs">@Html.DisplayFor(modelItem => item.Gioitinh)</p>
                                     </td>
                                     <td>
-                                        <h6 class="mb-0 text-sm">@item.Namsinh.Value.ToShortDateString()</h6>
+                                        <p class="mb-0 text-xs">@item.Namsinh.Value.ToShortDateString()</p>
                                     </td>
                                     <td>
-                                        <h6 class="mb-0 text-sm">@Html.DisplayFor(modelItem => item.CMND)</h6>
+                                        <p class="mb-0 text-xs">@Html.DisplayFor(modelItem => item.CMND)</p>
                                     </td>
                                     <td>
-                                        <h6 class="mb-0 text-sm">@Html.DisplayFor(modelItem => item.Email)</h6>
+                                        <p class="mb-0 text-xs">@Html.DisplayFor(modelItem => item.Email)</p>
                                     </td>
                                     <td>
                                         <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">@Html.DisplayFor(modelItem => item.SDT)</h6>
-                                            <p class="text-xs text-secondary mb-0">Người thân: @Html.DisplayFor(modelItem => item.SDT_nguoithan)</p>
+                                            <p class="mb-0 text-xs">@Html.DisplayFor(modelItem => item.SDT)</p>
+                                            <p class="text-xs text-secondary mb-0">Khác: @Html.DisplayFor(modelItem => item.SDT_nguoithan)</p>
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="/Admin/Users/Edit/@item.id" class="btn btn-sm btn-info"><i class="fa fa-pencil-square"></i> </a>
-                                        <a href="javascript:Del(@item.id)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </a>
+                                        <a href="/Admin/TuSinhs/Edit/@item.id" class="btn btn-xs btn-info mb-0"><i class="fa fa-pencil-square"></i> </a>
+                                        <a href="javascript:Del(@item.id)" class="btn btn-xs btn-danger mb-0"><i class="fa fa-trash"></i> </a>
                                     </td>
                                 </tr>
                             }
@@ -70,3 +64,38 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xác nhận xóa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            @using (Html.BeginForm("Delete", "KhoaTus"))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            Chọn xác nhận xóa để xóa tu sinh này?
+                            <input class="form-control" id="id" type="hidden" name="id" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <input type="submit" value="Xác nhận" class="btn btn-primary" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function Del(id) {
+        $("#id").val(id);
+        $("#deleteModal").modal('show');
+    }
+</script>

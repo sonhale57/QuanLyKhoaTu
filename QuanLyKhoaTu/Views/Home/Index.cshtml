@@ -1,169 +1,371 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Khóa Tu Tuổi Trẻ";
 }
-
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<div class="page-header align-items-start min-vh-70 pt-5 pb-5" style="background-image: url('/assets/client/images/header.png'); background-position: top;">
+    <span class="mask bg-gradient-dark opacity-0"></span>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center mx-auto mt-10">
+                <h1 class="text-white mb-2 mt-6"></h1>
+                <p class="text-lead text-white"></p>
+            </div>
+        </div>
+    </div>
 </div>
+<!--SECTION GIOITHIEU-->
+<section id="gioithieu">
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
 
-    <div class="jumbotron">
-        <div class="card-body bg-gradient">
-            <form action="/Home/Dangky" method="post">
-                <div class="row">
-                    <div class="col-md-12 mb-0">
-                        <div class="form-group">
-                            Khóa tu
-                            <div class="col-md-12">
-                                @Html.DropDownList("IdKhoaTu", null, htmlAttributes: new { @class = "form-control" })
-                            </div>
-                        </div>
+            <div class="col-lg-6 order-lg-2 mb-5">
+                <div class="image-stack mb-2 mb-lg-0">
+                    <div class="image-stack__item " data-aos="fade-up">
+                        <img src="~/assets/client/images/tapthe.png" alt="Image">
                     </div>
-                    <div class="col-md-12 mb-0">
-                        <div class="form-group">
-                            Họ và tên
-                            <div class="col-md-12">
-                                <input type="text" name="Hoten" value="" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
+                </div>
+            </div>
 
-                    <div class="col-md-12 mb-0">
-                        <div class="form-group">
-                            Pháp Danh
-                            <div class="col-md-12">
-                                <input type="text" name="Phapdanh" value="" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
+            <div class="col-lg-4 order-lg-1 mt-0">
+                <div>
+                    <h2 class="heading mb-3" data-aos="fade-up" data-aos-delay="100">Xin chào bạn mới!</h2>
 
-                    <div class="col-md-4 mb-0">
-                        <div class="form-group">
-                            CMND | CCCD
-                            <div class="col-md-12">
-                                <input type="text" name="CMND" value="" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-0">
-                        <div class="form-group">
-                            Sinh nhật
-                            <div class="col-md-12">
-                                <input type="date" name="Namsinh" value="" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
+                    <p data-aos="fade-up" data-aos-delay="200">Nếu đây là lần đầu bạn tham gia khoá tu tuổi trẻ cùng bọn tớ, hãy cùng nhau khám phá xem bọn mình sẽ được tham gia những chương trình gì nhé. </p>
 
-                    <div class="col-md-4 mb-0">
-                        <div class="form-group">
-                            Giới tính
-                            <select class="form-control mb-0" id="gioitinh" name="Gioitinh" aria-label="Chọn giới tính">
-                                <option value="nam" selected>Nam</option>
-                                <option value="nu">Nữ</option>
-                                <option value="khac">Khác</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-0">
-                        <div class="form-group">
-                            Email
-                            <div class="col-md-12">
-                                <input type="email" name="Email" value="" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-0">
-                        <div class="form-group">
-                            Số điện thoại
-                            <div class="col-md-12">
-                                <input type="text" name="SDT" value="" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
+                    <p class="my-4" data-aos="fade-up" data-aos-delay="300"><a href="#noibat" class="btn btn-primary">Khám phá</a></p>
+                </div>
+            </div>
 
-                    <div class="col-md-4 mb-0">
-                        <div class="form-group">
-                            Số điện thoại người thân
-                            <div class="col-md-12">
-                                <input type="text" name="SDT_nguoithan" value="" class="form-control" />
+        </div>
+    </div>
+</section>
+
+<!--SECTION HOATDONGNOIBAT-->
+<section class="mt-2" id="noibat" style="background-color: #f7f8ff ;">
+    <div data-aos="fade-up" data-aos-delay="100">
+        <div class="container">
+            <div class="row align-items-center justify-content-between mb-5">
+                <div class="col-lg-6 mt-6" data-aos="fade-up">
+                    <h2 class="heading ">Các chương trình nổi bật</h2>
+                </div>
+                <div class="" data-aos="fade-up" data-aos-delay="100">
+                    <div id="destination-controls" style="display: none;">
+                        <span class="prev me-3" data-controls="prev">
+                            <span class="icon-chevron-left"></span>
+                        </span>
+                        <span class="next" data-controls="next">
+                            <span class="icon-chevron-right"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="destination-slider-wrap">
+            <div class="destination-slider mb-6">
+                <div class="destination">
+                    <div class="thumb">
+                        <img src="~/assets/client/images/hoadang.jpeg" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="mt-2">
+                        <h5><a>Đêm hoa đăng</a></h5>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <div class="thumb">
+                        <img src="~/assets/client/images/ganket.jpeg" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="mt-2">
+                        <h5><a>Gắn kết yêu thương</a></h5>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <div class="thumb">
+                        <img src="~/assets/client/images/vannghe.jpeg" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="mt-2">
+                        <h5><a>Đêm văn nghệ</a></h5>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <div class="thumb">
+                        <img src="~/assets/client/images/tinhtoa.jpeg" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="mt-2">
+                        <h5><a>Thiền hành, tĩnh toạ</a></h5>
+                    </div>
+                </div>
+
+                <div class="destination mt-0">
+                    <div class="thumb">
+                        <img src="~/assets/client/images/giadinh.jpeg" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="mt-2">
+                        <h5><a>Sinh hoạt gia đình</a></h5>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <div class="thumb">
+                        <img src="~/assets/client/images/phapdam.jpeg" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="mt-2">
+                        <h5><a>Pháp đàm, toạ đàm</a></h5>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <div class="thumb">
+                        <img src="~/assets/client/images/luatrai.jpeg" alt="Image" class="img-fluid">
+                        <div class="price">Vạn Linh</div>
+                    </div>
+                    <div class="mt-2">
+                        <h5><a>Đêm lửa trại</a></h5>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <div class="thumb">
+                        <img src="~/assets/client/images/tungkinh.jpeg" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="mt-2">
+                        <h5><a>Khoá lễ tụng kinh niệm Phật</a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FORM ĐĂNG KÝ -->
+<section id="dangky" style="background-image: url('/assets/client/images/register.png'); background-repeat: no-repeat;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-10 col-md-10 mx-auto">
+                <div class="card z-index-0 mt-7">
+                    <div class="card-header text-center">
+                        <h4>Form đăng ký tham dự khoá tu</h4>
+                        <h4>@ViewBag.TenKhoaTu</h4>
+                        <h5>Thời gian: <span class="text-bolder">@ViewBag.Ngaybatdau - @ViewBag.Ngayketthuc</span></h5>
+                        <h5>Địa điểm: <span class="text-bolder">@ViewBag.Diadiem</span></h5>
+                        <h5>Số lượng: <span class="text-bolder"> 200 tu sinh</span></h5>
+                        <h5>Chi phí: <span class="text-bolder">@ViewBag.Chiphi</span></h5>
+                        <br>
+                    </div>
+                    <hr class="horizontal dark mt-0">
+                    <div class="card-body">
+                        <form action="/Home/DangKy" method="post">
+                            <div class="row">
+                                @Html.DropDownList("IdKhoaTu", null, htmlAttributes: new { @class = "hidden" })
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group mb-2">
+                                        <label for="ts_ten" class="form-label">Họ tên(*):</label>
+                                        <input type="text" class="form-control" id="ts_ten" placeholder="Họ tên của bạn..." name="Hoten" required />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group mb-4">
+                                        <label for="ts_phapdanh" class="form-label">Pháp danh (nếu có):</label>
+                                        <input type="text" class="form-control" id="ts_phapdanh" placeholder="Pháp danh của bạn..." name="Phapdanh" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <label for="ts_ngaysinh" class="form-label">Ngày sinh(*):</label>
+                                        <input class="form-control" id="ts_ngaysinh" name="Namsinh" type="date" required />
+                                        <small>VD: 31/01/1999</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <label for="ts_gioitinh" class="form-label">Giới tính(*):</label>
+                                        <select id="ts_gioitinh" name="Gioitinh" class="form-select" aria-label="Default select example" required>
+                                            <option disabled="disabled" selected>Chọn giới tính</option>
+                                            <option value="Nam">Nam</option>
+                                            <option value="Nu">Nữ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label for="ts_cmnd" class="form-label">CMND/CCCD(*):</label>
+                                        <input type="text" class="form-control" id="ts_cmnd" placeholder="Số căn cước của bạn..." name="CMND">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <label for="email" class="form-label">Địa chỉ Email(*):</label>
+                                        <input class="form-control" id="ts_email" name="Email" placeholder="Nhập email..." type="email" required>
+                                        <small>Ví dụ: bvhtt@gmail.com</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-2">
+                                        <label for="ts_sdt" class="form-label">Số điện thoại(*):</label>
+                                        <input type="tel" class="form-control" id="ts_sdt" placeholder="Nhập đủ 10 số nha..." name="SDT" pattern="[0-9]{10}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label for="ts_sdtnt" class="form-label">Số điện thoại người thân(*):</label>
+                                        <input type="tel" class="form-control" id="ts_sdtnt" placeholder="Nhập đủ 10 số nha..." name="SDT_Nguoithan" pattern="[0-9]{10}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-4">
+                                        <label for="ts_sdtnt" class="form-label">Phương thức di chuyển:</label>
+                                        <select name="DiChuyen" class="form-select">
+                                            <option value="chuavanduc">Chùa Vạn Đức</option>
+                                            <option value="tutuc">Tự túc</option>
+                                            <option value="khac">Khác</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="mb-4">
+                                        <label for="ts_sdtnt" class="form-label">Địa chỉ:</label>
+                                        <input type="text" class="form-control" id="ts_diachi" placeholder="Địa chỉ của bạn là..." name="DiaChi" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label class="form-label">Bạn đã có áo tràng chưa:</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="co_aotrang" value="true" checked>
+                                            <label class="form-check-label" for="co_aotrang">
+                                                Đã có áo tràng.
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="chuaco_aotrang" value="false">
+                                            <label class="form-check-label" for="chuaco_aotrang">
+                                                Chưa có áo tràng. (Liên hệ mượn trong khoá tu)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="ts_dicung" class="form-label">Bạn bè đi cùng</label>
+                                        <br>
+                                        <label class="switch">
+                                            <input type="checkbox" id="is_dicung" name="is_dicung" onclick="isDiCung()">
+                                            <span class="slider round"></span>
+                                        </label> Thêm bạn bè đi cùng
+                                        <div id="ts_dicung" name="ts_dicung" style="display: none ;">
+                                            <input id="stt_dicung" type="search" class="form-control" placeholder="STT người đi cùng..." name="DiChung" onblur="javascript:CheckExists()">
+                                            <small id="txt_hoten" class="text-bolder">(Nhập STT của một người bất kì mà bạn muốn đi cùng)</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check mb-3">
+                                    <label class="form-check-label">
+                                        <input id="lastcheck" class="form-check-input" type="checkbox" name="remember"> Bạn hãy kiểm tra lại đầy đủ thông tin trước khi nhấn nút Hoàn thành nhé!
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" id="save" class="btn btn-success form-button" disabled>Hoàn thành đăng ký</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tra cứu thông tin đăng ký</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/Home/TraCuu" method="post">
+                <div class="modal-body">
+                    <div class="row">
+                        @Html.Raw(TempData["err"])
+                        <div class="col-md-12 text-center hidden" id="errorhtml">
+                            <img src="~/assets/client/images/404 error.png" alt="Error404" width="350" height="auto" />
+                            <hr class="horizontal dark mt-3 ">
+                        </div>
+                        <div class="col-md-12">
+                            <div class="mb-2">
+                                <label class="form-label">Họ và tên(*):</label>
+                                <input type="text" class="form-control" id="hoten" placeholder="Nhập số điện thoại của bạn" name="SName" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="mb-2">
+                                <label class="form-label">Số điện thoại(*):</label>
+                                <input type="text" class="form-control" id="sdt" placeholder="Nhập số điện thoại của bạn" name="SPhone" required>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="mb-2">
+                                <label class="form-label">Địa chỉ Email(*):</label>
+                                <input type="email" class="form-control" id="email" placeholder="Nhập địa chỉ email của bạn" name="SEmail" required>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 mb-0">
-                        <div class="form-group">
-                            Địa chỉ
-                            <div class="col-md-12">
-                                <input type="text" name="DiaChi" value="" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-0">
-                        <div class="form-group">
-                            Hình thức di chuyển
-                            <div class="col-md-12">
-                                <select class="form-control mb-0" id="Dichuyen" name="Dichuyen" aria-label="Chọn hình thức di chuyển">
-                                    <option value="chuavanduc" selected>Chùa Vạn Đức</option>
-                                    <option value="tutuc">Tự Túc</option>
-                                    <option value="khac">Khác</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-0">
-                        <div class="form-group">
-                            Mượn áo tràng
-                            <div class="col-md-12">
-                                <select class="form-control mb-0" id="Muon" name="Muon" aria-label="Chọn hình thức di chuyển">
-                                    <option value="True" selected>Có Mượn</option>
-                                    <option value="False">Không</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-0">
-                        <div class="form-group">
-                            Mượn áo tràng
-                            <div class="col-md-12">
-                                <input type="text" class="form-control" name="Sizeao" value="" placeholder="Ví dụ: Size 28..." />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-0">
-                        <div class="form-group">
-                            Ghi chú kích thước của bạn
-                            <div class="col-md-12">
-                                <input type="text" class="form-control" name="Ghichu" value="" placeholder="Nặng ?, Cao ?" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-3">
-                        <button class="btn btn-success btn-sm mt-2 animate-up-2" type="submit">Xác nhận đăng ký</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark btn-sm" data-bs-dismiss="modal" aria-label="Close">Hủy bỏ</button>
+                        <button type="submit" class="btn btn-sm btn-success">Tra cứu</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
 </div>
+<script>
+    function CheckExists() {
+         $.ajax({
+            url:'@Url.Action("CheckExists")' ,
+            type: "GET",
+            data: {
+                idTS: $("#stt_dicung").val()
+            }
+            , dataType: "json",
+             success: function (data) {
+                 $("#txt_hoten").text('* Họ tên người đi cùng: '+data);
+            },
+             error: function () {
+                 $("#stt_dicung").val('');
+                 $("#txt_hoten").text('');
+                alert('Không tồn tài tu sinh này!');
+            }
+        });
+        return false;
+    }
+     function Tracuu() {
+         $.ajax({
+            url:'@Url.Action("TraCuu")' ,
+            type: "GET",
+             data: {
+                 Hoten: $("#SName").val(),
+                 SDT: $("#SPhone").val(),
+                 Email: $("#SEmail").val()
+            }
+            , dataType: "json",
+             success: function (data) {
+                 if (data.status == false) {
+                     $("#errorhtml").removeClass("hidden");
+                 }
+                 else {
+                     alert('tìm thấy');
+                 }
+            },
+             error: function () {
+                 $("#errorhtml").removeClass("hidden");
+            }
+        });
+        return false;
+    }
+    function ModalTracuu() {
+        $("#searchModal").modal('show');
+    }
+</script>

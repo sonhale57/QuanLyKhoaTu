@@ -1,0 +1,124 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="apple-touch-icon" sizes="76x76" href="~/assets/client/images/logo-ban-van-hoa.png">
+    <link rel="icon" type="image/png" href="~/assets/client/images/logo-ban-van-hoa.png">
+    <title>Oops 404 • Ban Văn Hóa Thông Tin Chùa Vạn Đức</title>
+    <link id="pagestyle" href="~/assets/client/css/style.css" rel="stylesheet" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Brygada+1918:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/assets/client/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="~/assets/client/fonts/flaticon/font/flaticon.css">
+
+    <link rel="stylesheet" href="~/assets/client/css/tiny-slider.css">
+    <link rel="stylesheet" href="~/assets/client/css/aos.css">
+    <link rel="stylesheet" href="~/assets/client/css/flatpickr.min.css">
+    <link rel="stylesheet" href="~/assets/client/css/glightbox.min.css">
+
+</head>
+<body class="">
+    <main class="main-content">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-8 col-md-8 mx-auto">
+                    <div class="card z-index-0 mt-7">
+                        <div class="card-header text-center">
+                            <img src="~/assets/client/images/404 error.png" alt="404" height="350" width="auto" />
+                            <h3>Oops...</h3>
+                            <p class="text-secondary text-sm"><span class="text-danger"><i class="icon-bullhorn"></i> KẾT QUẢ TRA CỨU:</span> <i> Xin lỗi chúng tớ không tìm thấy thông tin của bạn,<br /> Hãy thử kiểm tra lại hoặc đăng ký mới nhé!</i></p>
+                            <p class="text-secondary text-sm text-italic">This is not a fault, just an accident that was not intentional!</p>
+                            <a href="/Home" class="btn btn-dark btn-sm mb-0"><i class="icon-arrow-circle-left"></i> Trở lại trang đăng ký</a>
+                            <a href="javascript:ModalTracuu();" class="btn btn-sm mb-0 bg-gradient-success me-2 mx-2"><i class="icon-search"></i> Tra cứu</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tra cứu thông tin đăng ký</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/Home/TraCuu" method="post">
+                    <div class="modal-body">
+                        <div class="row">
+                            @Html.Raw(TempData["err"])
+                            <div class="col-md-12 text-center hidden" id="errorhtml">
+                                <img src="~/assets/client/images/404 error.png" alt="Error404" width="350" height="auto" />
+                                <hr class="horizontal dark mt-3 ">
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-2">
+                                    <label class="form-label">Họ và tên(*):</label>
+                                    <input type="text" class="form-control" id="hoten" placeholder="Nhập số điện thoại của bạn" name="SName" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-2">
+                                    <label class="form-label">Số điện thoại(*):</label>
+                                    <input type="text" class="form-control" id="sdt" placeholder="Nhập số điện thoại của bạn" name="SPhone" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-2">
+                                    <label class="form-label">Địa chỉ Email(*):</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Nhập địa chỉ email của bạn" name="SEmail" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-dark btn-sm" data-bs-dismiss="modal" aria-label="Close">Hủy bỏ</button>
+                            <button type="submit" class="btn btn-sm btn-success">Tra cứu</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+     function Tracuu() {
+         $.ajax({
+            url:'@Url.Action("TraCuu")' ,
+            type: "GET",
+             data: {
+                 Hoten: $("#SName").val(),
+                 SDT: $("#SPhone").val(),
+                 Email: $("#SEmail").val()
+            }
+            , dataType: "json",
+             success: function (data) {
+                 if (data.status == false) {
+                     $("#errorhtml").removeClass("hidden");
+                 }
+                 else {
+                     alert('tìm thấy');
+                 }
+            },
+             error: function () {
+                 $("#errorhtml").removeClass("hidden");
+            }
+        });
+        return false;
+    }
+    function ModalTracuu() {
+        $("#searchModal").modal('show');
+    }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="/assets/js/core/bootstrap.min.js"></script>
+</body>
+</html>

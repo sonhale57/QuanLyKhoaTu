@@ -83,46 +83,42 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-centered table-nowrap mb-0 rounded">
-                        <thead class="thead-light">
-                            <tr>
-                                <th class="border-0 rounded-start">Người dùng</th>
-                                <th class="border-0">Số điện thoại</th>
-                                <th class="border-0">Email </th>
-                                <th class="border-0">Tài khoản</th>
-                                <th class="border-0 rounded-end">..</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
                                     <td>
-                                        <div class="d-flex px-2 py-1">
+                                        <div class="d-flex">
                                             <div>
                                                 <img src="@Html.DisplayFor(modelItem => item.Image)" class="avatar avatar-sm me-3" alt="user1">
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">@Html.DisplayFor(modelItem => item.Name)</h6>
+                                                <h6 class="mb-0 text-xs">@Html.DisplayFor(modelItem => item.Name)</h6>
                                                 <p class="text-xs text-secondary mb-0">@Html.DisplayFor(modelItem => item.OtherName)</p>
                                             </div>
                                         </div>
-
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Phone)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Email)
-                                    </td>
-                                    <td>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">@Html.DisplayFor(modelItem => item.Username)</h6>
-                                            <p class="text-xs text-secondary mb-0">@Html.DisplayFor(modelItem => item.Password)</p>
+                                        <div class="d-flex">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-xs">@Html.DisplayFor(modelItem => item.Username)</h6>
+                                                <p class="text-xs text-secondary mb-0">@Html.DisplayFor(modelItem => item.Password)</p>
+                                            </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="/Admin/Users/Edit/@item.id" class="btn btn-sm btn-info"><i class="fa fa-pencil-square"></i> Sửa</a>
-                                        <a href="javascript:Del(@item.id)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Xóa</a>
+                                        <p class="text-xs text-secondary mb-0">
+                                            @Html.DisplayFor(modelItem => item.Phone)
+                                         </p>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs text-secondary mb-0">
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                          </p>
+                                    </td>
+                                    <td>
+                                        <a href="/Admin/Users/Edit/@item.id" class="btn btn-xs btn-info"><i class="fa fa-pencil-square"></i> </a>
+                                        <a href="javascript:Del(@item.id)" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> </a>
                                     </td>
                                 </tr>
                             }

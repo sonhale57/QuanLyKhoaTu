@@ -86,6 +86,7 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                tuSinh.Updatetime= DateTime.Now;
                 db.Entry(tuSinh).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

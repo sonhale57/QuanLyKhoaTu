@@ -1,4 +1,6 @@
 ﻿@{
+    ViewBag.Controller = "Khóa Tu";
+    ViewBag.Link = "/Admin/KhoaTus";
     ViewBag.Title = "Danh sách đăng ký";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
@@ -9,11 +11,12 @@
                 <div class="row">
                     <div class="col-lg-4 px-0 mx-1">
                         <div class="col-auto">
-                            @Html.DropDownList("IdKhoaTu", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownList("IdKhoaTu", null, htmlAttributes: new { @class = "form-select form-select-sm" ,@onchange= "javascript:Loadlist()" })
+                            
                         </div>
                     </div>
                     <div class="col-lg-2 mx-0 px-0">
-                        <a href="javascript:Loadlist();" class="btn btn-success"><i class="fa fa-search"></i></a>
+                        <a href="javascript:Loadlist();" class="btn btn-success btn-xs"><i class="fa fa-search"></i></a>
                     </div>
                 </div>
                 <hr class="horizontal dark">
@@ -43,16 +46,42 @@
                 var items = '';
                 var str = "";
                 $.each(data, function (i, item) {
+                    var aotrang = "";
+                    if (item.MuonAoTrang) {
+                        aotrang = "<p class='text-success text-bolder text-xs mb-0'>Có mượn</p>";
+                    } else {
+                        aotrang = "<p class='text-danger text-bolder text-xs mb-0'>Không mượn</p>";
+                    }
+                    var dichuyen = "";
+                    if (item.DiChuyen == "chuavanduc") {
+                        dichuyen = "<p class='text-secondary text-xs mb-0'>Đi cùng Đoàn</p>";
+                    }
+                    else if (item.DiChuyen == "tutuc") {
+                        dichuyen = "<p class='text-primary text-bolder text-xs mb-0'>Tự túc</p>";
+                    }
+                    else {
+                        dichuyen = "<p class='text-danger text-bolder text-xs mb-0'>Khác</p>";
+                    }
                     var rows = "<tr>"
-                        + "<td>" + item.Ten + "</td>"
-                        + "<td>" + item.Hoten + "</td>"
-                        + "<td>" + item.Phapdanh + "</td>"
-                        + "<td>" + item.Gioitinh + "</td>"
-                        + "<td>" + item.SDT + "</td>"
-                        + "<td>" + item.Email + "</td>"
-                        + "<td>" + item.Thoigian  + "</td>"
-                        + "<td>" + item.DiChuyen + "</td>"
-                        + "<td>" + (item.StatusCheckin ==null? "Chưa checkin":"Đã checkin") + "</td>"
+                        + "<td class='text-center'> <h6 class='text-xs mb-0'>#" + item.idTS + "</h6>"
+                        + "<p class='text-xs mb-0'>" + (item.TrangThai == 0 ?"<i class='fa fa-check-circle text-secondary' title='Chưa xác nhận tham gia'></i>":"<i class='fa fa-check-circle text-success' title='Đã xác nhận tham gia'></i>") + "</p>"
+                        +"</td>"
+                        + "<td> <h6 class='text-sm mb-0'>" + item.Hoten + "</h6>"
+                        + "<p class='text-xs mb-0'>" + item.Phapdanh + "</p>"
+                        +"</td> "
+                        + "<td>"
+                        +"<p class='text-xs mb-0'> SĐT: " + item.SDT + "</p> "
+                        + "<p class='text-xs mb-0'>Email: " + item.Email + "</p>"
+                        +"</td> "
+                        + "<td><p class='text-xs mb-0'>" + (item.Gioitinh == "Nam" ? "Nam" : "Nữ") + "</p></td>"
+                        + "<td>" + dichuyen + "</td>"
+                        + "<td>" + aotrang + "</td>"
+                        + "<td><p class='text-xs mb-0'>" + item.Thoigian + "</p></td>"
+                        + "<td><p class='text-xs mb-0'>" + (item.DiCung == "" ? "<span class='text-danger'>Không</span>" : item.DiCung) + "</p></td>"
+                        + "<td>"
+                        + "<a class='btn btn-xs btn-success mx-1 mb-0' href='javascript:Confirm(" + item.idTS + "," +item.idKT+")'><i class='fa fa-check-circle'></i></a>"
+                        + "<a class='btn btn-xs btn-danger mb-0' href='javascript:Cancel(" + item.idTS + "," + item.idKT +")'><i class='fa fa-trash'></i></a>"
+                        +"</td> "
                         + "</tr>";
                     str += rows;
                 });

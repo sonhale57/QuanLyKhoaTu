@@ -1,12 +1,14 @@
 ﻿@using QuanLyKhoaTu.Models;
 @model dynamic
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý Khóa Tu";
+    ViewBag.Controller = "Khóa Tu";
+    ViewBag.Link = "/Admin/KhoaTus";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
     <div class="col-lg-4">
-        <div class="card border-0 shadow mb-4">
+        <div class="card border-0 shadow mb-2">
             <div class="card-body px-3 py-2">
                 <form action="/Admin/LoaiKhoaTus/Create" method="post" enctype="multipart/form-data">
                     <div class="row">
@@ -16,9 +18,8 @@
                                 <label for="first_name">Loại khóa tu</label>
                                 <input class="form-control" id="ten" type="text" name="Ten" placeholder="Loại Khóa Tu" required>
                             </div>
-                            <button class="btn btn-success btn-sm mt-2 animate-up-2" type="submit">Thêm mới</button>
+                            <button class="btn btn-success btn-xs mt-2 animate-up-2" type="submit">Thêm mới</button>
                         </div>
-
                     </div>
                 </form>
                 <hr class="horizontal dark">
@@ -30,13 +31,13 @@
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">@Html.DisplayFor(modelItem => item.Ten)</h6>
+                                            <h6 class="mb-0 text-xs">@Html.DisplayFor(modelItem => item.Ten)</h6>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <a href="javascript:Edit_LoaiKhoaTu(@item.id,'@item.Ten')" class="btn btn-sm btn-info"><i class="fa fa-pencil-square"></i> </a>
-                                    <a href="javascript:Del_LoaiKhoaTu(@item.id)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </a>
+                                    <a href="javascript:Edit_LoaiKhoaTu(@item.id,'@item.Ten')" class="btn btn-xs btn-info mb-0"><i class="fa fa-pencil-square"></i> </a>
+                                    <a href="javascript:Del_LoaiKhoaTu(@item.id)" class="btn btn-xs btn-danger mb-0"><i class="fa fa-trash"></i> </a>
                                 </td>
                             </tr>
                         }
@@ -49,8 +50,9 @@
         <div class="card border-0 shadow mb-4">
             <div class="card-header pb-0 p-3">
                 <div class="row">
-                    <div class="col-6 d-flex align-items-center">
+                    <div class="col-6 align-items-center">
                         <h6 class="mb-0">Danh sách khóa tu</h6>
+                        <small class="text-danger"><i class="fa fa-bullhorn"></i> Chỉ active 1 khóa trước khi public link đăng ký.</small>
                     </div>
                     <div class="col-6 text-end">
                         <a class="btn btn-sm bg-gradient-dark mb-0" href="javascript:Create_KhoaTu();"><i class="fas fa-plus-circle"></i>&nbsp;Thêm khóa tu</a>
@@ -61,31 +63,21 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-centered table-nowrap mb-0 rounded">
-                        <thead class="thead-light">
-                            <tr>
-                                <th class="border-0 rounded-start">#ID</th>
-                                <th class="border-0">Khóa tu</th>
-                                <th class="border-0">Địa điểm</th>
-                                <th class="border-0">Ngày bắt đầu </th>
-                                <th class="border-0">Số lượng đăng ký</th>
-                                <th class="border-0 rounded-end">..</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             @foreach (KhoaTu item in Model.KhoaTu)
                             {
                                 <tr>
                                     <td class="text-center">
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">#@Html.DisplayFor(modelItem => item.id)</h6>
-                                            <p class="text-xs text-secondary mb-0">
+                                        <div class="d-flex flex-column justify-content-center ">
+                                            <h6 class="mb-0 text-xs mb-0">#@Html.DisplayFor(modelItem => item.id)</h6>
+                                            <p class="text-xs mb-0">
                                                 @if (item.Active == true)
-                                                {
-                                                    <a href="#" data-id="@item.id" class="badge badge-sm bg-gradient-success">Active</a>
+                                                { 
+                                                    <a href="#" data-id="@item.id" class="badge badge-xs bg-gradient-success">Active</a>
                                                 }
                                                 else
                                                 {
-                                                    <a href="#" data-id="@item.id" class="badge badge-sm bg-gradient-secondary">Not Active</a>
+                                                    <a class="text-secondary">Not Active</a>
                                                 }
                                             </p>
                                         </div>
@@ -93,27 +85,29 @@
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">@Html.DisplayFor(modelItem => item.Ten)</h6>
+                                                <p class="mb-0 text-xs">@Html.DisplayFor(modelItem => item.Ten)</p>
                                                 <p class="text-xs text-secondary mb-0">@Html.DisplayFor(modelItem => item.LoaiKhoaTu.Ten)</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">@Html.DisplayFor(modelItem => item.DiaDiem)</h6>
+                                            <p class="mb-0 text-xs">@Html.DisplayFor(modelItem => item.DiaDiem)</p>
                                             <p class="text-xs text-secondary mb-0">Chi phí: @Html.DisplayFor(modelItem => item.Chiphi) đ</p>
                                         </div>
                                     </td>
                                     <td>
-                                        @item.Ngaybatdau.Value.ToLongDateString()
+                                        <p class="text-xs text-secondary mb-0">
+                                            @item.Ngaybatdau.Value.ToLongDateString()
+                                         </p>
                                     </td>
 
                                     <td>
                                     </td>
 
                                     <td>
-                                        <a href="/Admin/KhoaTus/Edit/@item.id" class="btn btn-sm btn-info"><i class="fa fa-pencil-square"></i> </a>
-                                        <a href="javascript:Del(@item.id)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </a>
+                                        <a href="/Admin/KhoaTus/Edit/@item.id" class="btn btn-xs btn-info mb-0"><i class="fa fa-pencil-square"></i> </a>
+                                        <a href="javascript:Del(@item.id)" class="btn btn-xs btn-danger mb-0"><i class="fa fa-trash"></i> </a>
                                     </td>
                                 </tr>
                             }
@@ -127,7 +121,7 @@
 
 
 <div class="modal fade" id="createKhoaTu" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Thêm khóa tu</h5>
@@ -139,36 +133,43 @@
                         @Html.Raw(TempData["err"])
                         <div class="col-md-12 mb-3">
                             <div>
-                                <label for="first_name">Tên khóa tu</label>
+                                <label for="tenkhoatu">Tên khóa tu</label>
                                 <input class="form-control" id="tenkhoatu" type="text" name="Ten" placeholder="Tên khóa tu" required>
                             </div>
                         </div>
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-4 mb-3">
                             <div>
-                                <label for="last_name">Loại Khóa Tu</label>
-                                @Html.DropDownList("IdLoaiKhoaTu", null, htmlAttributes: new { @class = "form-control" })
+                                <label for="loaikhoatu">Loại Khóa Tu</label>
+                                @Html.DropDownList("IdLoaiKhoaTu", null, htmlAttributes: new { @class = "form-select" })
                             </div>
                         </div>
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-8 mb-3">
                             <div>
-                                <label for="last_name">Chi phí</label>
-                                <input class="form-control" id="chiphi" name="Chiphi" type="text" placeholder="Chi phí" value="0" required>
-                            </div>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <div>
-                                <label for="last_name">Địa điểm tổ chức</label>
+                                <label for="diadiem">Địa điểm tổ chức</label>
                                 <input class="form-control" id="diadiem" name="DiaDiem" type="text" placeholder="Địa điểm tổ chức" required>
                             </div>
                         </div>
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-4 mb-3">
+                            <div>
+                                <label for="chiphi">Chi phí</label>
+                                <input class="form-control" id="chiphi" name="Chiphi" type="text" placeholder="Chi phí" value="0" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
                             <div class="form-group">
-                                <label for="email">Ngày bắt đầu</label>
+                                <label for="ngaybatdau">Ngày bắt đầu</label>
                                 <input class="form-control" id="ngaybatdau" type="date" name="Ngaybatdau" placeholder="Ngày bắt đầu">
                             </div>
                         </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="form-group">
+                                <label for="ngayketthuc">Ngày Kết thúc</label>
+                                <input class="form-control" id="ngayketthuc" type="date" name="Ngayketthuc" placeholder="Ngày kết thúc">
+                            </div>
+                        </div>
                     </div>
-                    <div class="mt-3">
+                    <div>
                         <button class="btn btn-success btn-sm mt-2 animate-up-2" type="submit">Thêm mới</button>
                     </div>
                 </form>

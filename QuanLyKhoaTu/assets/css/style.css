@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&display=swap');
 :root {
   --bs-blue: #63B3ED;
   --bs-indigo: #596CFF;
@@ -83,16 +83,16 @@
 }
 
 body {
-  margin: 0;
-  font-family: var(--bs-body-font-family);
-  font-size: var(--bs-body-font-size);
-  font-weight: var(--bs-body-font-weight);
-  line-height: var(--bs-body-line-height);
-  color: var(--bs-body-color);
-  text-align: var(--bs-body-text-align);
-  background-color: var(--bs-body-bg);
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    margin: 0;
+    font-family: 'Libre Franklin',sans-serif;
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-body-font-weight);
+    line-height: var(--bs-body-line-height);
+    color: var(--bs-body-color);
+    text-align: var(--bs-body-text-align);
+    background-color: var(--bs-body-bg);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 hr {
@@ -359,6 +359,7 @@ tfoot,
 tr,
 td,
 th {
+  vertical-align:middle;
   border-color: inherit;
   border-style: solid;
   border-width: 0;
@@ -2479,7 +2480,7 @@ progress {
 }
 
 .table>thead {
-  vertical-align: bottom;
+  vertical-align: middle;
 }
 
 .table-group-divider {
@@ -6700,39 +6701,39 @@ fieldset:disabled .btn {
 }
 
 .tooltip {
-  --bs-tooltip-zindex: 1070;
-  --bs-tooltip-max-width: 200px;
-  --bs-tooltip-padding-x: 0.5rem;
-  --bs-tooltip-padding-y: 0.25rem;
-  --bs-tooltip-margin: 0;
-  --bs-tooltip-font-size: 0.875rem;
-  --bs-tooltip-color: #fff;
-  --bs-tooltip-bg: #000;
-  --bs-tooltip-border-radius: 0.5rem;
-  --bs-tooltip-opacity: 0.9;
-  --bs-tooltip-arrow-width: 0.8rem;
-  --bs-tooltip-arrow-height: 0.4rem;
-  z-index: var(--bs-tooltip-zindex);
-  display: block;
-  padding: var(--bs-tooltip-arrow-height);
-  margin: var(--bs-tooltip-margin);
-  font-family: var(--bs-font-sans-serif);
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.5;
-  text-align: left;
-  text-align: start;
-  text-decoration: none;
-  text-shadow: none;
-  text-transform: none;
-  letter-spacing: normal;
-  word-break: normal;
-  white-space: normal;
-  word-spacing: normal;
-  line-break: auto;
-  font-size: var(--bs-tooltip-font-size);
-  word-wrap: break-word;
-  opacity: 0;
+    --bs-tooltip-zindex: 1070;
+    --bs-tooltip-max-width: 200px;
+    --bs-tooltip-padding-x: 0.5rem;
+    --bs-tooltip-padding-y: 0.25rem;
+    --bs-tooltip-margin: 0;
+    --bs-tooltip-font-size: 0.875rem;
+    --bs-tooltip-color: #fff;
+    --bs-tooltip-bg: #000;
+    --bs-tooltip-border-radius: 0.5rem;
+    --bs-tooltip-opacity: 0.9;
+    --bs-tooltip-arrow-width: 0.8rem;
+    --bs-tooltip-arrow-height: 0.4rem;
+    z-index: var(--bs-tooltip-zindex);
+    display: block;
+    padding: var(--bs-tooltip-arrow-height);
+    margin: var(--bs-tooltip-margin);
+    font-family: 'Libre Franklin';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+    text-align: start;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    word-break: normal;
+    white-space: normal;
+    word-spacing: normal;
+    line-break: auto;
+    font-size: var(--bs-tooltip-font-size);
+    word-wrap: break-word;
+    opacity: 0;
 }
 
 .tooltip.show {
@@ -6818,49 +6819,49 @@ fieldset:disabled .btn {
 }
 
 .popover {
-  --bs-popover-zindex: 1060;
-  --bs-popover-max-width: 276px;
-  --bs-popover-font-size: 0.75rem;
-  --bs-popover-bg: #fff;
-  --bs-popover-border-width: 0px;
-  --bs-popover-border-color: rgba(0, 0, 0, 0.2);
-  --bs-popover-border-radius: 0.75rem;
-  --bs-popover-inner-border-radius: calc(0.75rem - 0px);
-  --bs-popover-box-shadow: 0 0.3125rem 0.625rem 0 rgba(0, 0, 0, 0.12);
-  --bs-popover-header-padding-x: 1rem;
-  --bs-popover-header-padding-y: 0.5rem;
-  --bs-popover-header-font-size: 1rem;
-  --bs-popover-header-color: #344767;
-  --bs-popover-header-bg: #e9ecef;
-  --bs-popover-body-padding-x: 1rem;
-  --bs-popover-body-padding-y: 1rem;
-  --bs-popover-body-color: #67748e;
-  --bs-popover-arrow-width: 1rem;
-  --bs-popover-arrow-height: 0.5rem;
-  --bs-popover-arrow-border: var(--bs-popover-border-color);
-  z-index: var(--bs-popover-zindex);
-  display: block;
-  max-width: var(--bs-popover-max-width);
-  font-family: var(--bs-font-sans-serif);
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.5;
-  text-align: left;
-  text-align: start;
-  text-decoration: none;
-  text-shadow: none;
-  text-transform: none;
-  letter-spacing: normal;
-  word-break: normal;
-  white-space: normal;
-  word-spacing: normal;
-  line-break: auto;
-  font-size: var(--bs-popover-font-size);
-  word-wrap: break-word;
-  background-color: var(--bs-popover-bg);
-  background-clip: padding-box;
-  border: var(--bs-popover-border-width) solid var(--bs-popover-border-color);
-  border-radius: var(--bs-popover-border-radius);
+    --bs-popover-zindex: 1060;
+    --bs-popover-max-width: 276px;
+    --bs-popover-font-size: 0.75rem;
+    --bs-popover-bg: #fff;
+    --bs-popover-border-width: 0px;
+    --bs-popover-border-color: rgba(0, 0, 0, 0.2);
+    --bs-popover-border-radius: 0.75rem;
+    --bs-popover-inner-border-radius: calc(0.75rem - 0px);
+    --bs-popover-box-shadow: 0 0.3125rem 0.625rem 0 rgba(0, 0, 0, 0.12);
+    --bs-popover-header-padding-x: 1rem;
+    --bs-popover-header-padding-y: 0.5rem;
+    --bs-popover-header-font-size: 1rem;
+    --bs-popover-header-color: #344767;
+    --bs-popover-header-bg: #e9ecef;
+    --bs-popover-body-padding-x: 1rem;
+    --bs-popover-body-padding-y: 1rem;
+    --bs-popover-body-color: #67748e;
+    --bs-popover-arrow-width: 1rem;
+    --bs-popover-arrow-height: 0.5rem;
+    --bs-popover-arrow-border: var(--bs-popover-border-color);
+    z-index: var(--bs-popover-zindex);
+    display: block;
+    max-width: var(--bs-popover-max-width);
+    font-family: 'Libre Franklin',sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+    text-align: start;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    word-break: normal;
+    white-space: normal;
+    word-spacing: normal;
+    line-break: auto;
+    font-size: var(--bs-popover-font-size);
+    word-wrap: break-word;
+    background-color: var(--bs-popover-bg);
+    background-clip: padding-box;
+    border: var(--bs-popover-border-width) solid var(--bs-popover-border-color);
+    border-radius: var(--bs-popover-border-radius);
 }
 
 .popover .popover-arrow {
@@ -10380,7 +10381,7 @@ fieldset:disabled .btn {
 }
 
 .font-monospace {
-  font-family: var(--bs-font-monospace) !important;
+    font-family: 'Libre Franklin' !important;
 }
 
 .fs-1 {
@@ -20849,10 +20850,10 @@ fieldset:disabled .btn {
   padding: 1.5rem;
 }
 
-.card .card-body {
-  font-family: "Open Sans", sans-serif;
-  padding: 1.5rem;
-}
+    .card .card-body {
+        font-family: 'Libre Franklin', sans-serif;
+        padding: 1.5rem;
+    }
 
 .card.card-plain {
   background-color: transparent;
@@ -22532,7 +22533,7 @@ hr.horizontal.gray-light {
   overflow-y: auto;
   padding: 0;
   box-shadow: none;
-  z-index: 9999;
+  z-index: 999;
 }
 
 .navbar-vertical.navbar-expand-xs .navbar-collapse {
@@ -24931,11 +24932,11 @@ p {
 }
 
 .text-sans-serif {
-  font-family: "Open Sans", sans-serif !important;
+    font-family: 'Libre Franklin', sans-serif !important;
 }
 
 .text-monospace {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+    font-family: 'Libre Franklin' !important;
 }
 
 .text-justify {
@@ -26675,24 +26676,24 @@ https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javasc
  */
 code[class*="language-"],
 pre[class*="language-"] {
-  color: black;
-  background: none;
-  text-shadow: 0 1px white;
-  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  font-size: 1em;
-  text-align: left;
-  white-space: pre;
-  word-spacing: normal;
-  word-break: normal;
-  word-wrap: normal;
-  line-height: 1.5;
-  -moz-tab-size: 4;
-  -o-tab-size: 4;
-  tab-size: 4;
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
-  hyphens: none;
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: 'Libre Franklin',Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-size: 1em;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
 }
 
 pre[class*="language-"]::-moz-selection,

@@ -33,7 +33,7 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
         }
         public ActionResult DanhSachDangKy()
         {
-            ViewBag.IdKhoaTu = new SelectList(db.KhoaTus.OrderByDescending(x=>x.id), "id", "Ten");
+            ViewBag.IdKhoaTu = new SelectList(db.KhoaTus.OrderByDescending(x=>x.Active), "id", "Ten");
             return View();
         }
         public JsonResult GetDanhSach(int? id)
@@ -45,6 +45,8 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
                        where k.id == id
                        select new
                        {
+                           idTS = ts.id,
+                           idKT = k.id,
                            Ten = k.Ten,
                            Hoten = ts.Hoten,
                            Namsinh = ts.Namsinh,
@@ -54,10 +56,13 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
                            Email = ts.Email,
                            CMND = ts.CMND,
                            NgayGhiDanh = dk.NgayGhiDanh,
-                           Thoigian =dk.NgayGhiDanh.ToString(),
                            DiChuyen = dk.DiChuyen,
+                           TrangThai   =dk.Trangthai,
+                           MuonAoTrang = dk.MuonAoTrang,
                            StatusCheckin = dk.Checkin,
-                           DiChung = dk.DiCung
+                           DiChung = dk.DiCung,
+                           DiCung = (from dc in db.TuSinhs where dc.id == dk.DiCung select dc.Hoten),
+                           Thoigian = dk.NgayGhiDanh.ToString()
                        };
 
             return Json(linq.ToList(), JsonRequestBehavior.AllowGet);
@@ -124,7 +129,7 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Ten,Ngaybatdau,Ngayketthuc,IdLoaiKhoaTu,Chiphi,DiaDiem")] KhoaTu khoaTu)
+        public ActionResult Edit([Bind(Include = "id,Ten,Ngaybatdau,Ngayketthuc,IdLoaiKhoaTu,Chiphi,DiaDiem,Active")] KhoaTu khoaTu)
         {
             if (ModelState.IsValid)
             {
