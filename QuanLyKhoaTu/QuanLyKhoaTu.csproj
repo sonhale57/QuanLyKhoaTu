@@ -161,6 +161,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\client\images\3.jpg" />
+    <Content Include="assets\client\images\4.jpg" />
     <Content Include="assets\client\images\404 error.png" />
     <Content Include="assets\client\css\aos.css" />
     <Content Include="assets\client\css\bootstrap-grid.css" />
@@ -187,20 +189,25 @@
     <Content Include="assets\client\fonts\index.html" />
     <Content Include="assets\client\images\1.jpg" />
     <Content Include="assets\client\images\2.jpg" />
+    <Content Include="assets\client\images\5.jpg" />
+    <Content Include="assets\client\images\6.jpeg" />
     <Content Include="assets\client\images\ganket.jpeg" />
     <Content Include="assets\client\images\giadinh.jpeg" />
     <Content Include="assets\client\images\header.png" />
+    <Content Include="assets\client\images\header2.png" />
     <Content Include="assets\client\images\hoadang.jpeg" />
     <Content Include="assets\client\images\hoadang.png" />
     <Content Include="assets\client\images\logo-ban-van-hoa.png" />
     <Content Include="assets\client\images\logocvd.png" />
     <Content Include="assets\client\images\luatrai.jpeg" />
     <Content Include="assets\client\images\phapdam.jpeg" />
+    <Content Include="assets\client\images\question.png" />
     <Content Include="assets\client\images\register.png" />
     <Content Include="assets\client\images\tapthe.jpeg" />
     <Content Include="assets\client\images\tapthe.png" />
     <Content Include="assets\client\images\tinhtoa.jpeg" />
     <Content Include="assets\client\images\tungkinh.jpeg" />
+    <Content Include="assets\client\images\tuoitre.png" />
     <Content Include="assets\client\images\vannghe.jpeg" />
     <Content Include="assets\client\js\aos.js" />
     <Content Include="assets\client\js\bootstrap.bundle.min.js" />
@@ -505,6 +512,9 @@
     <Content Include="Views\Home\Dangky.cshtml" />
     <Content Include="Views\Home\TraCuu.cshtml" />
     <Content Include="Views\Home\Error404.cshtml" />
+    <Content Include="Views\Home\UpdateInfo.cshtml" />
+    <Content Include="Views\Home\ConfirmJoin.cshtml" />
+    <Content Include="Views\Home\CancelJoin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

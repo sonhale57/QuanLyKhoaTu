@@ -1,12 +1,14 @@
 ﻿using QuanLyKhoaTu.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Data.Linq.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using System.Xml.Linq;
 
 namespace QuanLyKhoaTu.Controllers
 {
@@ -141,7 +143,10 @@ namespace QuanLyKhoaTu.Controllers
         }
         [HttpPost]
         public  ActionResult TraCuu(string SName,string SPhone,string SEmail) {
-            
+            if(SName=="" || SPhone == "" || SEmail == "")
+            {
+                return View("Error404");
+            }
             var linq = db.TuSinhs.SqlQuery("Select * from TuSinh where SDT ='" + SPhone + "' and Email ='" + SEmail + "' and Hoten like N'%" + SName + "%'").ToList();
             if (linq == null || linq.Count == 0)
             {
@@ -162,6 +167,7 @@ namespace QuanLyKhoaTu.Controllers
                            join dk in db.DangKyKhoaTus on k.id equals dk.IdKhoaTu
                            where dk.IdTuSinh ==idTSinh
                            select k;
+
                 ViewBag.data = list.ToList();
             }
             return View();
@@ -169,6 +175,110 @@ namespace QuanLyKhoaTu.Controllers
         public ActionResult Error404()
         {
             return View();
+        }
+        public ActionResult UpdateInfo()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult UpdateInfo(int STT,string Hoten,string Phapdanh,string SDT,string SDTKhac,string DiaChi,string CMND,string Email)
+        {
+            var tuSinh = db.TuSinhs.Find(STT);
+            tuSinh.Hoten = Hoten;
+            tuSinh.Phapdanh = Phapdanh;
+            tuSinh.CMND = CMND;
+            tuSinh.SDT = SDT;
+            tuSinh.SDT_nguoithan = SDTKhac;
+            tuSinh.DiaChi = DiaChi;
+            tuSinh.Email = Email;
+            db.Entry(tuSinh).State = EntityState.Modified;
+            db.SaveChanges();
+
+            var linq = db.TuSinhs.Find(STT);
+            ViewBag.idTS = linq.id;
+            ViewBag.Hoten = linq.Hoten;
+            ViewBag.Phapdanh = linq.Phapdanh;
+            ViewBag.CMND = linq.CMND;
+            ViewBag.Email = linq.Email;
+            ViewBag.SDT = linq.SDT;
+            ViewBag.DiaChi = linq.DiaChi;
+            ViewBag.SDTKhac = linq.SDT_nguoithan;
+            var list = from k in db.KhoaTus
+                       join dk in db.DangKyKhoaTus on k.id equals dk.IdKhoaTu
+                       where dk.IdTuSinh == STT
+                       select k;
+            ViewBag.data = list.ToList();
+            return View("TraCuu");
+        }
+        public ActionResult ConfirmJoin()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ConfirmJoin(int idTS, int idKT)
+        {
+            var dangky = db.DangKyKhoaTus.SingleOrDefault(m=>m.IdTuSinh ==idTS && m.IdKhoaTu==idKT);
+            if(dangky == null )
+            {
+                return View("Error404");
+            }
+            else
+            {
+                dangky.Trangthai = 1;
+                db.Entry(dangky).State = EntityState.Modified;
+                db.SaveChanges();
+
+                var linq = db.TuSinhs.Find(idTS);
+                    ViewBag.idTS = linq.id;
+                    ViewBag.Hoten = linq.Hoten;
+                    ViewBag.Phapdanh = linq.Phapdanh;
+                    ViewBag.CMND = linq.CMND;
+                    ViewBag.Email = linq.Email;
+                    ViewBag.SDT = linq.SDT;
+                    ViewBag.DiaChi = linq.DiaChi;
+                    ViewBag.SDTKhac = linq.SDT_nguoithan;
+                    var list = from k in db.KhoaTus
+                               join dk in db.DangKyKhoaTus on k.id equals dk.IdKhoaTu
+                               where dk.IdTuSinh == idTS
+                               select k;
+                ViewBag.data = list.ToList();
+                return View("TraCuu");
+            }
+        }
+        public ActionResult CancelJoin()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CancelJoin(int idTS, int idKT)
+        {
+            var dangky = db.DangKyKhoaTus.SingleOrDefault(m => m.IdTuSinh == idTS && m.IdKhoaTu == idKT);
+            if (dangky == null)
+            {
+                return View("Error404");
+            }
+            else
+            {
+                dangky.Trangthai = 0;
+                db.Entry(dangky).State = EntityState.Modified;
+                db.SaveChanges();
+
+                var linq = db.TuSinhs.Find(idTS);
+                ViewBag.idTS = linq.id;
+                ViewBag.Hoten = linq.Hoten;
+                ViewBag.Phapdanh = linq.Phapdanh;
+                ViewBag.CMND = linq.CMND;
+                ViewBag.Email = linq.Email;
+                ViewBag.SDT = linq.SDT;
+                ViewBag.DiaChi = linq.DiaChi;
+                ViewBag.SDTKhac = linq.SDT_nguoithan;
+                var list = from k in db.KhoaTus
+                           join dk in db.DangKyKhoaTus on k.id equals dk.IdKhoaTu
+                           where dk.IdTuSinh == idTS
+                           select k;
+                ViewBag.data = list.ToList();
+                return View("TraCuu");
+            }
         }
     }
 }

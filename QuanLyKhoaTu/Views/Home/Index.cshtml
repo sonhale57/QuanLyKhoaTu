@@ -1,37 +1,51 @@
 ﻿@{
     ViewBag.Title = "Khóa Tu Tuổi Trẻ";
 }
-<div class="page-header align-items-start min-vh-70 pt-5 pb-5" style="background-image: url('/assets/client/images/header.png'); background-position: top;">
-    <span class="mask bg-gradient-dark opacity-0"></span>
+<!--SECTION GIOITHIEU-->
+<div class="hero align-items-start min-vh-100  pt-5 pb-5">
+    <div class="img-bg rellax">
+        <img src="~/assets/client/images/header2.png" alt="Image" class="img-fluid" width="100%">
+    </div>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center mx-auto mt-10">
-                <h1 class="text-white mb-2 mt-6"></h1>
-                <p class="text-lead text-white"></p>
+        <div class="row align-items-center justify-content-start">
+            <div class="col-lg-5">
+                <h1 class="heading" data-aos="fade-up">Trang thông tin<br> Khoá tu tuổi trẻ</h1>
+                <p class="mb-3" data-aos="fade-up">Nếu đây là lần đầu bạn tham gia khoá tu tuổi trẻ cùng bọn tớ, hãy cùng nhau khám phá xem bọn mình sẽ được tham gia những chương trình gì nhé.</p>
+                <p class="mb-5" data-aos="fade-up">Bạn muốn đăng ký ngay? </p>
+                <p class="mt-2" data-aos="fade-up" data-aos-delay="300"><a href="#dangky" class="btn btn-primary">Đăng ký ngay</a></p>
             </div>
         </div>
     </div>
 </div>
+
 <!--SECTION GIOITHIEU-->
 <section id="gioithieu">
     <div class="container">
-        <div class="row align-items-center justify-content-between">
+        <div class="row align-items-center justify-content-between mt-9 mb-9">
 
-            <div class="col-lg-6 order-lg-2 mb-5">
-                <div class="image-stack mb-2 mb-lg-0">
-                    <div class="image-stack__item " data-aos="fade-up">
-                        <img src="~/assets/client/images/tapthe.png" alt="Image">
+            <div class="col-lg-6 order-lg-2">
+                <div class="image-stack mb-5 mb-lg-0">
+
+                    <div class="image-stack__item " data-aos="fade-up" data-aos-delay="100" data-rellax-percentage="0.5">
+                        <img src="~/assets/client/images/tuoitre.png" alt="Image" class="img-fluid">
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-4 order-lg-1 mt-0">
+            <div class="col-lg-4 order-lg-1">
                 <div>
                     <h2 class="heading mb-3" data-aos="fade-up" data-aos-delay="100">Xin chào bạn mới!</h2>
 
-                    <p data-aos="fade-up" data-aos-delay="200">Nếu đây là lần đầu bạn tham gia khoá tu tuổi trẻ cùng bọn tớ, hãy cùng nhau khám phá xem bọn mình sẽ được tham gia những chương trình gì nhé. </p>
+                    <p class="mb-5" data-aos="fade-up" data-aos-delay="200">Mời các bạn cùng lên "chuyến tàu quá khứ", xem lại những thước phim đậm màu ký ức của khóa tu "Vẽ Nắng"</p>
 
-                    <p class="my-4" data-aos="fade-up" data-aos-delay="300"><a href="#noibat" class="btn btn-primary">Khám phá</a></p>
+                    <div data-aos="fade-up">
+                        <a href="https://youtu.be/4rz8ZzJ_KIw" class="play-button align-items-center d-flex glightbox3 btn btn-md bg-gradient-success">
+                            <span class="icon-button me-3">
+                                <span class="icon-play"></span>
+                            </span>
+                            <span class="caption">Xem ngay</span>
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -40,12 +54,12 @@
 </section>
 
 <!--SECTION HOATDONGNOIBAT-->
-<section class="mt-2" id="noibat" style="background-color: #f7f8ff ;">
+<section id="noibat" style="background-color: #f2f2f2;">
     <div data-aos="fade-up" data-aos-delay="100">
         <div class="container">
             <div class="row align-items-center justify-content-between mb-5">
                 <div class="col-lg-6 mt-6" data-aos="fade-up">
-                    <h2 class="heading ">Các chương trình nổi bật</h2>
+                    <h2 class="heading">Các chương trình nổi bật</h2>
                 </div>
                 <div class="" data-aos="fade-up" data-aos-delay="100">
                     <div id="destination-controls" style="display: none;">
@@ -61,7 +75,7 @@
         </div>
 
         <div class="destination-slider-wrap">
-            <div class="destination-slider mb-6">
+            <div class="destination-slider mb-8 mt-5">
                 <div class="destination">
                     <div class="thumb">
                         <img src="~/assets/client/images/hoadang.jpeg" alt="Image" class="img-fluid">
@@ -98,7 +112,7 @@
                     </div>
                 </div>
 
-                <div class="destination mt-0">
+                <div class="destination">
                     <div class="thumb">
                         <img src="~/assets/client/images/giadinh.jpeg" alt="Image" class="img-fluid">
                     </div>
@@ -119,7 +133,6 @@
                 <div class="destination">
                     <div class="thumb">
                         <img src="~/assets/client/images/luatrai.jpeg" alt="Image" class="img-fluid">
-                        <div class="price">Vạn Linh</div>
                     </div>
                     <div class="mt-2">
                         <h5><a>Đêm lửa trại</a></h5>
@@ -138,6 +151,102 @@
         </div>
     </div>
 </section>
+
+<!-- FORM THƯ VIỆN -->
+<section id="thuvien">
+    <div class="container">
+        <div class="row align-items-center justify-content-between mb-4 mt-4">
+            <div class="col-lg-6 mt-6" data-aos="fade-up">
+                <h2 class="heading">Thư viện ảnh</h2>
+            </div>
+            <div class="photo-gallery mt-4 " data-aos="fade-up" data-aos-delay="100">
+                <div class="container">
+                    <div class="row photos">
+                        <div class="col-sm-4 col-md-4 col-lg-4  mb-1"><a data-lightbox="photos"><img style="border-radius: 0.40rem;" class="img-fluid" src="~/assets/client/images/1.jpg"></a></div>
+                        <div class="col-sm-4 col-md-4 col-lg-4  mb-1"><a data-lightbox="photos"><img style="border-radius: 0.40rem;" class="img-fluid" src="~/assets/client/images/2.jpg"></a></div>
+                        <div class="col-sm-4 col-md-4 col-lg-4  mb-1"><a data-lightbox="photos"><img style="border-radius: 0.40rem;" class="img-fluid" src="~/assets/client/images/3.jpg"></a></div>
+                        <div class="col-sm-4 col-md-4 col-lg-4  mb-1"><a data-lightbox="photos"><img style="border-radius: 0.40rem;" class="img-fluid" src="~/assets/client/images/4.jpg"></a></div>
+                        <div class="col-sm-4 col-md-4 col-lg-4  mb-1"><a data-lightbox="photos"><img style="border-radius: 0.40rem;" class="img-fluid" src="~/assets/client/images/5.jpg"></a></div>
+                        <div class="col-sm-4 col-md-4 col-lg-4  mb-1"><a data-lightbox="photos"><img style="border-radius: 0.40rem;" class="img-fluid" src="~/assets/client/images/6.jpeg"></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-item center justify-content-between text-center mt-3">
+                <p data-aos="fade-up" data-aos-delay="300">
+                    <a href="https://www.facebook.com/banvanhoavanduc/photos_albums" target="_blank" class="btn btn-primary">Xem thêm [...]</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--CAU HOI-->
+<div id="cauhoi" class="section" style="background-color: #f2f2f2;">
+    <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-lg-5 mb-4 mb-lg-0">
+                <img src="~/assets/client/images/question.png" alt="Image" class="img-fluid">
+            </div>
+            <div class="col-lg-5 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="100">
+
+                <h2 class="heading mb-5">Câu hỏi <br> thường gặp???</h2>
+
+                <div class="custom-accordion" id="accordion_1">
+                    <div class="accordion-item">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Có được sử dụng điện thoại hay các thiết bị điện tử khác không?</button>
+                        </h2>
+
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion_1">
+                            <div class="accordion-body">
+                                Nhằm để việc tu tập của các bạn được đảm bảo về sức khoẻ và tinh thần, các bạn nên để điện thoại ở nhà khi tham gia khoá tu. Nếu đem thì sẽ gửi BTC đến kết khoá sẽ trả lại cho các bạn.
+                            </div>
+                        </div>
+                    </div> <!-- .accordion-item -->
+
+                    <div class="accordion-item">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Đồ ăn có được mang theo trong suốt khoá tu không?</button>
+                        </h2>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion_1">
+                            <div class="accordion-body">
+                                Để tránh việc ăn phi thời và cũng như vấn đề vệ sinh ở nơi sinh hoạt chung, BTC cũng sẽ thu giữ bánh kẹo, đồ ăn vặt,… trong thời gian kiểm tra hành lý ạ!
+                            </div>
+                        </div>
+                    </div> <!-- .accordion-item -->
+                    <div class="accordion-item">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">How to link your paypal and bank account?</button>
+                        </h2>
+
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#accordion_1">
+                            <div class="accordion-body">
+                                When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.
+                            </div>
+                        </div>
+
+                    </div> <!-- .accordion-item -->
+
+
+                    <div class="accordion-item">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Có được mang theo boardgame, bài bói, tarot, lô tô… không?</button>
+                        </h2>
+
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingThree" data-bs-parent="#accordion_1">
+                            <div class="accordion-body">
+                                Các bạn hoan hỷ không mang theo các loại bài, cờ bạc, các trò chơi mang tính tập thể,… Trước khi chính thức tham gia khoá tu tụi mình sẽ có một đợt kiểm tra hành lý, nếu có sẽ tiến hành thu giữ tạm thời và trả lại sau khoá tu ạ!
+                            </div>
+                        </div>
+
+                    </div> <!-- .accordion-item -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- FORM ĐĂNG KÝ -->
 <section id="dangky" style="background-image: url('/assets/client/images/register.png'); background-repeat: no-repeat;">

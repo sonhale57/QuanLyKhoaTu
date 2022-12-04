@@ -47,32 +47,57 @@
                     <div class="row">
                         <div class="col-12">
                             <h4 class="text-bolder text-start">Danh sách các khóa tu bạn đã đăng ký:</h4>
-                            <p></p>
-                            <table class="table table-centered table-nowrap mb-0 rounded">
-                                <tbody>
-                                    @foreach (var item in ViewBag.data)
-                                    {
-                                        <tr>
-                                            <td class="text-left text-start"><h5 class="text-secondary mb-0">@item.Ten</h5></td>
-                                            <td><p class="text-secondary mb-0 text-sm">@item.DiaDiem</p></td>
-                                            <td><p class="text-secondary mb-0 text-sm">@item.Ngaybatdau</p></td>
-                                            <td><p class="text-secondary mb-0 text-sm">@item.Ngayketthuc</p></td>
-                                            <td><i class="icon-check-circle text-success mb-0" title="Tham gia"></i></td>
-                                            <td>
-                                                @if (item.Active == false)
-                                                {
-
-                                                }
-                                                else
-                                                {
-                                                    <a href="javascript:Confirm(@item.id,@ViewBag.idTS)" class="btn btn-xs btn-success"><i class="icon-check-circle"></i> Xác nhận</a>
-                                                    <a href="javascript:Cancel(@item.id,@ViewBag.idTS)" class="btn btn-xs btn-primary"><i class="icon-cancel"></i> Cancel</a>
-                                                }
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
+                            <!-- New-->
+                            <div class="new mt-3">
+                                @if (ViewBag.data == null)
+                                {
+                                    Response.Redirect("/Home");
+                                }
+                                @foreach (var item in ViewBag.data)
+                                {
+                                    <div class="col-lg-4">
+                                        <div class="flex items-center justify-center min-h-screen">
+                                            <div class="max-w-sm w-full sm:w-1/2 lg:w-1/3 py-6 px-3">
+                                                <div class="bg-white shadow-xl rounded-lg overflow-hidden" style="border-radius: 0.40rem;">
+                                                    <div class="bg-cover bg-center min-height-250 p-4" style="background-image: url(https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80)">
+                                                    </div>
+                                                    <div class="flex p-4 border-t border-gray-300 text-gray-700">
+                                                        <h4>@item.Ten</h4>
+                                                        <p class="text-secondary">@item.DiaDiem</p>
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-lg-5 item">
+                                                                    <p class="text-secondary mb-0 text-sm">@item.Ngaybatdau</p>
+                                                                </div>
+                                                                <div class="col-lg-2 item">
+                                                                    <i class="arrowRight"></i>
+                                                                </div>
+                                                                <div class="col-lg-5 item">
+                                                                    <p class="text-secondary mb-0 text-sm">@item.Ngayketthuc</p>
+                                                                </div>
+                                                            </div>
+                                                            <p ></p>
+                                                        </div>
+                                                    </div>
+                                                    <!---->
+                                                    <!--Area 3-->
+                                                    <div class="px-4 pt-3 pb-4 border-t border-gray-300 bg-gray-100">
+                                                        <div class="flex items-center pt-2">
+                                                            <div class="bg-cover bg-center w-10 h-10 rounded-full mr-3" style="background-image: url(https://images.unsplash.com/photo-1500522144261-ea64433bbe27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=751&q=80)">
+                                                            </div>
+                                                            <td>
+                                                                <a href="javascript:Confirm(@item.id)" class="btn btn-success btn-xs mb-1"><i class="icon-check-circle"></i> Xác nhận chắc chắn tham gia</a>
+                                                                <a href="javascript:Cancel(@item.id)" class="btn btn-primary btn-xs mb-1"><i class="icon-cancel"></i> Tiếc quá, có việc bận</a>
+                                                            </td>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <!--End new-->
                         </div>
                     </div>
                 </div>
@@ -160,11 +185,75 @@
             </div>
         </div>
     </div>
-       <script>
-           function ModalUpdate() {
-               $("#updateInfo").modal('show');
-           }
-       </script>
+
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xác nhận tham gia</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                @using (Html.BeginForm("ConfirmJoin", "Home"))
+                {
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                Bạn sẽ chắc chắn tham gia khóa tu này??
+                                <input class="form-control" id="idTS" type="hidden" name="idTS" value="@ViewBag.idTS" />
+                                <input class="form-control" id="idKT" type="hidden" name="idKT" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <input type="submit" value="Xác nhận" class="btn btn-primary" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xác nhận không tham gia</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                @using (Html.BeginForm("CancelJoin", "Home"))
+                {
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                Tiếc quá, Tôi không tham gia được khóa tu này??
+                                <input class="form-control" id="idTSinh" type="hidden" name="idTS" value="@ViewBag.idTS" />
+                                <input class="form-control" id="idKTu" type="hidden" name="idKT" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <input type="submit" value="Xác nhận" class="btn btn-primary" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function ModalUpdate() {
+            $("#updateInfo").modal('show');
+        }
+
+        function Confirm(idKT) {
+            $("#idKT").val(idKT);
+            $("#confirmModal").modal('show');
+        }
+        function Cancel(idKT) {
+            $("#idKTu").val(idKT);
+            $("#cancelModal").modal('show');
+        }
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="/assets/js/core/bootstrap.min.js"></script>
 </body>
