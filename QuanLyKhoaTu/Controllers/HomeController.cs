@@ -98,17 +98,28 @@ namespace QuanLyKhoaTu.Controllers
             {
                 db.DangKyKhoaTus.Add(dangky);
                 db.SaveChanges();
-                return Redirect("/Home/Review/" + idTS);
+                return Redirect("/Home/Review/?id=" + idTS+"&idKT="+IdKhoaTu);
             }
             else
             {
-                return Redirect("/Home/Review/" + idTS);
+                return Redirect("/Home/Review/?id=" + idTS + "&idKT=" + IdKhoaTu);
             }
         }
 
-        public ActionResult Review(int? id)
+        public ActionResult Review(int? id,int idKT)
         {
             var tuSinh = db.TuSinhs.Find(id);
+            var list = from k in db.KhoaTus
+                       join dk in db.DangKyKhoaTus on k.id equals dk.IdKhoaTu
+                       where dk.IdTuSinh == id
+                       select k;
+            ViewBag.data = list.ToList();
+            var kt = db.KhoaTus.Find(idKT);
+            ViewBag.TenKhoaTu = kt.Ten;
+            ViewBag.Ngaybatdau = kt.Ngaybatdau;
+            ViewBag.DiaDiem = kt.DiaDiem;
+            ViewBag.Poster = "/assets/client/images/poster.jpg";
+
             return View(tuSinh);
         }
          

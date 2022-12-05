@@ -11,12 +11,13 @@
 
     <link rel="apple-touch-icon" sizes="76x76" href="~/assets/client/images/logo-ban-van-hoa.png">
     <link rel="icon" type="image/png" href="~/assets/client/images/logo-ban-van-hoa.png">
-    <title> @ViewBag.Title - Ban Văn Hóa Thông Tin Chùa Vạn Đức</title>
+    <title> @ViewBag.Title • Ban Văn Hóa Thông Tin Chùa Vạn Đức</title>
     <link id="pagestyle" href="~/assets/client/css/style.css" rel="stylesheet" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Brygada+1918:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
 
     <link rel="stylesheet" href="~/assets/client/fonts/icomoon/style.css">
     <link rel="stylesheet" href="~/assets/client/fonts/flaticon/font/flaticon.css">
@@ -32,21 +33,21 @@
         <section id="dangky">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-xl-8 col-lg-8 col-md-8 mx-auto">
+                    <div class="col-xl-10 col-lg-10 col-md-10 mx-auto">
                         <div class="card z-index-0 mt-7">
                             <div class="card-header text-center">
-                                <div class="wrapper">
-                                    <img src="https://i.pinimg.com/originals/85/bb/1e/85bb1e0d75c635321f1fd9f5f0d03b0e.gif" alt="Alternate Text" width="250" />
+                                <div class="bg-cover bg-center height-300 p-4" style="background-image: url(@ViewBag.Poster);border-radius:10px;">
                                 </div>
-                                <h4>Đăng Ký Thành Công</h4>
-                                <h8>Chúc mừng <b>@Model.Hoten</b> đã đăng ký thành công. Số thứ tự của bạn là:</h8>
+                                <h4 class="mt-3">Đăng Ký Thành Công</h4>
+                                <p>Chúc mừng <b>@Model.Hoten</b> đã đăng ký thành công khóa tu <b>@ViewBag.TenKhoaTu</b> tổ chức tại <b>@ViewBag.DiaDiem</b>.<br />Thời gian khởi hành: <b>@ViewBag.Ngaybatdau</b>.<br /> Số thứ tự của bạn là:</p>
                                 <hr class="horizontal dark mt-4 ">
                                 <h1 id="ts_stt">@Model.id</h1>
                                 <hr class="horizontal dark mt-4">
                                 <h8>Để cập nhật các thông tin về khoá tu, bạn truy cập vào đây nhé!</h8>
                                 <br>
-                                <a href="/Home/Index" class="btn btn-outline-dark form-button mt-4">Trở về trang đăng ký</a>
                                 <a href="https://www.facebook.com/banvanhoavanduc" class="btn btn-primary form-button mt-4" target="_blank">Follow chúng tớ tại đây!</a>
+                                <a href="/Home/Index" class="btn btn-outline-dark form-button mt-4"><i class="icon-arrow-circle-left"></i> Trở về trang đăng ký</a>
+                                
                             </div>
                         </div>
                     </div>
