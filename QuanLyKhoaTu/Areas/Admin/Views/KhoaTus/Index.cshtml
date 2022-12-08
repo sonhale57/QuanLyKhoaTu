@@ -128,13 +128,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/Admin/KhoaTus/Create" method="post">
+                <form action="/Admin/KhoaTus/Create" method="post" enctype="multipart/form-data">
                     <div class="row">
                         @Html.Raw(TempData["err"])
                         <div class="col-md-12 mb-3">
                             <div>
                                 <label for="tenkhoatu">Tên khóa tu</label>
                                 <input class="form-control" id="tenkhoatu" type="text" name="Ten" placeholder="Tên khóa tu" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8 mb-3">
+                            <div>
+                                <label for="diadiem">Poster khóa tu</label>
+                                <input class="form-control" id="File" name="File" type="file" placeholder="Poster khóa tu" required>
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">

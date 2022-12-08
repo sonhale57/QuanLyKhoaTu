@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees;
 using System.Data.SqlClient;
 using System.Dynamic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -94,10 +95,17 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create([Bind(Include = "id,Ten,Ngaybatdau,Ngayketthuc,IdLoaiKhoaTu,Chiphi,DiaDiem,Active")] KhoaTu khoaTu)
+        public ActionResult Create([Bind(Include = "id,Ten,Ngaybatdau,Ngayketthuc,IdLoaiKhoaTu,Chiphi,DiaDiem,Active,Poster")] KhoaTu khoaTu, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null && file.ContentLength > 0)
+                {
+                    string _FileName = Path.GetFileName(file.FileName);
+                    string _path = Path.Combine(Server.MapPath("~/Uploads"), _FileName);
+                    file.SaveAs(_path);
+                    khoaTu.Poster = "/Uploads/" + _FileName;
+                }
                 khoaTu.Active = true;
                 db.KhoaTus.Add(khoaTu);
                 db.SaveChanges();

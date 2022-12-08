@@ -206,6 +206,7 @@
     <Content Include="assets\client\images\register.png" />
     <Content Include="assets\client\images\tapthe.jpeg" />
     <Content Include="assets\client\images\tapthe.png" />
+    <Content Include="assets\client\images\thumbnail.png" />
     <Content Include="assets\client\images\tinhtoa.jpeg" />
     <Content Include="assets\client\images\tungkinh.jpeg" />
     <Content Include="assets\client\images\tuoitre.png" />

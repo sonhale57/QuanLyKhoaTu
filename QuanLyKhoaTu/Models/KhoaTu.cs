@@ -26,6 +26,9 @@ namespace QuanLyKhoaTu.Models
         [StringLength(100)]
         public string Ten { get; set; }
 
+        [Column(TypeName = "ntext")]
+        public string Poster { get; set; }
+
         public DateTime? Ngaybatdau { get; set; }
 
         public DateTime? Ngayketthuc { get; set; }

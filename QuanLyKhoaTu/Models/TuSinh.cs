@@ -49,6 +49,9 @@ namespace QuanLyKhoaTu.Models
         [StringLength(20)]
         public string SDT_nguoithan { get; set; }
 
+        [StringLength(2000)]
+        public string LinkFB { get; set; }
+
         public int? IdUser { get; set; }
 
         public DateTime? Updatetime { get; set; }

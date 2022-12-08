@@ -16,7 +16,6 @@
         </div>
     </div>
 </div>
-
 <!--SECTION GIOITHIEU-->
 <section id="gioithieu">
     <div class="container">
@@ -38,7 +37,7 @@
                     <p class="mb-5" data-aos="fade-up" data-aos-delay="200">Mời các bạn cùng lên "chuyến tàu quá khứ", xem lại những thước phim đậm màu ký ức của khóa tu "Vẽ Nắng"</p>
 
                     <div data-aos="fade-up">
-                        <a href="https://youtu.be/4rz8ZzJ_KIw" class="play-button align-items-center d-flex glightbox3 btn btn-md bg-gradient-success">
+                        <a href="https://youtu.be/F1taFUZdJ34" class="play-button align-items-center d-flex glightbox3 btn btn-md bg-gradient-success">
                             <span class="icon-button me-3">
                                 <span class="icon-play"></span>
                             </span>
@@ -215,20 +214,6 @@
                     </div> <!-- .accordion-item -->
                     <div class="accordion-item">
                         <h2 class="mb-0">
-                            <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">How to link your paypal and bank account?</button>
-                        </h2>
-
-                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#accordion_1">
-                            <div class="accordion-body">
-                                When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.
-                            </div>
-                        </div>
-
-                    </div> <!-- .accordion-item -->
-
-
-                    <div class="accordion-item">
-                        <h2 class="mb-0">
                             <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Có được mang theo boardgame, bài bói, tarot, lô tô… không?</button>
                         </h2>
 
@@ -256,7 +241,7 @@
                     <div class="card-header text-center">
                         <h4>Form đăng ký tham dự khoá tu</h4>
                         <h4>@ViewBag.TenKhoaTu</h4>
-                        <h5>Thời gian: <span class="text-bolder">@ViewBag.Ngaybatdau - @ViewBag.Ngayketthuc</span></h5>
+                        <h5>Thời gian: <span class="text-bolder">@ViewBag.Ngaybatdau đến @ViewBag.Ngayketthuc</span></h5>
                         <h5>Địa điểm: <span class="text-bolder">@ViewBag.Diadiem</span></h5>
                         <h5>Số lượng: <span class="text-bolder"> 200 tu sinh</span></h5>
                         <h5>Chi phí: <span class="text-bolder">@ViewBag.Chiphi</span></h5>
@@ -337,7 +322,12 @@
                                         <input type="text" class="form-control" id="ts_diachi" placeholder="Địa chỉ của bạn là..." name="DiaChi" required>
                                     </div>
                                 </div>
-
+                                <div class="col-md-12">
+                                    <div class="mb-4">
+                                        <label for="ts_fb" class="form-label">Link FB:</label>
+                                        <input type="text" class="form-control" id="ts_fb" placeholder="Link FB của bạn là" name="LinkFB" required>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="mb-4">
                                         <label class="form-label">Bạn đã có áo tràng chưa:</label>
@@ -377,7 +367,10 @@
                                     </label>
                                 </div>
                             </div>
-                            <button type="submit" id="save" class="btn btn-success form-button" disabled>Hoàn thành đăng ký</button>
+                            <div class="col-md-6">
+                                <label class="text-primary"><i class="fa fa-user-secret" aria-hidden="true"></i> ** Toàn bộ thông tin của bạn sẽ được bảo mật hoàn toàn!</label>
+                            </div>
+                                <button type="submit" id="save" class="btn btn-success form-button" disabled><i class="icon-paper-plane"></i> Hoàn thành đăng ký</button>
                         </form>
                     </div>
                 </div>

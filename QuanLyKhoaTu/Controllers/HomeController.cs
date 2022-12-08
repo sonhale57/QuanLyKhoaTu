@@ -23,8 +23,8 @@ namespace QuanLyKhoaTu.Controllers
                        where kt.Active == true
                        select kt;
             ViewBag.IdKhoaTu = new SelectList(linq.ToList(), "id", "Ten");
-            ViewBag.Ngaybatdau = linq.First().Ngaybatdau.Value.ToString("dd/MM/yyyy");
-            ViewBag.Ngayketthuc = linq.First().Ngayketthuc.Value.ToString("dd/MM/yyyy");
+            ViewBag.Ngaybatdau = linq.First().Ngaybatdau.Value.AddDays(1).ToString("dd-MM-yyyy");
+            ViewBag.Ngayketthuc = linq.First().Ngayketthuc.Value.ToString("dd-MM-yyyy");
             ViewBag.Diadiem = linq.First().DiaDiem;
             ViewBag.TenKhoaTu = linq.First().Ten;
             int chiphi = Convert.ToInt32(linq.First().Chiphi);
@@ -48,7 +48,7 @@ namespace QuanLyKhoaTu.Controllers
         }
 
         [HttpPost] 
-        public ActionResult Dangky(string Hoten,string Phapdanh,DateTime Namsinh,string Email,string SDT,string SDT_Nguoithan,string CMND,string Gioitinh,string DiaChi,int IdKhoaTu,string Dichuyen,string Sizeao,string Ghichu,string exampleRadios, string DiChung)
+        public ActionResult Dangky(string Hoten,string Phapdanh,DateTime Namsinh,string Email,string SDT,string SDT_Nguoithan,string CMND,string Gioitinh,string DiaChi,int IdKhoaTu,string Dichuyen,string Sizeao,string Ghichu,string exampleRadios, string DiChung,string LinkFB)
         {
                 
                 int idTS;
@@ -63,6 +63,7 @@ namespace QuanLyKhoaTu.Controllers
                             CMND = CMND,
                             DiaChi= DiaChi,
                             Gioitinh= Gioitinh,
+                            LinkFB = LinkFB,
                             Updatetime= DateTime.Now
                  };
                 if (linq == null || linq.Count ==0)
@@ -116,9 +117,9 @@ namespace QuanLyKhoaTu.Controllers
             ViewBag.data = list.ToList();
             var kt = db.KhoaTus.Find(idKT);
             ViewBag.TenKhoaTu = kt.Ten;
-            ViewBag.Ngaybatdau = kt.Ngaybatdau;
+            ViewBag.Ngaybatdau = kt.Ngaybatdau.Value.ToString("dd-MM-yyyy hh:mm tt");
             ViewBag.DiaDiem = kt.DiaDiem;
-            ViewBag.Poster = "/assets/client/images/poster.jpg";
+            ViewBag.Poster = kt.Poster;
 
             return View(tuSinh);
         }
