@@ -238,140 +238,154 @@
         <div class="row justify-content-center">
             <div class="col-xl-10 col-lg-10 col-md-10 mx-auto">
                 <div class="card z-index-0 mt-7">
-                    <div class="card-header text-center">
-                        <h4>Form đăng ký tham dự khoá tu</h4>
-                        <h4>@ViewBag.TenKhoaTu</h4>
-                        <h5>Thời gian: <span class="text-bolder">@ViewBag.Ngaybatdau đến @ViewBag.Ngayketthuc</span></h5>
-                        <h5>Địa điểm: <span class="text-bolder">@ViewBag.Diadiem</span></h5>
-                        <h5>Số lượng: <span class="text-bolder"> 200 tu sinh</span></h5>
-                        <h5>Chi phí: <span class="text-bolder">@ViewBag.Chiphi</span></h5>
-                        <br>
-                    </div>
-                    <hr class="horizontal dark mt-0">
                     <div class="card-body">
-                        <form action="/Home/DangKy" method="post">
-                            <div class="row">
-                                @Html.DropDownList("IdKhoaTu", null, htmlAttributes: new { @class = "hidden" })
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group mb-2">
-                                        <label for="ts_ten" class="form-label">Họ tên(*):</label>
-                                        <input type="text" class="form-control" id="ts_ten" placeholder="Họ tên của bạn..." name="Hoten" required />
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group mb-4">
-                                        <label for="ts_phapdanh" class="form-label">Pháp danh (nếu có):</label>
-                                        <input type="text" class="form-control" id="ts_phapdanh" placeholder="Pháp danh của bạn..." name="Phapdanh" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-2">
-                                        <label for="ts_ngaysinh" class="form-label">Ngày sinh(*):</label>
-                                        <input class="form-control" id="ts_ngaysinh" name="Namsinh" type="date" required />
-                                        <small>VD: 31/01/1999</small>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-2">
-                                        <label for="ts_gioitinh" class="form-label">Giới tính(*):</label>
-                                        <select id="ts_gioitinh" name="Gioitinh" class="form-select" aria-label="Default select example" required>
-                                            <option disabled="disabled" selected>Chọn giới tính</option>
-                                            <option value="Nam">Nam</option>
-                                            <option value="Nu">Nữ</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-4">
-                                        <label for="ts_cmnd" class="form-label">CMND/CCCD(*):</label>
-                                        <input type="text" class="form-control" id="ts_cmnd" placeholder="Số căn cước của bạn..." name="CMND">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-2">
-                                        <label for="email" class="form-label">Địa chỉ Email(*):</label>
-                                        <input class="form-control" id="ts_email" name="Email" placeholder="Nhập email..." type="email" required>
-                                        <small>Ví dụ: bvhtt@gmail.com</small>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-2">
-                                        <label for="ts_sdt" class="form-label">Số điện thoại(*):</label>
-                                        <input type="tel" class="form-control" id="ts_sdt" placeholder="Nhập đủ 10 số nha..." name="SDT" pattern="[0-9]{10}" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-4">
-                                        <label for="ts_sdtnt" class="form-label">Số điện thoại người thân(*):</label>
-                                        <input type="tel" class="form-control" id="ts_sdtnt" placeholder="Nhập đủ 10 số nha..." name="SDT_Nguoithan" pattern="[0-9]{10}" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="mb-4">
-                                        <label for="ts_sdtnt" class="form-label">Phương thức di chuyển:</label>
-                                        <select name="DiChuyen" class="form-select">
-                                            <option value="chuavanduc">Chùa Vạn Đức</option>
-                                            <option value="tutuc">Tự túc</option>
-                                            <option value="khac">Khác</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="mb-4">
-                                        <label for="ts_sdtnt" class="form-label">Địa chỉ:</label>
-                                        <input type="text" class="form-control" id="ts_diachi" placeholder="Địa chỉ của bạn là..." name="DiaChi" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="mb-4">
-                                        <label for="ts_fb" class="form-label">Link FB:</label>
-                                        <input type="text" class="form-control" id="ts_fb" placeholder="Link FB của bạn là" name="LinkFB" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-4">
-                                        <label class="form-label">Bạn đã có áo tràng chưa:</label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="exampleRadios" id="co_aotrang" value="true" checked>
-                                            <label class="form-check-label" for="co_aotrang">
-                                                Đã có áo tràng.
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="exampleRadios" id="chuaco_aotrang" value="false">
-                                            <label class="form-check-label" for="chuaco_aotrang">
-                                                Chưa có áo tràng. (Liên hệ mượn trong khoá tu)
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="ts_dicung" class="form-label">Bạn bè đi cùng</label>
-                                        <br>
-                                        <label class="switch">
-                                            <input type="checkbox" id="is_dicung" name="is_dicung" onclick="isDiCung()">
-                                            <span class="slider round"></span>
-                                        </label> Thêm bạn bè đi cùng
-                                        <div id="ts_dicung" name="ts_dicung" style="display: none ;">
-                                            <input id="stt_dicung" type="search" class="form-control" placeholder="STT người đi cùng..." name="DiChung" onblur="javascript:CheckExists()">
-                                            <small id="txt_hoten" class="text-bolder">(Nhập STT của một người bất kì mà bạn muốn đi cùng)</small>
-                                        </div>
-                                    </div>
+                        @if (ViewBag.CountKT == 0)
+                        {
+                            <div class=" text-center align-items-center">
+                                <img src="~/assets/client/images/no.jpg" width="100%" height="auto" style="border-radius: 10px ;">
+                                <h3 class="text-danger mt-4"><i class="icon-bullhorn"></i> Form đã đóng</h3>
+                                <p class="text-secondary text-sm"><span class="text-danger"></span> <i>Khoá tu đã đủ số lượng mất rồi :((<br> hãy nhắn tin cho bọn mình qua Facebook để theo dõi đăng ký nếu như có slot xin hủy nhé!</i></p>
+                                <div class="mt-4">
+                                    <a href="https://www.facebook.com/banvanhoavanduc" class="btn btn-dark form-button" target="_blank"><i class="icon-facebook"></i> Facebook ở đây nha</a>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-check mb-3">
-                                    <label class="form-check-label">
-                                        <input id="lastcheck" class="form-check-input" type="checkbox" name="remember"> Bạn hãy kiểm tra lại đầy đủ thông tin trước khi nhấn nút Hoàn thành nhé!
-                                    </label>
+                        }
+                        else
+                        {
+                            <div class="text-center">
+                                <h4>Form đăng ký tham dự khoá tu</h4>
+                                <h4>@ViewBag.TenKhoaTu</h4>
+                                <h5>Thời gian: <span class="text-bolder">@ViewBag.Ngaybatdau đến @ViewBag.Ngayketthuc</span></h5>
+                                <h5>Địa điểm: <span class="text-bolder">@ViewBag.Diadiem</span></h5>
+                                <h5>Số lượng: <span class="text-bolder"> 200 tu sinh</span></h5>
+                                <h5>Chi phí: <span class="text-bolder">@ViewBag.Chiphi</span></h5>
+                                <br>
+                            </div>
+                            <hr class="horizontal dark mt-0">
+                            <form action="/Home/DangKy" method="post">
+                                <div class="row">
+                                    @Html.DropDownList("IdKhoaTu", null, htmlAttributes: new { @class = "hidden" })
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group mb-2">
+                                            <label for="ts_ten" class="form-label">Họ tên(*):</label>
+                                            <input type="text" class="form-control" id="ts_ten" placeholder="Họ tên của bạn..." name="Hoten" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group mb-4">
+                                            <label for="ts_phapdanh" class="form-label">Pháp danh (nếu có):</label>
+                                            <input type="text" class="form-control" id="ts_phapdanh" placeholder="Pháp danh của bạn..." name="Phapdanh" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-2">
+                                            <label for="ts_ngaysinh" class="form-label">Ngày sinh(*):</label>
+                                            <input class="form-control" id="ts_ngaysinh" name="Namsinh" type="date" required />
+                                            <small>VD: 31/01/1999</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-2">
+                                            <label for="ts_gioitinh" class="form-label">Giới tính(*):</label>
+                                            <select id="ts_gioitinh" name="Gioitinh" class="form-select" aria-label="Default select example" required>
+                                                <option disabled="disabled" selected>Chọn giới tính</option>
+                                                <option value="Nam">Nam</option>
+                                                <option value="Nu">Nữ</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-4">
+                                            <label for="ts_cmnd" class="form-label">CMND/CCCD(*):</label>
+                                            <input type="text" class="form-control" id="ts_cmnd" placeholder="Số căn cước của bạn..." name="CMND">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-2">
+                                            <label for="email" class="form-label">Địa chỉ Email(*):</label>
+                                            <input class="form-control" id="ts_email" name="Email" placeholder="Nhập email..." type="email" required>
+                                            <small>Ví dụ: bvhtt@gmail.com</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-2">
+                                            <label for="ts_sdt" class="form-label">Số điện thoại(*):</label>
+                                            <input type="tel" class="form-control" id="ts_sdt" placeholder="Nhập đủ 10 số nha..." name="SDT" pattern="[0-9]{10}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-4">
+                                            <label for="ts_sdtnt" class="form-label">Số điện thoại người thân(*):</label>
+                                            <input type="tel" class="form-control" id="ts_sdtnt" placeholder="Nhập đủ 10 số nha..." name="SDT_Nguoithan" pattern="[0-9]{10}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-4">
+                                            <label for="ts_sdtnt" class="form-label">Phương thức di chuyển:</label>
+                                            <select name="DiChuyen" class="form-select">
+                                                <option value="chuavanduc">Chùa Vạn Đức</option>
+                                                <option value="tutuc">Tự túc</option>
+                                                <option value="khac">Khác</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="mb-4">
+                                            <label for="ts_sdtnt" class="form-label">Địa chỉ:</label>
+                                            <input type="text" class="form-control" id="ts_diachi" placeholder="Địa chỉ của bạn là..." name="DiaChi" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-4">
+                                            <label for="ts_fb" class="form-label">Link FB:</label>
+                                            <input type="text" class="form-control" id="ts_fb" placeholder="Link FB của bạn là" name="LinkFB" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-4">
+                                            <label class="form-label">Bạn đã có áo tràng chưa:</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="exampleRadios" id="co_aotrang" value="true" checked>
+                                                <label class="form-check-label" for="co_aotrang">
+                                                    Đã có áo tràng.
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="exampleRadios" id="chuaco_aotrang" value="false">
+                                                <label class="form-check-label" for="chuaco_aotrang">
+                                                    Chưa có áo tràng. (Liên hệ mượn trong khoá tu)
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="ts_dicung" class="form-label">Bạn bè đi cùng</label>
+                                            <br>
+                                            <label class="switch">
+                                                <input type="checkbox" id="is_dicung" name="is_dicung" onclick="isDiCung()">
+                                                <span class="slider round"></span>
+                                            </label> Thêm bạn bè đi cùng
+                                            <div id="ts_dicung" name="ts_dicung" style="display: none ;">
+                                                <input id="stt_dicung" type="search" class="form-control" placeholder="STT người đi cùng..." name="DiChung" onblur="javascript:CheckExists()">
+                                                <small id="txt_hoten" class="text-bolder">(Nhập STT của một người bất kì mà bạn muốn đi cùng)</small>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="text-primary"><i class="fa fa-user-secret" aria-hidden="true"></i> ** Toàn bộ thông tin của bạn sẽ được bảo mật hoàn toàn!</label>
-                            </div>
+                                <div class="col-md-6">
+                                    <div class="form-check mb-3">
+                                        <label class="form-check-label">
+                                            <input id="lastcheck" class="form-check-input" type="checkbox" name="remember"> Bạn hãy kiểm tra lại đầy đủ thông tin trước khi nhấn nút Hoàn thành nhé!
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="text-primary"><i class="fa fa-user-secret" aria-hidden="true"></i> ** Toàn bộ thông tin của bạn sẽ được bảo mật hoàn toàn!</label>
+                                </div>
                                 <button type="submit" id="save" class="btn btn-success form-button" disabled><i class="icon-paper-plane"></i> Hoàn thành đăng ký</button>
-                        </form>
+                            </form>
+                        }
                     </div>
                 </div>
             </div>
@@ -379,6 +393,46 @@
     </div>
 </section>
 
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Xác nhận tham gia khóa tu</h5>
+                <button type="button" class="btn btn-danger btn-xs" data-bs-dismiss="modal" aria-label="Close">x</button>
+            </div>
+            <div class="modal-body">
+                @ViewBag.close
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-2">
+                            <label class="form-label">STT bạn đã đăng ký(*):</label>
+                            <input type="text" class="form-control" id="XacnhanSTT" placeholder="Nhập số thứ tự của bạn" name="XacnhanSTT" required>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="mb-2">
+                            <label class="form-label">Xác nhận hình thức di chuyển (*):</label>
+                            <select id="Xacnhandichuyen" name="Xacnhandichuyen" class="form-select" placeholder="Nếu bạn thay đổi phương thức di chuyển hay chọn vào đây">
+                                <option value="chuavanduc">Chùa vạn đức</option>
+                                <option value="tutuc">Tự túc</option>
+                                <option value="khac">Khác</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <i class=" h-25 text-primary text-xs">** Việc xác nhận này có ý nghĩa quan trọng đối với quyền và lợi ích tham gia khóa tu của các bạn tu sinh. <br/>Đồng thời, hỗ trợ cho BTC trong công tác sắp xếp phương tiện di chuyển. Các bạn hoan hỷ xác nhận cùng chúng tớ nhé...!!!</i>
+                </div>
+                <hr class="horizontal dark mt-2 mb-2">
+
+                <div class="text-center align-items-center">
+                    <a href="javascript:ConfirmThamGia(2)" class="btn btn-danger btn-sm">Tiếc quá, tôi có việc bận đột xuất</a>
+                    <a href="javascript:ConfirmThamGia(1)" class="btn btn-success btn-sm">Chắc chắn rồi, tôi sẽ tham gia</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -390,14 +444,10 @@
                 <div class="modal-body">
                     <div class="row">
                         @Html.Raw(TempData["err"])
-                        <div class="col-md-12 text-center hidden" id="errorhtml">
-                            <img src="~/assets/client/images/404 error.png" alt="Error404" width="350" height="auto" />
-                            <hr class="horizontal dark mt-3 ">
-                        </div>
                         <div class="col-md-12">
                             <div class="mb-2">
                                 <label class="form-label">Họ và tên(*):</label>
-                                <input type="text" class="form-control" id="hoten" placeholder="Nhập số điện thoại của bạn" name="SName" required>
+                                <input type="text" class="form-control" id="hoten" placeholder="Nhập tên của bạn" name="SName" required>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -422,7 +472,7 @@
         </div>
     </div>
 </div>
-<script>
+    <script>
     function CheckExists() {
          $.ajax({
             url:'@Url.Action("CheckExists")' ,
@@ -438,6 +488,28 @@
                  $("#stt_dicung").val('');
                  $("#txt_hoten").text('');
                 alert('Không tồn tài tu sinh này!');
+            }
+        });
+        return false;
+    }
+    function closeModal() {
+        $("#confirmModal").modal('hide');
+    }
+    function ConfirmThamGia(status) {
+        $.ajax({
+            url: '@Url.Action("ConfirmThamGia")',
+            type: "POST",
+             data: {
+                 idTS: $("#XacnhanSTT").val(),
+                 Dichuyen: $("#Xacnhandichuyen").val(),
+                 status: status
+            }
+            , dataType: "json",
+             success: function (data) {
+            },
+            error: function () {
+                alert((status == 1 ? "Hooray! Cảm ơn bạn đã xác nhận tham gia cho chúng tớ biết nhé!" : "Oops! Cảm ơn bạn đã xác nhận với chúng tớ, thật tiếc khi bạn không thể tham gia khóa tu lần này cùng chúng tớ!"));
+                location.reload();
             }
         });
         return false;
@@ -469,4 +541,7 @@
     function ModalTracuu() {
         $("#searchModal").modal('show');
     }
-</script>
+    function ModalConfirm() {
+        $("#confirmModal").modal('show');
+    }
+    </script>

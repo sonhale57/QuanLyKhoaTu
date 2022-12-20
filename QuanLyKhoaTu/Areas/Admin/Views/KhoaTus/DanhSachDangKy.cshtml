@@ -44,47 +44,80 @@
             , dataType: "json",
             success: function (data) {
                 var items = '';
-                var str = "";
+                var counttc = 0, countmuon = 0, countnam = 0, countnu = 0, countdicungdoan = 0, counttutuc = 0, countxn = 0, countchua = 0,countonha=0;
+                var str = "",txtxn=""
                 $.each(data, function (i, item) {
                     var aotrang = "";
                     if (item.MuonAoTrang) {
                         aotrang = "<p class='text-success text-bolder text-xs mb-0'>Có mượn</p>";
+                        countmuon++;
                     } else {
                         aotrang = "<p class='text-danger text-bolder text-xs mb-0'>Không mượn</p>";
                     }
                     var dichuyen = "";
                     if (item.DiChuyen == "chuavanduc") {
                         dichuyen = "<p class='text-secondary text-xs mb-0'>Đi cùng Đoàn</p>";
+                        countdicungdoan++;
                     }
                     else if (item.DiChuyen == "tutuc") {
                         dichuyen = "<p class='text-primary text-bolder text-xs mb-0'>Tự túc</p>";
+                        counttutuc++;
                     }
                     else {
                         dichuyen = "<p class='text-danger text-bolder text-xs mb-0'>Khác</p>";
                     }
+                    if (item.Gioitinh == "Nam") {
+                        countnam++;
+                    }
+                    else {
+                        countnu++;
+                    }
+                    var xacnhan = Number(item.TrangThai);
+                    if (xacnhan == 1) {
+                        countxn++;
+                        txtxn = "<i class='fa fa-check-circle text-success' title='Đã xác nhận tham gia'></i>";
+                    } else if (xacnhan == 2) {
+                        countonha++;
+                        txtxn = "<i class='fa fa-check-circle text-danger' title='Đã xác nhận không tham gia'></i>";
+                    } else {
+                        countchua++;
+                        txtxn = "<i class='fa fa-check-circle text-secondary' title='Chưa xác nhận tham gia'></i>";
+                    }
                     var rows = "<tr>"
                         + "<td class='text-center'> <h6 class='text-xs mb-0'>#" + item.idTS + "</h6>"
-                        + "<p class='text-xs mb-0'>" + (item.TrangThai == 0 ?"<i class='fa fa-check-circle text-secondary' title='Chưa xác nhận tham gia'></i>":"<i class='fa fa-check-circle text-success' title='Đã xác nhận tham gia'></i>") + "</p>"
-                        +"</td>"
-                        + "<td> <h6 class='text-sm mb-0'>" + item.Hoten + "</h6>"
+                        + "<p class='text-xs mb-0'>" + txtxn + "</p>"
+                        + "</td>"
+                        + "<td> <h6 class='text-sm mb-0'><a href='" + item.LinkFB + "' target='_blank'>" + item.Hoten + "</a></h6>"
                         + "<p class='text-xs mb-0'>" + item.Phapdanh + "</p>"
-                        +"</td> "
+                        + "</td> "
                         + "<td>"
-                        +"<p class='text-xs mb-0'> SĐT: " + item.SDT + "</p> "
+                        + "<p class='text-xs mb-0'> SĐT: " + item.SDT + "</p> "
                         + "<p class='text-xs mb-0'>Email: " + item.Email + "</p>"
-                        +"</td> "
+                        + "</td> "
                         + "<td><p class='text-xs mb-0'>" + (item.Gioitinh == "Nam" ? "Nam" : "Nữ") + "</p></td>"
                         + "<td>" + dichuyen + "</td>"
                         + "<td>" + aotrang + "</td>"
                         + "<td><p class='text-xs mb-0'>" + item.Thoigian + "</p></td>"
                         + "<td><p class='text-xs mb-0'>" + (item.DiCung == "" ? "<span class='text-danger'>Không</span>" : item.DiCung) + "</p></td>"
-                        + "<td>"
-                        + "<a class='btn btn-xs btn-success mx-1 mb-0' href='javascript:Confirm(" + item.idTS + "," +item.idKT+")'><i class='fa fa-check-circle'></i></a>"
-                        + "<a class='btn btn-xs btn-danger mb-0' href='javascript:Cancel(" + item.idTS + "," + item.idKT +")'><i class='fa fa-trash'></i></a>"
-                        +"</td> "
+                        + "<td >"
+                        + "<a class='btn btn-xs btn-danger mb-0' href='javascript:Cancel(" + item.idTS + "," + item.idKT + ")'><i class='fa fa-trash'></i></a>"
+                        + "</td> "
                         + "</tr>";
                     str += rows;
+                    counttc++;
                 });
+                str += "<tr><td colspan=7>"
+                    + "Tổng danh sách: <b>" + counttc + "</b> Tu sinh."
+                    + "<br /> Mượn áo tràng: <b>" + countmuon + "</b> Tu sinh"
+                    + "<br /> Số lượng nam: <b>" + countnam + "</b>"
+                    + "<br /> Số lượng nữ: <b>" + countnu + "</b>"
+                    + "<br /> Số lượng đi cùng đoàn: <b>" + countdicungdoan + "</b>"
+                    + "<br /> Số lượng tự túc: <b>" + counttutuc + "</b>"
+                    + "<br /> Đã xác nhận: <b>" + countxn + "</b>"
+                    + "<br /> Xác nhận không tham gia: <b>" + countonha + "</b>"
+                    + "<br /> Chưa xác nhận: <b>" + countchua + "</b>"
+                    + "</td >"
+                    + "</tr > ";
                 $('#showlist').html(str);
             },
             error: function () {

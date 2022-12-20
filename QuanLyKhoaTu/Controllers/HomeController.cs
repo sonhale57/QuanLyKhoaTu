@@ -12,7 +12,16 @@ using System.Xml.Linq;
 
 namespace QuanLyKhoaTu.Controllers
 {
-   
+    public class Dkkhoatu
+    {
+        public int id { get; set; }
+        public string Ten { get; set; }
+        public string Diadiem { get; set; }
+        public string Poster { get; set; }
+        public DateTime? From { get; set; }
+        public DateTime? Todate { get; set; }
+        public int? Trangthai { get; set; }
+    }
     public class HomeController : Controller
     {
         private ModelDbContext db = new ModelDbContext();
@@ -22,19 +31,24 @@ namespace QuanLyKhoaTu.Controllers
             var linq = from kt in db.KhoaTus
                        where kt.Active == true
                        select kt;
-            ViewBag.IdKhoaTu = new SelectList(linq.ToList(), "id", "Ten");
-            ViewBag.Ngaybatdau = linq.First().Ngaybatdau.Value.AddDays(1).ToString("dd-MM-yyyy");
-            ViewBag.Ngayketthuc = linq.First().Ngayketthuc.Value.ToString("dd-MM-yyyy");
-            ViewBag.Diadiem = linq.First().DiaDiem;
-            ViewBag.TenKhoaTu = linq.First().Ten;
-            int chiphi = Convert.ToInt32(linq.First().Chiphi);
-            if(chiphi> 0)
+            
+            ViewBag.CountKT = linq.Count();
+            if(linq.Count() > 0)
             {
-                ViewBag.Chiphi = chiphi +" đ";
-            }
-            else
-            {
-                ViewBag.Chiphi = "Miễn phí";
+                ViewBag.IdKhoaTu = new SelectList(linq.ToList(), "id", "Ten");
+                ViewBag.Ngaybatdau = linq.First().Ngaybatdau.Value.AddDays(1).ToString("dd-MM-yyyy");
+                ViewBag.Ngayketthuc = linq.First().Ngayketthuc.Value.ToString("dd-MM-yyyy");
+                ViewBag.Diadiem = linq.First().DiaDiem;
+                ViewBag.TenKhoaTu = linq.First().Ten;
+                int chiphi = Convert.ToInt32(linq.First().Chiphi);
+                if (chiphi > 0)
+                {
+                    ViewBag.Chiphi = chiphi + " đ";
+                }
+                else
+                {
+                    ViewBag.Chiphi = "Miễn phí";
+                }
             }
             return View();
         }
@@ -178,7 +192,15 @@ namespace QuanLyKhoaTu.Controllers
                 var list = from k in db.KhoaTus
                            join dk in db.DangKyKhoaTus on k.id equals dk.IdKhoaTu
                            where dk.IdTuSinh ==idTSinh
-                           select k;
+                           select new Dkkhoatu
+                           {
+                               id =k.id,
+                               Ten =k.Ten,
+                               Diadiem  =k.DiaDiem,
+                                 From = k.Ngaybatdau,
+                               Todate = k.Ngayketthuc,
+                               Trangthai = dk.Trangthai
+                           };
 
                 ViewBag.data = list.ToList();
             }
@@ -218,7 +240,15 @@ namespace QuanLyKhoaTu.Controllers
             var list = from k in db.KhoaTus
                        join dk in db.DangKyKhoaTus on k.id equals dk.IdKhoaTu
                        where dk.IdTuSinh == STT
-                       select k;
+                       select new Dkkhoatu
+                       {
+                           id = k.id,
+                           Ten = k.Ten,
+                           Diadiem = k.DiaDiem,
+                           From = k.Ngaybatdau,
+                           Todate = k.Ngayketthuc,
+                           Trangthai = dk.Trangthai
+                       };
             ViewBag.data = list.ToList();
             return View("TraCuu");
         }
@@ -252,11 +282,45 @@ namespace QuanLyKhoaTu.Controllers
                     var list = from k in db.KhoaTus
                                join dk in db.DangKyKhoaTus on k.id equals dk.IdKhoaTu
                                where dk.IdTuSinh == idTS
-                               select k;
+                               select new Dkkhoatu
+                               {
+                                   id = k.id,
+                                   Ten = k.Ten,
+                                   Diadiem = k.DiaDiem,
+                                   From = k.Ngaybatdau,
+                                   Todate = k.Ngayketthuc,
+                                   Trangthai = dk.Trangthai
+                               };
                 ViewBag.data = list.ToList();
                 return View("TraCuu");
             }
         }
+
+        public ActionResult ConfirmThamGia()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ConfirmThamGia(int idTS, int status,string Dichuyen)
+        {
+            var linqKT = db.KhoaTus.OrderByDescending(m => m.id).ToList();
+            int idKT = linqKT.First().id;
+            var linq = db.DangKyKhoaTus.SingleOrDefault(m=>m.IdKhoaTu== idKT && m.IdTuSinh == idTS);
+            if(linq == null)
+            {
+                return View("Error404");
+            }
+            else
+            {
+                linq.Trangthai = status;
+                linq.DiChuyen= Dichuyen;
+                db.Entry(linq).State = EntityState.Modified;
+                db.SaveChanges();
+                ViewBag.close = "<script>closeModal();</script>";
+            }
+            return View("Index");
+        }
+
         public ActionResult CancelJoin()
         {
             return View();
@@ -271,7 +335,7 @@ namespace QuanLyKhoaTu.Controllers
             }
             else
             {
-                dangky.Trangthai = 0;
+                dangky.Trangthai = 2;
                 db.Entry(dangky).State = EntityState.Modified;
                 db.SaveChanges();
 
@@ -287,7 +351,15 @@ namespace QuanLyKhoaTu.Controllers
                 var list = from k in db.KhoaTus
                            join dk in db.DangKyKhoaTus on k.id equals dk.IdKhoaTu
                            where dk.IdTuSinh == idTS
-                           select k;
+                           select new Dkkhoatu
+                           {
+                               id = k.id,
+                               Ten = k.Ten,
+                               Diadiem = k.DiaDiem,
+                               From = k.Ngaybatdau,
+                               Todate = k.Ngayketthuc,
+                               Trangthai = dk.Trangthai
+                           };
                 ViewBag.data = list.ToList();
                 return View("TraCuu");
             }

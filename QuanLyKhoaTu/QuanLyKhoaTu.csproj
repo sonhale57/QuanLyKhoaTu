@@ -162,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\client\images\3.jpg" />
+    <Content Include="assets\client\images\no.jpg" />
     <Content Include="assets\client\images\poster.jpg" />
     <Content Include="assets\client\images\4.jpg" />
     <Content Include="assets\client\images\404 error.png" />
@@ -517,6 +518,7 @@
     <Content Include="Views\Home\UpdateInfo.cshtml" />
     <Content Include="Views\Home\ConfirmJoin.cshtml" />
     <Content Include="Views\Home\CancelJoin.cshtml" />
+    <Content Include="Views\Home\ConfirmThamGia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
