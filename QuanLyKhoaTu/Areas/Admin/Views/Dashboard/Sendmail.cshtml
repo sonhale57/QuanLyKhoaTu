@@ -3,3 +3,25 @@
     ViewBag.Title = "Sendmail";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+<div id="editor"></div>
+<a href="javascript:Send()" class="btn btn-xs btn-success"> Xác nhận gửi</a>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        });
+    function Send() {
+        $.ajax({
+            url: "/Admin/Dashboard/Sendmail",
+            type: "POST"
+            , dataType: "json",
+            success: function (data) {
+                alert('Send success');
+            },
+            error: function () {
+                alert('Lỗi');
+            }
+        });
+    }
+</script>

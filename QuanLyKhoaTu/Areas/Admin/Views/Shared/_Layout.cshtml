@@ -13,6 +13,8 @@
     <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="/assets/css/style.css" rel="stylesheet" />
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+
 </head>
 <body class="g-sidenav-show  bg-gray-100">
     <div class="min-height-300 bg-bvh position-absolute w-100"></div>
@@ -191,7 +193,7 @@
                 </div>
                 @using (Html.BeginForm("Logout", "Dashboard"))
                 {
-               
+
                     @Html.AntiForgeryToken()
                     <div class="modal-body">
                         <div class="row">

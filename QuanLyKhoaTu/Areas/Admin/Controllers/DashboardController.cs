@@ -2,8 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 namespace QuanLyKhoaTu.Areas.Admin.Controllers
 {
@@ -15,8 +18,47 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
         {
             return View();
         }
+        [HttpGet]
         public ActionResult Sendmail()
         {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Sendmail(string receiver, string subject, string message)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var senderEmail = new MailAddress("superbrain.noreply@gmail.com", "Jamil");
+                    var receiverEmail = new MailAddress("sonhale57@gmail.com", "Receiver");
+                    var password = "rhewihyggxsizliv";
+                    var sub = subject;
+                    var body = message;
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(senderEmail.Address, password)
+                    };
+                    using (var mess = new MailMessage(senderEmail, receiverEmail)
+                    {
+                        Subject = "Test nè",
+                        Body = "Đây là nội dung mail test"
+                    })
+                    {
+                        smtp.Send(mess);
+                    }
+                    return View();
+                }
+            }
+            catch (Exception)
+            {
+                ViewBag.Error = "Some Error";
+            }
             return View();
         }
         public ActionResult Login()
