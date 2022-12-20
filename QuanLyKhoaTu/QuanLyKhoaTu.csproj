@@ -486,6 +486,7 @@
     <Content Include="assets\client\fonts\icomoon\fonts\icomoon.ttf" />
     <Content Include="assets\client\fonts\icomoon\fonts\icomoon.woff" />
     <Content Include="assets\client\fonts\icomoon\selection.json" />
+    <Content Include="Areas\Admin\Views\Dashboard\Sendmail.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

@@ -15,6 +15,10 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
         {
             return View();
         }
+        public ActionResult Sendmail()
+        {
+            return View();
+        }
         public ActionResult Login()
         {
             return View();
