@@ -50,6 +50,7 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
                            idKT = k.id,
                            Ten = k.Ten,
                            Hoten = ts.Hoten,
+                           LinkFB = ts.LinkFB,
                            Namsinh = ts.Namsinh,
                            Gioitinh = ts.Gioitinh,
                            Phapdanh = ts.Phapdanh,

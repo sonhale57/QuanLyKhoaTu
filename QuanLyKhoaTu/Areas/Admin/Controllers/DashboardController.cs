@@ -18,23 +18,34 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
         {
             return View();
         }
+
         [HttpGet]
         public ActionResult Sendmail()
         {
+            ViewBag.IdKhoaTu = new SelectList(db.KhoaTus.OrderByDescending(x=>x.Active), "id", "Ten");
             return View();
         }
         [HttpPost]
-        public ActionResult Sendmail(string receiver, string subject, string message)
+        [ValidateInput(false)]
+        public ActionResult Sendmail(int idKhoaTu, string content)
         {
-            try
+            try                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
             {
                 if (ModelState.IsValid)
                 {
-                    var senderEmail = new MailAddress("superbrain.noreply@gmail.com", "Jamil");
-                    var receiverEmail = new MailAddress("sonhale57@gmail.com", "Receiver");
-                    var password = "rhewihyggxsizliv";
-                    var sub = subject;
-                    var body = message;
+                    var linq = from ts in db.TuSinhs
+                               join dk in db.DangKyKhoaTus
+                               on ts.id equals dk.IdTuSinh
+                               select ts;
+
+                    List<string> listEmail = new List<string>();
+                    listEmail.Add("sonhale57.data@gmail.com");
+                    listEmail.Add("sonhale57.tech@gmail.com");
+                    listEmail.Add("quybow@gmail.com");
+                    var senderEmail = new MailAddress("sonhale57@gmail.com", "Ban Văn Hóa Thông Tin Chùa Vạn Đức");
+                    var password = "okwfibwakuxpyvij";
+                    var sub = "QUAN TRỌNG: Xác nhận tham gia khóa tu";
+                    var body = content;
                     var smtp = new SmtpClient
                     {
                         Host = "smtp.gmail.com",
@@ -44,14 +55,22 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
                         UseDefaultCredentials = false,
                         Credentials = new NetworkCredential(senderEmail.Address, password)
                     };
-                    using (var mess = new MailMessage(senderEmail, receiverEmail)
-                    {
-                        Subject = "Test nè",
-                        Body = "Đây là nội dung mail test"
-                    })
-                    {
-                        smtp.Send(mess);
+                    foreach(var item in linq) {
+                        var receiverEmail = new MailAddress(item.Email, "Tu Sinh");
+                        using (var mess = new MailMessage(senderEmail, receiverEmail)
+                        {
+                            Subject = sub,
+                            Body = body,
+                            IsBodyHtml= true
+                        })
+                        {
+                            smtp.Send(mess);
+                        }
                     }
+                    string json = "{\"status\":\"ok\"}";
+                    Response.Clear();
+                    Response.ContentType = "application/json; charset=utf-8";
+                    Response.Write(json);
                     return View();
                 }
             }
