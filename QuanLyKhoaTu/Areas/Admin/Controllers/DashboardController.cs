@@ -36,6 +36,7 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
                     var linq = from ts in db.TuSinhs
                                join dk in db.DangKyKhoaTus
                                on ts.id equals dk.IdTuSinh
+                               where dk.IdKhoaTu== idKhoaTu && dk.Trangthai==0
                                select ts;
 
                     List<string> listEmail = new List<string>();

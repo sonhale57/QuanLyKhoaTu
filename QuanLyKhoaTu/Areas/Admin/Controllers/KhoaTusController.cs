@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using QuanLyKhoaTu.Controllers;
 using QuanLyKhoaTu.Models;
 
 namespace QuanLyKhoaTu.Areas.Admin.Controllers
@@ -31,6 +32,37 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
             mymodel.KhoaTu = khoaTus;
 
             return View(mymodel);
+        }
+        public ActionResult Diemdanh()
+        {
+            ViewBag.IdKhoaTu = new SelectList(db.KhoaTus.OrderByDescending(x => x.Active), "id", "Ten");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Diemdanh(int? idTuSinh,int? idKhoaTu)
+        {
+            var linq = db.DangKyKhoaTus.SingleOrDefault(m=>m.IdKhoaTu== idKhoaTu && m.IdTuSinh==idTuSinh);
+            if(linq == null)
+            {
+                string json = "{\"status\":\"Không tìm thấy!\"}";
+                Response.Clear();
+                Response.ContentType = "application/json; charset=utf-8";
+                Response.Write(json);
+                Response.End();
+            }
+            else
+            {
+                linq.Checkin = true;
+                linq.TimeCheckin = DateTime.Now;
+                db.Entry(linq).State = EntityState.Modified;
+                db.SaveChanges();
+                string json = "{\"status\":\"ok\"}";
+                Response.Clear();
+                Response.ContentType = "application/json; charset=utf-8";
+                Response.Write(json);
+                Response.End();
+            }
+            return View();
         }
         public ActionResult DanhSachDangKy()
         {
@@ -62,12 +94,26 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
                            TrangThai   =dk.Trangthai,
                            MuonAoTrang = dk.MuonAoTrang,
                            StatusCheckin = dk.Checkin,
+                           TimeCheckin = dk.TimeCheckin.ToString(),
                            DiChung = dk.DiCung,
                            DiCung = (from dc in db.TuSinhs where dc.id == dk.DiCung select dc.Hoten),
                            Thoigian = dk.NgayGhiDanh.ToString()
                        };
 
             return Json(linq.ToList(), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult Review(int? idTuSinh)
+        {
+            var linq =db.TuSinhs.Find(idTuSinh);
+            string str = "<p>Họ & tên: <b>"+linq.Hoten+"</b> </p>"
+                             + "<p>Pháp danh: <b>" + linq.Phapdanh + "</b></p>"
+                             + "<p>Số điện thoại:<b> " + linq.SDT + "</b></p><p> Email: <b>" + linq.Email + " </b></p>";
+            string json = "{\"status\":\"ok\",\"str\":\"" +str + "\"}";
+            Response.Clear();
+            Response.ContentType = "application/json; charset=utf-8";
+            Response.Write(json);
+            Response.End();
+            return Json(linq, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Admin/KhoaTus/Details/5

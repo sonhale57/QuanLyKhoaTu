@@ -1,0 +1,141 @@
+﻿
+@{
+    ViewBag.Controller = "Khóa Tu";
+    ViewBag.Title = "Điểm danh";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="card">
+        <div class="card-body">
+            <form action="/Admin/KhoaTus/Checkin" method="post">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Chọn khóa tu:</label>
+                            @Html.DropDownList("IdKhoaTu", null, htmlAttributes: new { @class = "form-select form-select-sm", @onchange = "javascript:Loadlist()" })
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <label>Chọn tu sinh:</label>
+                            <select id="idTS" class="form-select" data-show-subtext="true" data-live-search="true" onchange="javascript:Review()">
+                                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div id="info"></div>
+                        <a href="javascript:Checkin()" class="btn btn-sm bg-gradient-success"><i class="fa fa-certificate"></i>  Xác nhận điểm danh</a>
+                    </div>
+                </div>
+            </form>
+            <hr class="horizontal dark" />
+            <div class="table-responsive">
+                <table class="table table-centered table-nowrap mb-0 rounded">
+                    <tbody id="showlist">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+     Loadlist();
+    function Loadlist() {
+        $.ajax({
+            url:'@Url.Action("GetDanhSach")' ,
+            type: "GET",
+            data: {
+                   id :$("#IdKhoaTu").val()
+            }
+            , dataType: "json",
+            success: function (data) {
+                var items = '';
+                var count=0;
+                var str = "", txtxn = "", stroption = "";
+                stroption = "<option>Tìm kiếm tu sinh</option>";
+                $.each(data, function (i, item) {
+                    var time = Date.parse(item.TimeCheckin);
+                    var option = "<option value='" + item.idTS + "'>" + item.idTS + " - " + item.Hoten + "</option>";
+                    var xacnhan = Number(item.TrangThai);
+                    var rows = "<tr>"
+                        + "<td class='text-center'> <h6 class='text-xs mb-0'>#" + item.idTS + "</h6>"
+                        + "</td>"
+                        + "<td> <h6 class='text-sm mb-0'><a href='" + item.LinkFB + "' target='_blank'>" + item.Hoten + "</a></h6>"
+                        + "<p class='text-xs mb-0'>" + item.Phapdanh + "</p>"
+                        + "</td> "
+                        + "<td>"
+                        + "<p class='text-xs mb-0'> SĐT: <b>" + item.SDT + "</b></p> "
+                        + "<p class='text-xs mb-0'>Email: <b>" + item.Email + "</b></p>"
+                        + "</td> "
+                        + "<td><p class='text-xs mb-0'>" + (item.StatusCheckin == 1 ? "<i class='fa fa-check-circle text-success' title='Đã check in'></i>" : "<i class='fa fa-check-circle text-secondary' title='Chưa checkin'></i>") + "</p></td>"
+                        + "<td><p class='text-xs mb-0'>" + item.TimeCheckin  + "</p></td>"
+                        + "</tr>";
+                    if (item.StatusCheckin == 1) {
+                        str += rows;
+                        count++;
+                    }
+                    stroption += option;
+                });
+                str += "<tr><td colspan=4> <i class='fa fa-check-circle text-success' title='Đã checkin'></i> : <b>" + count + "</b></td></tr>";
+                str += "<tr><td colspan=4> <i class='fa fa-check-circle text-secondary' title='Chưa checkin'></i> : <b>0</b></td></tr>";
+                $('#idTS').html(stroption);
+                $('#showlist').html(str);
+            },
+            error: function () {
+                alert('Lỗi!');
+            }
+        });
+        return false;
+    }
+    function Review() {
+        $.ajax({
+            url:'@Url.Action("Review")' ,
+            type: "GET",
+            data: {
+                idTuSinh: $("#idTS").val()
+            }
+            , dataType: "json",
+            success: function (data) {
+                var items = '';
+                if (data.status == "ok") {
+                    $("#info").html(data.str);
+                }
+            },
+            error: function () {
+                alert('Lỗi!');
+            }
+        });
+        return false;
+    }
+
+    function Checkin() {
+        $.ajax({
+            url:'@Url.Action("Diemdanh")' ,
+            type: "Post",
+            data: {
+                idTuSinh: $("#idTS").val(),
+                idKhoaTu: $("#IdKhoaTu").val()
+            }
+            , dataType: "json",
+            success: function (data) {
+                var items = '';
+                if (data.status == "ok") {
+                    alert('Đã cập nhật thành công!');
+                    Loadlist();
+                }
+                else {
+                    alert(data.status);
+                }
+            },
+            error: function () {
+                alert('Lỗi!');
+            }
+        });
+        return false;
+    }
+    $(document).ready(function () {
+        $('#idTS').select2();
+    });
+</script>

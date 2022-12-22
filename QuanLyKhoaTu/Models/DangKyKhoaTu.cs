@@ -31,6 +31,7 @@ namespace QuanLyKhoaTu.Models
         public bool? Checkin { get; set; }
 
         public int? TypeCheckin { get; set; }
+        public DateTime? TimeCheckin { get; set; }
         public bool MuonAoTrang { get; set; }
 
         public virtual KhoaTu KhoaTu { get; set; }
