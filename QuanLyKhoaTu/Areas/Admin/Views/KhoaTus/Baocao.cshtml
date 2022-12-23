@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Controller = "Điểm danh";
+    ViewBag.Title = "Báo cáo điểm danh";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card border-0 shadow mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4 px-1">
+                        <div class="col-auto">
+                            @Html.DropDownList("IdKhoaTu", null, htmlAttributes: new { @class = "form-select form-select-sm", @onchange = "javascript:Loadlist()" })
+                        </div>
+                    </div>
+                    <div class="col-lg-2 px-1">
+                        <div class="col-auto">
+                            <select id="Status" class="form-select form-select-sm" onchange="javascript: Loadlist()">
+                                <option value="false">Chưa điểm danh</option>
+                                <option value="true" selected>Đã điểm danh</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-end">
+                        <a href="javascript:ExportToExcel()" class="btn btn-outline-dark btn-xs"><i class="fa fa-file-excel-o"></i> Xuất file Excel</a>
+                    </div>
+                </div>
+                <hr class="horizontal dark">
+                <div class="table-responsive">
+                    <table class="table table-centered table-nowrap mb-0 rounded" id="dynatable">
+                        <tbody id="showlist">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    Loadlist();
+    function Loadlist() {
+        $.ajax({
+            url:'@Url.Action("GetBaoCaO")' ,
+            type: "GET",
+            data: {
+                id: $("#IdKhoaTu").val(),
+                status: $("#Status").val()
+            }
+            , dataType: "json",
+            success: function (data) {
+                var items = '';
+                var str = "";
+                var tong = 0, count = 0;
+                $.each(data, function (i, item) {
+                    var rows = "<tr>"
+                        + "<td class='text-center'> <h6 class='text-xs mb-0'>#" + item.idTS + "</h6></td>"
+                        + "<td> <h6 class='text-sm mb-0'><a href='" + item.LinkFB + "' target='_blank'>" + item.Hoten + "</a></h6></td>"
+                        + "<td class='text-xs mb-0'>PD: <b>" + item.Phapdanh + "</b></td>"
+                        + "<td><p class='text-xs mb-0'>" + (item.Gioitinh == "Nam" ? "Nam" : "Nữ") + "</p></td>"
+                        + "<td class='text-xs mb-0'> SĐT: " + item.SDT + "</td> "
+                        + "<td class='text-xs mb-0'>Email: " + item.Email + "</td>"
+                        + "<td><p class='text-xs mb-0'>" + (item.StatusCheckin == 1 ? "<i class='fa fa-check-circle text-success' title='Đã check in'></i>" : "<i class='fa fa-check-circle text-secondary' title='Chưa checkin'></i>") + "</p></td>"
+                        + "</tr>";
+                    str += rows;
+                    count++;
+                });
+                str += "<tr><td colspan=7>Tổng cộng: <b>" + count +" Tu sinh.</td></tr>";
+                $('#showlist').html(str);
+            },
+            error: function () {
+                alert('Lỗi!');
+            }
+        });
+        return false;
+    }
+    var ExportToExcel = (function () {
+        var uri = 'data:application/vnd.ms-excel;base64,'
+            , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+            , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+            , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+        return function () {
+            var table = "dynatable"; var name = "Danh sách tu sinh";
+            if (!table.nodeType) table = document.getElementById(table)
+            var ctx = { worksheet: name || 'Worksheet', table: strip_html_tags(table.innerHTML) }
+            window.location.href = uri + base64(format(template, ctx))
+        }
+    })();
+
+    function strip_html_tags(str) {
+        if ((str === null) || (str === ''))
+            return false;
+        else
+            str = str.toString();
+        str = str.replace(/<a /g, "<div ");
+        str = str.replace(/<\/a /g, "<div ");
+        return str;
+    }
+</script>

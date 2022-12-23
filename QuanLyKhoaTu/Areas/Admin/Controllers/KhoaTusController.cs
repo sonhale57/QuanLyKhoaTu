@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using QuanLyKhoaTu.Models;
+using System;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Core.Common.CommandTrees;
-using System.Data.SqlClient;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using QuanLyKhoaTu.Controllers;
-using QuanLyKhoaTu.Models;
 
 namespace QuanLyKhoaTu.Areas.Admin.Controllers
 {
@@ -22,8 +18,15 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
         // GET: Admin/KhoaTus
         public ActionResult Index()
         {
+            if (Session["id"] != null)
+            {
+                if (Session["phanquyen"].ToString() != "quantri")
+                {
+                    return Redirect("/Admin/Dashboard/Permission");
+                }
+            }
             var khoaTus = db.KhoaTus.Include(k => k.LoaiKhoaTu);
-            var loaiKhoaTus = db.LoaiKhoaTus.ToList() ;
+            var loaiKhoaTus = db.LoaiKhoaTus.ToList();
             ViewBag.IdLoaiKhoaTu = new SelectList(db.LoaiKhoaTus, "id", "Ten");
 
             dynamic mymodel = new ExpandoObject();
@@ -33,16 +36,21 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
 
             return View(mymodel);
         }
+        public ActionResult Baocao()
+        {
+            ViewBag.IdKhoaTu = new SelectList(db.KhoaTus.OrderByDescending(x => x.Active), "id", "Ten");
+            return View();
+        }
         public ActionResult Diemdanh()
         {
             ViewBag.IdKhoaTu = new SelectList(db.KhoaTus.OrderByDescending(x => x.Active), "id", "Ten");
             return View();
         }
         [HttpPost]
-        public ActionResult Diemdanh(int? idTuSinh,int? idKhoaTu)
+        public ActionResult Diemdanh(int? idTuSinh, int? idKhoaTu)
         {
-            var linq = db.DangKyKhoaTus.SingleOrDefault(m=>m.IdKhoaTu== idKhoaTu && m.IdTuSinh==idTuSinh);
-            if(linq == null)
+            var linq = db.DangKyKhoaTus.SingleOrDefault(m => m.IdKhoaTu == idKhoaTu && m.IdTuSinh == idTuSinh);
+            if (linq == null)
             {
                 string json = "{\"status\":\"Không tìm thấy!\"}";
                 Response.Clear();
@@ -66,12 +74,11 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
         }
         public ActionResult DanhSachDangKy()
         {
-            ViewBag.IdKhoaTu = new SelectList(db.KhoaTus.OrderByDescending(x=>x.Active), "id", "Ten");
+            ViewBag.IdKhoaTu = new SelectList(db.KhoaTus.OrderByDescending(x => x.Active), "id", "Ten");
             return View();
         }
         public JsonResult GetDanhSach(int? id)
         {
-
             var linq = from k in db.KhoaTus
                        join dk in db.DangKyKhoaTus on k.id equals dk.IdKhoaTu
                        join ts in db.TuSinhs on dk.IdTuSinh equals ts.id
@@ -91,7 +98,7 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
                            CMND = ts.CMND,
                            NgayGhiDanh = dk.NgayGhiDanh,
                            DiChuyen = dk.DiChuyen,
-                           TrangThai   =dk.Trangthai,
+                           TrangThai = dk.Trangthai,
                            MuonAoTrang = dk.MuonAoTrang,
                            StatusCheckin = dk.Checkin,
                            TimeCheckin = dk.TimeCheckin.ToString(),
@@ -104,11 +111,11 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
         }
         public JsonResult Review(int? idTuSinh)
         {
-            var linq =db.TuSinhs.Find(idTuSinh);
-            string str = "<p>Họ & tên: <b>"+linq.Hoten+"</b> </p>"
+            var linq = db.TuSinhs.Find(idTuSinh);
+            string str = "<p>Họ & tên: <b>" + linq.Hoten + "</b> </p>"
                              + "<p>Pháp danh: <b>" + linq.Phapdanh + "</b></p>"
                              + "<p>Số điện thoại:<b> " + linq.SDT + "</b></p><p> Email: <b>" + linq.Email + " </b></p>";
-            string json = "{\"status\":\"ok\",\"str\":\"" +str + "\"}";
+            string json = "{\"status\":\"ok\",\"str\":\"" + str + "\"}";
             Response.Clear();
             Response.ContentType = "application/json; charset=utf-8";
             Response.Write(json);
@@ -184,10 +191,17 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Ten,Ngaybatdau,Ngayketthuc,IdLoaiKhoaTu,Chiphi,DiaDiem,Active")] KhoaTu khoaTu)
+        public ActionResult Edit([Bind(Include = "id,Ten,Ngaybatdau,Ngayketthuc,IdLoaiKhoaTu,Chiphi,DiaDiem,Active")] KhoaTu khoaTu, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null && file.ContentLength > 0)
+                {
+                    string _FileName = Path.GetFileName(file.FileName);
+                    string _path = Path.Combine(Server.MapPath("~/Uploads"), _FileName);
+                    file.SaveAs(_path);
+                    khoaTu.Poster = "/Uploads/" + _FileName;
+                }
                 db.Entry(khoaTu).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -229,6 +243,136 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+        //Xác nhận tham gia
+        public ActionResult Confirm()
+        {
+            ViewBag.IdKhoaTu = new SelectList(db.KhoaTus.OrderByDescending(x => x.Active), "id", "Ten");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Confirm(int? idTuSinh, int? idKhoaTu)
+        {
+            var linq = db.DangKyKhoaTus.SingleOrDefault(m => m.IdKhoaTu == idKhoaTu && m.IdTuSinh == idTuSinh);
+            if (linq == null)
+            {
+                string json = "{\"status\":\"Không tìm thấy!\"}";
+                Response.Clear();
+                Response.ContentType = "application/json; charset=utf-8";
+                Response.Write(json);
+                Response.End();
+            }
+            else
+            {
+                linq.Trangthai = 1;
+                db.Entry(linq).State = EntityState.Modified;
+                db.SaveChanges();
+                string json = "{\"status\":\"ok\"}";
+                Response.Clear();
+                Response.ContentType = "application/json; charset=utf-8";
+                Response.Write(json);
+                Response.End();
+            }
+            return View();
+        }
+        //Cancel tham gia
+
+        public ActionResult Cancel()
+        {
+            ViewBag.IdKhoaTu = new SelectList(db.KhoaTus.OrderByDescending(x => x.Active), "id", "Ten");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Cancel(int? idTuSinh, int? idKhoaTu)
+        {
+            var linq = db.DangKyKhoaTus.SingleOrDefault(m => m.IdKhoaTu == idKhoaTu && m.IdTuSinh == idTuSinh);
+            if (linq == null)
+            {
+                string json = "{\"status\":\"Không tìm thấy!\"}";
+                Response.Clear();
+                Response.ContentType = "application/json; charset=utf-8";
+                Response.Write(json);
+                Response.End();
+            }
+            else
+            {
+                linq.Trangthai = 2;
+                db.Entry(linq).State = EntityState.Modified;
+                db.SaveChanges();
+                string json = "{\"status\":\"ok\"}";
+                Response.Clear();
+                Response.ContentType = "application/json; charset=utf-8";
+                Response.Write(json);
+                Response.End();
+            }
+            return View();
+        }
+
+        //Cancel Checkin 
+        public ActionResult CancelCheckin()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CancelCheckin(int? idTuSinh, int? idKhoaTu)
+        {
+            var linq = db.DangKyKhoaTus.SingleOrDefault(m => m.IdKhoaTu == idKhoaTu && m.IdTuSinh == idTuSinh);
+            if (linq == null)
+            {
+                string json = "{\"status\":\"Không tìm thấy!\"}";
+                Response.Clear();
+                Response.ContentType = "application/json; charset=utf-8";
+                Response.Write(json);
+                Response.End();
+            }
+            else
+            {
+                linq.Checkin = false;
+                linq.TimeCheckin = null;
+                db.Entry(linq).State = EntityState.Modified;
+                db.SaveChanges();
+                string json = "{\"status\":\"ok\"}";
+                Response.Clear();
+                Response.ContentType = "application/json; charset=utf-8";
+                Response.Write(json);
+                Response.End();
+            }
+            return View();
+        }
+
+        public JsonResult GetBaoCaO(int? id, bool? status)
+        {
+            var linq = from k in db.KhoaTus
+                       join dk in db.DangKyKhoaTus on k.id equals dk.IdKhoaTu
+                       join ts in db.TuSinhs on dk.IdTuSinh equals ts.id
+                       where k.id == id && dk.Checkin == status && dk.Trangthai !=2
+                       select new
+                       {
+                           idTS = ts.id,
+                           idKT = k.id,
+                           Ten = k.Ten,
+                           Hoten = ts.Hoten,
+                           LinkFB = ts.LinkFB,
+                           Namsinh = ts.Namsinh,
+                           Gioitinh = ts.Gioitinh,
+                           Phapdanh = ts.Phapdanh,
+                           SDT = ts.SDT,
+                           Email = ts.Email,
+                           CMND = ts.CMND,
+                           NgayGhiDanh = dk.NgayGhiDanh,
+                           DiChuyen = dk.DiChuyen,
+                           TrangThai = dk.Trangthai,
+                           MuonAoTrang = dk.MuonAoTrang,
+                           StatusCheckin = dk.Checkin,
+                           TimeCheckin = dk.TimeCheckin.ToString(),
+                           DiChung = dk.DiCung,
+                           DiCung = (from dc in db.TuSinhs where dc.id == dk.DiCung select dc.Hoten),
+                           Thoigian = dk.NgayGhiDanh.ToString()
+                       };
+
+            return Json(linq.ToList(), JsonRequestBehavior.AllowGet);
         }
     }
 }

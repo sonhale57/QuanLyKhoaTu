@@ -1,5 +1,6 @@
 ﻿
 @{
+    ViewBag.Permission = "quanly";
     ViewBag.Controller = "Khóa Tu";
     ViewBag.Title = "Điểm danh";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -52,7 +53,7 @@
             , dataType: "json",
             success: function (data) {
                 var items = '';
-                var count=0;
+                var count=0,tong=0;
                 var str = "", txtxn = "", stroption = "";
                 stroption = "<option>Tìm kiếm tu sinh</option>";
                 $.each(data, function (i, item) {
@@ -70,16 +71,17 @@
                         + "<p class='text-xs mb-0'>Email: <b>" + item.Email + "</b></p>"
                         + "</td> "
                         + "<td><p class='text-xs mb-0'>" + (item.StatusCheckin == 1 ? "<i class='fa fa-check-circle text-success' title='Đã check in'></i>" : "<i class='fa fa-check-circle text-secondary' title='Chưa checkin'></i>") + "</p></td>"
-                        + "<td><p class='text-xs mb-0'>" + item.TimeCheckin  + "</p></td>"
+                        + "<td><p class='text-xs mb-0'>" + item.TimeCheckin + "</p></td>"
+                        + "<td><a class='btn btn-xs btn-danger mb-0' href='javascript:Cancel_Checkin(" + item.idTS + "," + $("#IdKhoaTu").val() + ")'><i class='fa fa-check-circle'></i> Hủy checkin</a></td>"
                         + "</tr>";
                     if (item.StatusCheckin == 1) {
                         str += rows;
                         count++;
                     }
+                    tong++;
                     stroption += option;
                 });
-                str += "<tr><td colspan=4> <i class='fa fa-check-circle text-success' title='Đã checkin'></i> : <b>" + count + "</b></td></tr>";
-                str += "<tr><td colspan=4> <i class='fa fa-check-circle text-secondary' title='Chưa checkin'></i> : <b>0</b></td></tr>";
+                str += "<tr><td colspan=5> <i class='fa fa-check-circle text-success' title='Đã checkin'></i> Checkin: <b>" + count + "</b> Tu sinh <br/><i class='fa fa-check-circle text-secondary' title='Chưa checkin'></i> Chưa: <b>" + (tong - count) + "</b> Tu sinh</td></tr>";
                 $('#idTS').html(stroption);
                 $('#showlist').html(str);
             },
@@ -117,6 +119,31 @@
             data: {
                 idTuSinh: $("#idTS").val(),
                 idKhoaTu: $("#IdKhoaTu").val()
+            }
+            , dataType: "json",
+            success: function (data) {
+                var items = '';
+                if (data.status == "ok") {
+                    alert('Đã cập nhật thành công!');
+                    Loadlist();
+                }
+                else {
+                    alert(data.status);
+                }
+            },
+            error: function () {
+                alert('Lỗi!');
+            }
+        });
+        return false;
+    }
+    function Cancel_Checkin(idTS,idKT) {
+        $.ajax({
+            url:'@Url.Action("CancelCheckin")' ,
+            type: "Post",
+            data: {
+                idTuSinh: idTS,
+                idKhoaTu: idKT
             }
             , dataType: "json",
             success: function (data) {

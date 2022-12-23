@@ -17,6 +17,10 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
         // GET: Admin/ThanhViens
         public ActionResult Index()
         {
+            if (Session["phanquyen"] != "quantri")
+            {
+                return Redirect("/Admin/Dashboard/Permission");
+            }
             return View(db.ThanhViens.ToList());
         }
 

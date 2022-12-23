@@ -22,6 +22,13 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
         // GET: Admin/Users
         public ActionResult Index()
         {
+            if (Session["id"] != null)
+            {
+                if (Session["phanquyen"].ToString() != "quantri")
+                {
+                    return Redirect("/Admin/Dashboard/Permission");
+                }
+            }
             return View(db.Users.ToList());
         }
 
@@ -74,6 +81,13 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
         // GET: Admin/Users/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["id"] != null)
+            {
+                if (Session["phanquyen"].ToString() != "quantri")
+                {
+                    return Redirect("/Admin/Dashboard/Permission");
+                }
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

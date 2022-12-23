@@ -18,10 +18,20 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
         {
             return View();
         }
-
+        public ActionResult Permission()
+        {
+            return View();
+        }
         [HttpGet]
         public ActionResult Sendmail()
         {
+            if (Session["id"] != null)
+            {
+                if (Session["phanquyen"].ToString() != "quantri")
+                {
+                    return Redirect("/Admin/Dashboard/Permission");
+                }
+            }
             ViewBag.IdKhoaTu = new SelectList(db.KhoaTus.OrderByDescending(x=>x.Active), "id", "Ten");
             return View();
         }
@@ -98,8 +108,9 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
                 else
                 {
                     Session["Name"] = user.Name;
+                    Session["phanquyen"] = user.Permission;
                     Session["id"] = user.id;
-                    Session.Add("CurrentUser", user);
+                    Session.Add("CurrentUser", user.Permission);
                     return RedirectToAction("Index");
                 }
             }

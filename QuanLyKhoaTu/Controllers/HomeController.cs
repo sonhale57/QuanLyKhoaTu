@@ -96,6 +96,7 @@ namespace QuanLyKhoaTu.Controllers
                     NgayGhiDanh=DateTime.Now,
                     DiChuyen = Dichuyen,
                     Trangthai = 0,
+                    Checkin=false,
                     MuonAoTrang = Boolean.Parse(exampleRadios) 
                 };
                 if (DiChung == "" || DiChung == null)
