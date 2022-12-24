@@ -1,7 +1,8 @@
 ﻿
 @{
     ViewBag.Permission = "quanly";
-    ViewBag.Title = "Index";
+    ViewBag.Controller = "Trang Quản Trị";
+    ViewBag.Title = "Trang chủ";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
@@ -13,10 +14,10 @@
                         <div class="numbers">
                             <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Member</p>
                             <h5 class="font-weight-bolder">
-                                2,300
+                                @ViewBag.Count
                             </h5>
                             <p class="mb-0">
-                                <span class="text-success text-sm font-weight-bolder">+3</span> Tu sinh đăng ký hôm nay
+                                <span class="text-success text-sm font-weight-bolder">@ViewBag.TotalToday</span> Tu sinh đăng ký hôm nay
                             </p>
                         </div>
                     </div>

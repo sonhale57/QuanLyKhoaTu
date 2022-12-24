@@ -191,7 +191,7 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Ten,Ngaybatdau,Ngayketthuc,IdLoaiKhoaTu,Chiphi,DiaDiem,Active")] KhoaTu khoaTu, HttpPostedFileBase file)
+        public ActionResult Edit([Bind(Include = "id,Ten,Ngaybatdau,Ngayketthuc,IdLoaiKhoaTu,Chiphi,DiaDiem,Active,Poster")] KhoaTu khoaTu, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {

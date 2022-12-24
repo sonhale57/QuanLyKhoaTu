@@ -52,22 +52,31 @@
             , dataType: "json",
             success: function (data) {
                 var items = '';
-                var str = "";
-                var tong = 0, count = 0;
+                var str = "",strdicung="";
+                var countdicung = 0, count = 0;
                 $.each(data, function (i, item) {
+                    if (item.DiChuyen == "chuavanduc") {
+                        countdicung++;
+                        strdicung = "<p class='text-success text-xs'>Đi cùng đoàn</p>";
+                    } else if (item.DiChuyen == "chuavanduc") {
+                        strdicung = "<p class='text-primary text-xs'>Tự túc</p>";
+                    } else {
+                        strdicung = "<p class='text-danger text-xs'>Khác</p>";
+                    }
                     var rows = "<tr>"
-                        + "<td class='text-center'> <h6 class='text-xs mb-0'>#" + item.idTS + "</h6></td>"
-                        + "<td> <h6 class='text-sm mb-0'><a href='" + item.LinkFB + "' target='_blank'>" + item.Hoten + "</a></h6></td>"
-                        + "<td class='text-xs mb-0'>PD: <b>" + item.Phapdanh + "</b></td>"
-                        + "<td><p class='text-xs mb-0'>" + (item.Gioitinh == "Nam" ? "Nam" : "Nữ") + "</p></td>"
-                        + "<td class='text-xs mb-0'> SĐT: " + item.SDT + "</td> "
-                        + "<td class='text-xs mb-0'>Email: " + item.Email + "</td>"
-                        + "<td><p class='text-xs mb-0'>" + (item.StatusCheckin == 1 ? "<i class='fa fa-check-circle text-success' title='Đã check in'></i>" : "<i class='fa fa-check-circle text-secondary' title='Chưa checkin'></i>") + "</p></td>"
+                        + "<td class='text-center text-xs'>#" + item.idTS + "</td>"
+                        + "<td class='text-sm'><a href='" + item.LinkFB + "' target='_blank'>" + item.Hoten + "</a></td>"
+                        + "<td class='text-xs'>PD: <b>" + item.Phapdanh + "</b></td>"
+                        + "<td class='text-xs'>" + (item.Gioitinh == "Nam" ? "Nam" : "Nữ") + "</td>"
+                        + "<td class='text-xs'> SĐT: " + item.SDT + "</td> "
+                        + "<td class='text-xs'>Email: " + item.Email + "</td>"
+                        + "<td>" + strdicung + "</td>"
+                        + "<td><p class='text-xs'>" + (item.StatusCheckin == 1 ? "<i class='fa fa-check-circle text-success' title='Đã check in'></i>" : "<i class='fa fa-check-circle text-secondary' title='Chưa checkin'></i>") + "</p></td>"
                         + "</tr>";
                     str += rows;
                     count++;
                 });
-                str += "<tr><td colspan=7>Tổng cộng: <b>" + count +" Tu sinh.</td></tr>";
+                str += "<tr><td colspan=7>Tổng cộng: <b>" + count + "</b> Tu sinh.<br/>Đi cùng đoàn: <b>" + countdicung +"</b> Tu sinh.</td></tr>";
                 $('#showlist').html(str);
             },
             error: function () {

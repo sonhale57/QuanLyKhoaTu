@@ -2,8 +2,8 @@
 
 @{
 
-    ViewBag.Permission = "quanly";
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh sách";
+    ViewBag.Controller = "Quản Trị Users";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -60,8 +60,8 @@
                             <div class="form-group">
                                 <label for="address">Vị trí</label>
                                 <select class="form-select mb-0" id="phanquyen" name="Permission" aria-label="Chọn phân quyền">
-                                    <option value="thanhvien" selected>Quản lý</option>
-                                    <option value="ketoan">Thủ Thư</option>
+                                    <option value="quantri" selected>Quản lý</option>
+                                    <option value="thuquy">Thủ Quỹ</option>
                                     <option value="ctv">Cộng tác viên</option>
                                 </select>
                             </div>

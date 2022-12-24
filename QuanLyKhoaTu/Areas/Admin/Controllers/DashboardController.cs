@@ -16,6 +16,18 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
         // GET: Admin/Dashboard
         public ActionResult Index()
         {
+            var linq = db.TuSinhs.ToList();
+            int counttong = linq.Count;
+            int count = 0;
+            foreach(var item in linq)
+            {
+                if(item.Updatetime.Value.Date >= DateTime.Now.Date)
+                {
+                    count++;
+                }
+            }
+            ViewBag.Count = counttong.ToString();
+            ViewBag.TotalToday= "+"+count;
             return View();
         }
         public ActionResult Permission()

@@ -53,8 +53,9 @@
             , dataType: "json",
             success: function (data) {
                 var items = '';
-                var count=0,tong=0;
+                var count=0,tong=0,countdicung=0;
                 var str = "", txtxn = "", stroption = "";
+                
                 stroption = "<option>Tìm kiếm tu sinh</option>";
                 $.each(data, function (i, item) {
                     var time = Date.parse(item.TimeCheckin);
@@ -78,10 +79,19 @@
                         str += rows;
                         count++;
                     }
-                    tong++;
+                    
+                    if (item.TrangThai != 2) {
+                        tong++;
+                        if (item.DiChuyen == "chuavanduc") {
+                            countdicung++;
+                        }
+                    }
                     stroption += option;
                 });
-                str += "<tr><td colspan=5> <i class='fa fa-check-circle text-success' title='Đã checkin'></i> Checkin: <b>" + count + "</b> Tu sinh <br/><i class='fa fa-check-circle text-secondary' title='Chưa checkin'></i> Chưa: <b>" + (tong - count) + "</b> Tu sinh</td></tr>";
+                str += "<tr><td colspan=5><i class='fa fa-check-circle text-success'></i> <b>" + count + "</b> Tu sinh  đã checkin"
+                    + "<br /> <i class='fa fa-check-circle text-secondary'></i><b> " + (tong - count) + "</b> Tu sinh chưa checkin"
+                    + "<br /> <i class='fa fa-check-circle text-secondary'></i><b> " + (countdicung - count) + "</b> Tu sinh chưa checkin tại Chùa Vạn Đức"
+                    +"</td ></tr > ";
                 $('#idTS').html(stroption);
                 $('#showlist').html(str);
             },

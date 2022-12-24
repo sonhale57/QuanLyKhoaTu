@@ -1,7 +1,8 @@
 ﻿@model QuanLyKhoaTu.Models.User
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Controller = "Quản Trị Users";
+    ViewBag.Title = "Chỉnh sửa";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
@@ -90,8 +91,11 @@
                             <div class="form-group">
                                 Phân quyền
                                 <div class="col-md-12">
-                                    @Html.EditorFor(model => model.Permission, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Permission, "", new { @class = "text-danger" })
+                                    <select class="form-select mb-0" id="phanquyen" name="Permission" aria-label="Chọn phân quyền">
+                                        <option value="quantri" selected>Quản lý</option>
+                                        <option value="thuquy">Thủ Quỹ</option>
+                                        <option value="ctv">Cộng tác viên</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
