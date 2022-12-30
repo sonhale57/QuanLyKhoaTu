@@ -134,9 +134,11 @@
     <Compile Include="Areas\Admin\Controllers\GiaoThoesController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhoaTusController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoaiKhoaTusController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MuonAoTrangController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThanhViensController.cs" />
     <Compile Include="Areas\Admin\Controllers\TuSinhsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\XepGiaDinhController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -487,6 +489,11 @@
     <Content Include="assets\client\fonts\icomoon\fonts\icomoon.woff" />
     <Content Include="assets\client\fonts\icomoon\selection.json" />
     <Content Include="Areas\Admin\Views\Dashboard\Sendmail.cshtml" />
+    <Content Include="Areas\Admin\Views\KhoaTus\Baocao.cshtml" />
+    <Content Include="Areas\Admin\Views\KhoaTus\Cancel.cshtml" />
+    <Content Include="Areas\Admin\Views\KhoaTus\Confirm.cshtml" />
+    <Content Include="Areas\Admin\Views\KhoaTus\Diemdanh.cshtml" />
+    <Content Include="Areas\Admin\Views\MuonAoTrang\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
