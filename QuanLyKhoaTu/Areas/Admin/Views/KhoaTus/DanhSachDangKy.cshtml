@@ -48,34 +48,34 @@
                 var str = "",txtxn=""
                 $.each(data, function (i, item) {
                     var aotrang = "";
-                    if (item.MuonAoTrang) {
-                        aotrang = "<p class='text-success text-bolder text-xs mb-0'>Có mượn</p>";
-                        countmuon++;
-                    } else {
-                        aotrang = "<p class='text-danger text-bolder text-xs mb-0'>Không mượn</p>";
-                    }
                     var dichuyen = "";
-                    if (item.DiChuyen == "chuavanduc") {
-                        dichuyen = "<p class='text-secondary text-xs mb-0'>Đi cùng Đoàn</p>";
-                        countdicungdoan++;
-                    }
-                    else if (item.DiChuyen == "tutuc") {
-                        dichuyen = "<p class='text-primary text-bolder text-xs mb-0'>Tự túc</p>";
-                        counttutuc++;
-                    }
-                    else {
-                        dichuyen = "<p class='text-danger text-bolder text-xs mb-0'>Khác</p>";
-                    }
-                    if (item.Gioitinh == "Nam") {
-                        countnam++;
-                    }
-                    else {
-                        countnu++;
-                    }
                     var xacnhan = Number(item.TrangThai);
                     if (xacnhan == 1) {
                         countxn++;
                         txtxn = "<i class='fa fa-check-circle text-success' title='Đã xác nhận tham gia'></i>";
+                        if (item.Gioitinh == "Nam") {
+                            countnam++;
+                        }
+                        else {
+                            countnu++;
+                        }
+                        if (item.MuonAoTrang) {
+                            aotrang = "<p class='text-success text-bolder text-xs mb-0'>Có mượn</p>";
+                            countmuon++;
+                        } else {
+                            aotrang = "<p class='text-danger text-bolder text-xs mb-0'>Không mượn</p>";
+                        }
+                        if (item.DiChuyen == "chuavanduc") {
+                            dichuyen = "<p class='text-secondary text-xs mb-0'>Đi cùng Đoàn</p>";
+                            countdicungdoan++;
+                        }
+                        else if (item.DiChuyen == "tutuc") {
+                            dichuyen = "<p class='text-primary text-bolder text-xs mb-0'>Tự túc</p>";
+                            counttutuc++;
+                        }
+                        else {
+                            dichuyen = "<p class='text-danger text-bolder text-xs mb-0'>Khác</p>";
+                        }
                     } else if (xacnhan == 2) {
                         countonha++;
                         txtxn = "<i class='fa fa-check-circle text-danger' title='Đã xác nhận không tham gia'></i>";
@@ -109,11 +109,10 @@
                 });
                 str += "<tr><td colspan=7>"
                     + "Tổng danh sách: <b>" + counttc + "</b> Tu sinh."
-                    + "<br /> Mượn áo tràng: <b>" + countmuon + "</b> Tu sinh"
+                    + "<br /> Danh sách tham gia: <b>" + countxn + "</b> Tu sinh."
                     + "<br /> Số lượng Nam/Nữ: <b>" + countnam + " / " + countnu + "</b>"
+                    + "<br /> Mượn áo tràng: <b>" + countmuon + "</b> Tu sinh"
                     + "<br /> Số lượng đi cùng đoàn: <b>" + countdicungdoan + "</b>"
-                    + "<br /> Số lượng tự túc: <b>" + counttutuc + "</b>"
-                    + "<br /> Đã xác nhận tham gia: <b>" + countxn + "</b>"
                     + "<br /> Xác nhận không tham gia: <b>" + countonha + "</b>"
                     + "<br /> Chưa xác nhận: <b>" + countchua + "</b>"
                     + "</td >"

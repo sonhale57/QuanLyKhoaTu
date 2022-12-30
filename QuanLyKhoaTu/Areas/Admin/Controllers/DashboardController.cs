@@ -16,16 +16,21 @@ namespace QuanLyKhoaTu.Areas.Admin.Controllers
         // GET: Admin/Dashboard
         public ActionResult Index()
         {
-            var linq = db.TuSinhs.ToList();
-            int counttong = linq.Count;
             int count = 0;
-            foreach(var item in linq)
+            var linq = db.TuSinhs.ToList();
+            var linqtoday = from ts in db.TuSinhs
+                            where ts.Updatetime.Value.Date >= DateTime.UtcNow.Date
+                            select ts;
+            if(linqtoday==null)
             {
-                if(item.Updatetime.Value.Date >= DateTime.Now.Date)
-                {
-                    count++;
-                }
+                count= linqtoday.Count();
             }
+            else
+            {
+                count=0;    
+            }
+            int counttong = linq.Count;
+            
             ViewBag.Count = counttong.ToString();
             ViewBag.TotalToday= "+"+count;
             return View();
