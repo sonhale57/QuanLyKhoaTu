@@ -1,0 +1,233 @@
+﻿
+@{
+    ViewData["Title"] = "Đăng ký tham gia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row align-items-end justify-content-between border-bottom g-3 mt-2 pb-3">
+    <div class="col-auto ms-3">
+        <h5><i class="ti ti-table-export"></i> Đăng ký tham gia</h5>
+        <p class="text-body-tertiary lh-sm mb-0">
+            <span class="me-3 text-secondary"><i class="ti ti-point"></i> Chỗ ngủ có thể xếp được</span>
+            <span class="me-3 text-success"><i class="ti ti-point"></i> Đã có người</span>
+            <span class="me-3 text-danger"><i class="ti ti-point"></i> Chỗ ngủ không xếp được</span>
+        </p>
+    </div>
+    <div class="col-12 col-md-auto me-2">
+        <div class="row g-2 gy-3">
+            <div class="col-auto flex-1">
+                <select id="selectKhoatu" class="form-select rounded-1 me-1"></select>
+            </div>
+            <div class="col-auto flex-2">
+                <select id="selectArea" class="form-select rounded-1 me-1"></select>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="bedMatrixContainer" class="table-responsive"></div>
+
+<div class="modal fade" id="dangkymoiModal" tabindex="-1">
+    <div class="modal-lg modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Đăng ký tham gia</h5>
+                <a href="#" class="btn btn-sm btn-light" data-bs-dismiss="modal">
+                    <i class="ti ti-x"></i>
+                </a>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="dknew_courseId">
+                <input type="hidden" id="dknew_bedId">
+                <div class="mb-3">
+                    <label>Mã thành viên</label>
+                    <input type="text" id="dknew_code" class="form-control" readonly>
+                </div>
+                <div class="mb-3">
+                    <label>Họ và tên</label>
+                    <input type="text" id="dknew_name" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Pháp danh</label>
+                    <input type="text" id="dknew_ortherName" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Giới tính</label>
+                    <select id="dknew_gender" class="form-control">
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label>Ngày tháng năm sinh</label>
+                    <input type="date" id="dknew_birthDay" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Số điện thoại</label>
+                    <input type="text" id="dknew_phone" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Số điện thoại người thân</label>
+                    <input type="text" id="dknew_ortherPhone" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Mặt trước CCCD</label>
+                    <input type="file" id="dknew_imageCCCD" class="form-control">
+                </div>
+
+                <div class="text-divider-bg mt-4 mb-4">
+                    <span><i class="ti ti-edit"></i> Thông tin đăng ký</span>
+                </div>
+                <div class="mb-3">
+                    <label>Chỗ ngủ</label>
+                    <input id="dknew_bedName" class="form-control" readonly />
+                </div>
+                <div class="row mb-3">
+                    <div class="col-auto">
+                        <input type="checkbox" id="dknew_guidienthoai" class="form-check-input" checked> Gửi điện thoại
+                    </div>
+                    <div class="col-auto">
+                        <input type="checkbox" id="dknew_guicccd" class="form-check-input" checked> Gửi CCCD
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="btnSubmitDKNew">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="dangkycuModal" tabindex="-1">
+    <div class="modal-lg modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Đăng ký tham gia cho thành viên cũ</h5>
+                <a href="#" class="btn btn-sm btn-light" data-bs-dismiss="modal">
+                    <i class="ti ti-x"></i>
+                </a>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="dkold_courseId">
+                <input type="hidden" id="dkold_bedId">
+
+                <div class="mb-3">
+                    <label>Thành viên</label>
+                    <select id="dkold_memberId" class="form-control"></select>
+                </div>
+                <div class="mb-3">
+                    <label>Mã thành viên</label>
+                    <input id="dkold_memberCode" class="form-control" readonly />
+                </div>
+                <div class="mb-3">
+                    <label>Họ và tên</label>
+                    <input id="dkold_memberName" class="form-control" readonly />
+                </div>
+
+                <div class="mb-3">
+                    <label>Pháp danh</label>
+                    <input id="dkold_memberOrtherName" class="form-control" readonly />
+                </div>
+
+                <div class="text-divider-bg mt-4 mb-4">
+                    <span><i class="ti ti-edit"></i> Thông tin đăng ký</span>
+                </div>
+                <div class="mb-3">
+                    <label>Chỗ ngủ</label>
+                    <input id="dkold_bedName" class="form-control" readonly />
+                </div>
+                <div class="row mb-3">
+                    <div class="col-auto">
+                        <input type="checkbox" id="dkold_guidienthoai" class="form-check-input" checked> Gửi điện thoại
+                    </div>
+                    <div class="col-auto">
+                        <input type="checkbox" id="dkold_guicccd" class="form-check-input" checked> Gửi CCCD
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="btnSubmitDKOld">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="doichoModal" tabindex="-1">
+    <div class="modal-lg modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cập nhật chỗ ngủ mới</h5>
+                <a href="#" class="btn btn-sm btn-light" data-bs-dismiss="modal">
+                    <i class="ti ti-x"></i>
+                </a>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="doicho_memberId">
+                <input type="hidden" id="doicho_courseId">
+                <div class="mb-3">
+                    <label>Đổi chỗ cho</label>
+                    <input id="doicho_memberName" class="form-control" readonly/>
+                </div>
+                <div class="mb-3">
+                    <label>Chỗ ngủ hiện tại</label>
+                    <input id="doicho_currentBed" class="form-control" readonly/>
+                </div>
+                <div class="mb-3">
+                    <label>Chọn khu vực</label>
+                    <select id="doicho_areaId" class="form-control"></select>
+                </div>
+                <div class="mb-3">
+                    <label>Chọn chỗ ngủ mới</label>
+                    <select id="doicho_bedId" class="form-control"></select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="btnchangeBed">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="capnhatveModal" tabindex="-1">
+    <div class="modal-lg modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cập nhật đi về</h5>
+                <a href="#" class="btn btn-sm btn-light" data-bs-dismiss="modal">
+                    <i class="ti ti-x"></i>
+                </a>
+            </div>
+            <div class="modal-body">
+                <div class="text-divider-bg mb-4">
+                    <span><i class="ti ti-edit"></i> Thông tin đăng ký</span>
+                </div>
+                <input type="hidden" id="capnhatve_memberId">
+                <input type="hidden" id="capnhatve_courseId">
+                <div class="mb-3">
+                    <label>Cập nhật về cho</label>
+                    <input id="capnhatve_memberName" class="form-control" readonly />
+                </div>
+                <div class="mb-3">
+                    <label>Chỗ ngủ hiện tại</label>
+                    <input id="capnhatve_currentBed" class="form-control" readonly />
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-auto">
+                        <input type="checkbox" id="capnhatve_guidienthoai" class="form-check-input" disabled> Gửi điện thoại
+                    </div>
+                    <div class="col-auto">
+                        <input type="checkbox" id="capnhatve_guicccd" class="form-check-input" disabled> Gửi CCCD
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="btnsubmitVe">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/js/DangKy.js"></script>
+}

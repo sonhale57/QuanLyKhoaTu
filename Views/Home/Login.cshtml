@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý Khóa tu | Đăng nhập</title>
+    <link rel="icon" href="/images/logo.png" type="image/gif" sizes="45x45">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/QuanLyKhoaTu.styles.css" asp-append-version="true" />
+</head>
+<body style="background:#E8F3FF !important;">
+    <div class="container">
+        <div class="text-center zheader">
+            <img src="https://chuavanduc.vn/wp-content/uploads/2018/07/cropped-logo-1-1.png" alt="PMQLKhoatuChuaVanDuc" width="65" height="65" class="mb-3" />
+            <h6>Phần mềm Quản lý Khóa tu</h6>
+            <p>Đăng nhập tài khoản quản lý để kết nối với phần mềm.</p>
+        </div>
+        <div class="card zcard shadow">
+            <div class="card-header text-center">
+                Đăng nhập với mật khẩu
+            </div>
+            <div class="card-body card-md p-5">
+                <form onsubmit="event.preventDefault(); submitLogin()">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Tên đăng nhập">
+                        <label for="floatingInput">Tên đăng nhập</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="Mật khẩu">
+                        <label for="floatingPassword">Mật khẩu</label>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100 mt-3">Đăng nhập</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div class="toast bg-light" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Thông báo</strong>
+                <small>2 seconds ago</small>
+            </div>
+            <div class="toast-body">
+                <span id="notificationText"></span>
+            </div>
+        </div>
+    </div>
+    <script>
+        function submitLogin() {
+            $.ajax({
+                url: '/Account/Login',
+                type: 'POST',
+                data: {
+                    username: document.getElementById("floatingInput").value,
+                    password: document.getElementById("floatingPassword").value
+                }, 
+                success: function (response) {
+                    if (response.success) {
+                        showNotification("Đăng nhập thành công!");
+                        window.location.href = response.redirectUrl;
+                    } else {
+                        showNotification(response.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                        console.error("Lỗi đăng nhập: " + error);
+                }
+            });
+        }
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

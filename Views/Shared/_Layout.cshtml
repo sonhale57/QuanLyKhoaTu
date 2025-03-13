@@ -1,0 +1,71 @@
+﻿@using QuanLyKhoaTu.Helper
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | Quản lý Khóa tu</title>
+    <link rel="icon" href="/images/logo.png" type="image/gif" sizes="45x45">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/QuanLyKhoaTu.styles.css" asp-append-version="true" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar-->
+        <div class="border-end bg-white" id="sidebar-wrapper">
+            <div class="sidebar-heading border-bottom bg-light pt-3 pb-2">
+                <img src="/images/logo.png" alt="Phần mềm Khóa tu" width="25" height="25" class="me-2"/>
+                <span class="mt-5 pt-3">Quản lý Khóa Tu</span>
+            </div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action list-group-item-light p-3 text-muted" href="/"><i class="ti ti-layout-dashboard"></i> Trang chủ</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3 text-muted" href="/khoa-tu"><i class="ti ti-leaf"></i> Quản lý khóa tu</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3 text-muted" href="/thanh-vien"><i class="ti ti-user"></i> Quản lý thành viên</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3 text-muted" href="/dang-ky"><i class="ti ti-file-pencil"></i> Quản lý đăng ký</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3 text-muted" href="/so-do-cho-ngu"><i class="ti ti-table-export"></i> Quản lý sơ đồ chỗ ngủ</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3 text-muted" href="/users"><i class="ti ti-users"></i> Quản trị Users</a>
+            </div>
+        </div>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+            <!-- Top navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <button class="btn btn-light" id="sidebarToggle"><i class="ti ti-align-left"></i> Menu</button>
+                    <a class="btn btn-sm btn-light navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti ti-align-right"></i></a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mt-2 me-2 mt-lg-0 text-sm-center">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@await Component.InvokeAsync("UserInfo") </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item text-muted" href="#!" data-bs-toggle="modal" data-bs-target="#changePasswordModal"><i class="ti ti-lock"></i> Đổi mật khẩu</a>
+                                    <a class="dropdown-item text-muted" href="#!"><i class="ti ti-pencil"></i> Sửa thông tin</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-muted" href="/account/signout"><i class="ti ti-logout"></i> Đăng xuất</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Page content-->
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    @await Html.PartialAsync("_ChangePassword")
+    @await Html.PartialAsync("_Notification")
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

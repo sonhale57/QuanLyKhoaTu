@@ -1,0 +1,107 @@
+﻿@model IEnumerable<QuanLyKhoaTu.Models.User>
+
+@{
+    ViewData["Title"] = "Quản trị Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="d-flex justify-content-between mb-2 mt-3">
+    <input type="text" id="searchInput" class="form-control w-25" placeholder="Tìm kiếm users...">
+    <a id="btnAddUser" class="btn btn-success"><i class="ti ti-plus"></i> Thêm mới</a>
+</div>
+<table class="table table-bordered table-hover table-responsive">
+    <thead class="bg-success text-white">
+        <tr>
+            <th class="text-center">STT</th>
+            <th>Họ và Tên</th>
+            <th>Pháp danh (nếu có)</th>
+            <th class="text-center">Số điện thoại</th>
+            <th class="text-center">Tên đăng nhập</th>
+            <th class="text-center">User Role</th>
+            <th class="text-center">Trạng thái</th>
+            <th class="text-end me-3">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody id="userTable">
+        <tr>
+            <td colspan="8" class="text-center">Đang "tải dữ liệu" vui lòng đợi!</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-between mb-3">
+    <div class="input-group mb-3 w-25">
+        <span class="input-group-text" id="basic-addon1">
+            <i class="ti ti-list me-2"></i> rows per page
+        </span>
+        <select id="limitSelect" class="form-select form-select-sm w-25" aria-label=".form-select-sm example">
+            <option value="50">50 users</option>
+            <option value="100">100 users</option>
+            <option value="150">150 users</option>
+        </select>
+    </div>
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <button class="page-link" id="prevPage">
+                    <i class="ti ti-chevrons-left"></i> Trước
+                </button>
+            </li>
+            <li class="page-item disabled"><span class="page-link" id="currentPage">1</span></li>
+            <li class="page-item">
+                <button class="page-link" id="nextPage">
+                    Sau <i class="ti ti-chevrons-right"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>
+<!-- Modal User -->
+<div class="modal fade" id="userModal" tabindex="-1">
+    <div class="modal-lg modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông tin tài khoản người dùng</h5>
+                <a href="#" class="btn btn-sm btn-light" data-bs-dismiss="modal">
+                    <i class="ti ti-x"></i>
+                </a>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="userId">
+                <div class="mb-3">
+                    <label>Họ và tên</label>
+                    <input type="text" id="name" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Pháp danh</label>
+                    <input type="text" id="ortherName" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Số điện thoại</label>
+                    <input type="text" id="phone" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Tên đăng nhập</label>
+                    <input type="text" id="username" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Mật khẩu (chỉ nhập nếu muốn đổi)</label>
+                    <input type="password" id="password" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>User Role</label>
+                    <select id="adminRole" class="form-control">
+                        <option value="true">Admin</option>
+                        <option value="false">Người dùng</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="btnSaveUser">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/js/Users.js"></script>
+}
