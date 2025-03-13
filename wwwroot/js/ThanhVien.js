@@ -18,13 +18,14 @@
                     <td class="text-center align-content-center">${item.code}</td>
                     <td class="align-content-center">${item.name}</td>
                     <td class="align-content-center">${item.ortherName}</td>
+                    <td class="text-center align-content-center">${item.gender}</td>
                     <td class="text-center align-content-center">${item.year}</td>
                     <td class="align-content-center text-center">${item.phone}</td>
                     <td class="align-content-center text-center">${item.statusIdentity == true ? `<a href="${item.imageIdentity}" target="_blank" class="text-decoration-none"><i class="ti ti-shield-check text-success"></i></a>` : '<i class="ti ti-alert-circle text-warning"></i>'} ${item.numberIdentity}</td>
                     <td class="text-center align-content-center">${item.countJoin}</td>
                     <td class="text-center align-content-center">${item.dateCreate}</td>
                     <td class="text-end me-3 align-content-center">
-                        <button type="button" class="btn btn-sm btn-dark btn-delete" data-id="${item.id}"><i class="ti ti-printer"></i> ${item.printCount}</button>
+                        <button type="button" class="btn btn-sm btn-dark btn-print" data-id="${item.id}"><i class="ti ti-printer"></i> ${item.printCount}</button>
                         <a href="#!" class="btn btn-sm btn-icon btn-outline-secondary btn-edit" 
                             data-id="${item.id}" 
                             data-name="${item.name}" 
@@ -57,6 +58,7 @@
             }
         });
     }
+
     // 2️⃣ Xử lý tìm kiếm khi nhập vào ô input
     $("#searchInput").on("input", function () {
         search = $(this).val();
@@ -170,6 +172,68 @@
             }
         });
     });
+    $(document).on("click", ".btn-print", function () {
+        var memberId = $(this).data("id");
+
+        $.ajax({
+            url: "/Member/GetMemberCard",
+            type: "GET",
+            data: { id: memberId },
+            success: function (data) {
+                if (data.success) {
+                    let printWindow = window.open("", "_blank");
+                    printWindow.document.write(`
+                    <html>
+                    <head>
+                        <title>In Thẻ Thành Viên</title>
+                        <style>
+                            @page { size: 8cm 11cm; margin: 0; }
+                            body { font-family: Arial, sans-serif; text-align: center; padding: 5mm; }
+                            .card-container {
+                                width: 8cm;
+                                height: 11cm;
+                                border: 2px solid black;
+                                padding: 10px;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+                                text-align: center;
+                            }
+                            .member-photo {
+                                width: 4cm;
+                                height: 4cm;
+                                border-radius: 10px;
+                                border: 1px solid #dedede;
+                            }
+                            .member-name { font-size: 18px; font-weight: bold; margin-top: 10px; }
+                            .member-code { font-size: 14px; color: gray; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="card-container">
+                            <img src="${data.image}" class="member-photo" alt="Ảnh thành viên">
+                            <div class="member-name">${data.name}</div>
+                            <div class="member-code">${data.ortherName}</div>
+                        </div>
+                        <script>
+                            window.onload = function () {
+                                window.print();
+                                setTimeout(() => window.close(), 1000);
+                            };
+                        </script>
+                    </body>
+                    </html>
+                `);
+                    printWindow.document.close();
+                } else {
+                    alert("Không thể lấy thông tin thẻ!");
+                }
+            }
+        });
+    });
+
+
     document.getElementById("imageCCCD").addEventListener("change", function (event) {
         const file = event.target.files[0];
         if (!file) return;

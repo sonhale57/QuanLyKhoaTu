@@ -4,6 +4,9 @@ using System.IO;
 using OfficeOpenXml;
 using QuanLyKhoaTu.Helper;
 using QuanLyKhoaTu.Models;
+using QRCoder; // Thư viện tạo QR Code
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace QuanLyKhoaTu.Controllers
 {
@@ -80,7 +83,8 @@ namespace QuanLyKhoaTu.Controllers
                     CountJoin = _context.JoinCourses.Count(x=>x.MemberId==u.Id),
                     NumberIdentity=(u.NumberIdentity==null?"Đang cập nhật":u.NumberIdentity),
                     u.PrintCount,
-                    u.Address
+                    u.Address,
+                    u.Gender,
                 })
                 .ToListAsync();
 
@@ -266,6 +270,59 @@ namespace QuanLyKhoaTu.Controllers
                 return Json(new { success = true, message = "Đã xóa khóa tu thành công!" });
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> GetMemberCard(int id)
+        {
+            var member = await _context.Members.FindAsync(id);
+            if (member == null)
+            {
+                return Json(new { success = false, message = "Thành viên không tồn tại!" });
+            }
+
+            // 🔹 Lấy 2 chữ cuối của tên
+            var nameParts = member.Name.Split(' ');
+            string lastTwoWords = nameParts.Length > 1 ? nameParts[^2] + " " + nameParts[^1] : nameParts[0];
+
+            // 🔹 Tạo QR Code từ member.Code
+            //string qrCodeBase64 = GenerateQRCode(member.Code);
+
+            return Json(new
+            {
+                success = true,
+                id = member.Id,
+                name = lastTwoWords, // Chỉ hiển thị 2 chữ cuối
+                ortherName = member.OrtherName, // Chỉ hiển thị 2 chữ cuối
+                code = member.Code,
+                year = member.BirthDay?.Year,
+                phone = member.Phone,
+                image = string.IsNullOrEmpty(member.ImageIdentity) ? "/images/default-avatar.png" : member.ImageIdentity,
+                //qrCode = $"data:image/png;base64,{qrCodeBase64}" // QR Code dưới dạng Base64
+            });
+        }
+
+        // 🔹 Hàm tạo QR Code
+        //private string GenerateQRCode(string text)
+        //{
+        //    using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
+        //    {
+        //        using (QRCodeData qrCodeData = qrGenerator.CreateQrCode(text, QRCodeGenerator.ECCLevel.Q))
+        //        {
+        //            using (QRCode qrCode = new QRCode(qrCodeData))
+        //            {
+        //                using (Bitmap qrBitmap = qrCode.GetGraphic(10))
+        //                {
+        //                    using (MemoryStream ms = new MemoryStream())
+        //                    {
+        //                        qrBitmap.Save(ms, ImageFormat.Png);
+        //                        return Convert.ToBase64String(ms.ToArray());
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
+
+
 
         [HttpPost]
         public async Task<IActionResult> Restore(int id)
