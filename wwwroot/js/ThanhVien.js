@@ -187,34 +187,65 @@
                     <head>
                         <title>In Thẻ Thành Viên</title>
                         <style>
-                            @page { size: 8cm 11cm; margin: 0; }
-                            body { font-family: Arial, sans-serif; text-align: center; padding: 5mm; }
+                            @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Prata&display=swap');
+                            @page {
+                                size: 8cm 11cm; /* Kích thước chính xác của thẻ */
+                                margin: 0; /* Loại bỏ lề để in đúng kích thước */
+                            }
+
+                            body {
+                                font-family: Arial, sans-serif;
+                                text-align: center;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                height: 100vh; /* Căn giữa thẻ trong trang */
+                                margin: 0;
+                            }
+
                             .card-container {
                                 width: 8cm;
                                 height: 11cm;
-                                border: 2px solid black;
-                                padding: 10px;
+                                padding: 0;
                                 display: flex;
                                 flex-direction: column;
                                 justify-content: center;
                                 align-items: center;
                                 text-align: center;
                             }
+
                             .member-photo {
-                                width: 4cm;
-                                height: 4cm;
-                                border-radius: 10px;
-                                border: 1px solid #dedede;
+                                width: 3cm;
+                                height: 3cm;
+                                padding:0;
+                                background:#fff;
+                                margin-bottom:0;
+                                margin-top:-5px;
                             }
-                            .member-name { font-size: 18px; font-weight: bold; margin-top: 10px; }
-                            .member-code { font-size: 14px; color: gray; }
+                            .member-name {
+                                font-family: "Nunito Sans", sans-serif;
+                                padding-top:0;
+                                margin-top:7px;
+                                font-size: 18px;
+                                font-weight:700;
+                                color: #530000;
+                            }
+
+                            .member-code {
+                                font-family: "Prata", serif;
+                                font-size: 16px;
+                                color: #530000;
+                            }    
+                            * {
+                                page-break-inside: avoid;
+                            }
                         </style>
                     </head>
                     <body>
                         <div class="card-container">
-                            <img src="${data.image}" class="member-photo" alt="Ảnh thành viên">
-                            <div class="member-name">${data.name}</div>
-                            <div class="member-code">${data.ortherName}</div>
+                            <img src="${data.qrCoder}" class="member-photo" alt="qrcode" id="qrcode">
+                            <div class="member-name">${data.ortherName}</div>
+                            <div class="member-code">${data.fullname}</div>
                         </div>
                         <script>
                             window.onload = function () {
