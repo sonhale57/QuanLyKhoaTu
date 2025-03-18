@@ -289,7 +289,7 @@ namespace QuanLyKhoaTu.Controllers
 
             //QrCoder
             QRCodeGenerator qrGenerator = new();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(member.Code, QRCodeGenerator.ECCLevel.Q);
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(member.Code+"."+member.Id, QRCodeGenerator.ECCLevel.Q);
             var imgType = Base64QRCode.ImageType.Png;
 
             Base64QRCode qrCode = new Base64QRCode(qrCodeData);

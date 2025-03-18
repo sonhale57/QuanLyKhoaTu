@@ -112,7 +112,6 @@
         $("#memberId").val(id);
         $("#code").val(code);
         $("#gender").val(gender);
-        $("#code").attr("disabled", true);
         $("#name").val(name);
         $("#ortherName").val(ortherName);
         $("#phone").val(phone);
