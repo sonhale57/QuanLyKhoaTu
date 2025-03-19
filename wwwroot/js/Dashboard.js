@@ -22,7 +22,7 @@
                     <td class="text-center align-content-center">${item.phone}</td>
                     <td class="text-center align-content-center">${item.ortherPhone}</td>
                     <td class="align-content-center text-center">${item.bed}</td>
-                    <td class="text-center align-content-center">${item.fromdate}</td>
+                    <td class="text-center align-content-center">${item.dateCreate}</td>
                     <td class="text-center align-content-center">${item.status}</td>
                 </tr>`;
                 });

@@ -121,6 +121,7 @@ namespace QuanLyKhoaTu.Controllers
                                       Fromdate = j.Fromdate,
                                       Todate = j.Todate,
                                       StatusJoin = j.StatusJoin,
+                                      j.DateCreate,
                                       Status = j.StatusJoin==true ? "Đang tham gia" : "Đã về"
                                   };
 
@@ -141,9 +142,10 @@ namespace QuanLyKhoaTu.Controllers
             {
                 "bed" => joinCourse.OrderBy(x => x.BedId).ToList(),
                 "name" => joinCourse.OrderBy(x => x.Name).ToList(),
-                "date" => joinCourse.OrderBy(x => x.Fromdate).ToList(),
+                "date" => joinCourse.OrderBy(x => x.DateCreate).ToList(),
+                "date_desc" => joinCourse.OrderByDescending(x => x.DateCreate).ToList(),
                 "status" => joinCourse.OrderBy(x => x.StatusJoin).ToList(),
-                _ => joinCourse.OrderBy(x => x.Fromdate).ToList()
+                _ => joinCourse.OrderByDescending(x => x.DateCreate).ToList()
             };
 
             return Json(new { data = joinCourse, courseId, courseName });
