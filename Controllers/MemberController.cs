@@ -199,12 +199,26 @@ namespace QuanLyKhoaTu.Controllers
                     imageUrl = "/uploads/" + uniqueFileName;
                 }
 
+                var existingCodes = (await _context.Members
+                .Where(u => u.Enable == true && u.Code.StartsWith("VD"))
+                .Select(u => u.Code.Substring(2)) // Lấy phần số (bỏ "VD")
+                .ToListAsync()) // Chuyển dữ liệu ra khỏi database trước
+                .Where(code => int.TryParse(code, out _)) // Lọc số hợp lệ
+                .Select(int.Parse) // Chuyển về kiểu số
+                .OrderBy(n => n) // Sắp xếp tăng dần
+                .ToList();
 
+                // Tìm số nhỏ nhất bị thiếu
+                int nextNumber = Enumerable.Range(1, existingCodes.Count + 1) // Tạo danh sách [1,2,3,...]
+                    .Except(existingCodes) // Loại bỏ các số đã có
+                    .First(); // Lấy số nhỏ nhất bị thiếu
+
+                string newCode = $"VD{nextNumber:D5}"; // VD00001, VD00002, ...
                 if (id == 0)
                 {
                     var member = new Member
                     {
-                        Code = code,
+                        Code = newCode,
                         Name = name.Trim(),
                         OrtherName = ortherName.Trim(),
                         Phone = phone,
